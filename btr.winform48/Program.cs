@@ -1,4 +1,5 @@
-﻿using System;
+﻿using btr.winform48.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace btr.winform48
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SalesPersonForm());
+            Application.Run(new MainForm());
         }
     }
 }
