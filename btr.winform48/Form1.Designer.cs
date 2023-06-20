@@ -28,20 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ListGrid = new System.Windows.Forms.DataGridView();
             this.SalesPersonNameLabel = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SalesPersonIdLabel = new System.Windows.Forms.Label();
             this.SalesPersonIdTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ListBinding = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListGrid)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ListBinding)).BeginInit();
             this.SuspendLayout();
             // 
             // ListGrid
@@ -115,6 +112,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "New";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -141,7 +139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ListGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ListBinding)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -149,7 +146,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView ListGrid;
-        private System.Windows.Forms.BindingSource ListBinding;
         private System.Windows.Forms.Label SalesPersonNameLabel;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.Label SalesPersonIdLabel;
