@@ -47,5 +47,13 @@ namespace btr.winform48
             };
             ListGrid.DataSource = _bindingSource;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var x = "5 + 2";
+            DataTable dt = new DataTable();
+            var result = dt.Compute(x, "");
+            NameTextBox.Text = result.ToString();
+        }
     }
 }
