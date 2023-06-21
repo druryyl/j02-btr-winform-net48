@@ -93,6 +93,16 @@ namespace btr.winform48.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_document_48px {
+            get {
+                object obj = ResourceManager.GetObject("delete_document_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delivered_48px {
             get {
                 object obj = ResourceManager.GetObject("delivered_48px", resourceCulture);
@@ -113,9 +123,29 @@ namespace btr.winform48.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap driver_48px {
+            get {
+                object obj = ResourceManager.GetObject("driver_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap factory_48px {
             get {
                 object obj = ResourceManager.GetObject("factory_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap import_48px {
+            get {
+                object obj = ResourceManager.GetObject("import_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +193,49 @@ namespace btr.winform48.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap map_marker_48px {
+            get {
+                object obj = ResourceManager.GetObject("map_marker_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mobile_48px {
+            get {
+                object obj = ResourceManager.GetObject("mobile_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_48px {
+            get {
+                object obj = ResourceManager.GetObject("outline_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap purchase_order_48px {
             get {
                 object obj = ResourceManager.GetObject("purchase_order_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap real_estate_48px {
+            get {
+                object obj = ResourceManager.GetObject("real_estate_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +256,16 @@ namespace btr.winform48.Properties {
         internal static System.Drawing.Bitmap report_card_48px1 {
             get {
                 object obj = ResourceManager.GetObject("report_card_48px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap route_48px {
+            get {
+                object obj = ResourceManager.GetObject("route_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -39,33 +39,43 @@
             this.ClaimButton = new System.Windows.Forms.RibbonButton();
             this.InvoiceReportButton = new System.Windows.Forms.RibbonButton();
             this.MasterPurchasingPanel = new System.Windows.Forms.RibbonPanel();
-            this.Principal = new System.Windows.Forms.RibbonButton();
+            this.SupplierButton = new System.Windows.Forms.RibbonButton();
             this.SalesTab = new System.Windows.Forms.RibbonTab();
             this.FakturPanel = new System.Windows.Forms.RibbonPanel();
             this.FakturButton = new System.Windows.Forms.RibbonButton();
             this.FakturReportButton = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
             this.MasterSalePanel = new System.Windows.Forms.RibbonPanel();
             this.OutletButton = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton10 = new System.Windows.Forms.RibbonButton();
+            this.ribbonSeparator2 = new System.Windows.Forms.RibbonSeparator();
             this.SalesPersonButton = new System.Windows.Forms.RibbonButton();
-            this.InventoryTab = new System.Windows.Forms.RibbonTab();
+            this.ribbonButton11 = new System.Windows.Forms.RibbonButton();
+            this.DistributionTab = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
-            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonSeparator3 = new System.Windows.Forms.RibbonSeparator();
+            this.ribbonButton12 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton13 = new System.Windows.Forms.RibbonButton();
+            this.InventoryTab = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel7 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButton14 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton15 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton16 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel8 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButton17 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton19 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel9 = new System.Windows.Forms.RibbonPanel();
             this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButton7 = new System.Windows.Forms.RibbonButton();
-            this.MasterInventoryPanel = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButton8 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButton9 = new System.Windows.Forms.RibbonButton();
             this.FinanceTab = new System.Windows.Forms.RibbonTab();
-            this.SettingTab = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel5 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel6 = new System.Windows.Forms.RibbonPanel();
+            this.SettingTab = new System.Windows.Forms.RibbonTab();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -88,6 +98,7 @@
             this.ribbon1.TabIndex = 1;
             this.ribbon1.Tabs.Add(this.PurchasingTab);
             this.ribbon1.Tabs.Add(this.SalesTab);
+            this.ribbon1.Tabs.Add(this.DistributionTab);
             this.ribbon1.Tabs.Add(this.InventoryTab);
             this.ribbon1.Tabs.Add(this.FinanceTab);
             this.ribbon1.Tabs.Add(this.SettingTab);
@@ -158,17 +169,17 @@
             // 
             // MasterPurchasingPanel
             // 
-            this.MasterPurchasingPanel.Items.Add(this.Principal);
+            this.MasterPurchasingPanel.Items.Add(this.SupplierButton);
             this.MasterPurchasingPanel.Name = "MasterPurchasingPanel";
             this.MasterPurchasingPanel.Text = "Master Data";
             // 
-            // Principal
+            // SupplierButton
             // 
-            this.Principal.Image = global::btr.winform48.Properties.Resources.factory_48px;
-            this.Principal.LargeImage = global::btr.winform48.Properties.Resources.factory_48px;
-            this.Principal.Name = "Principal";
-            this.Principal.SmallImage = ((System.Drawing.Image)(resources.GetObject("Principal.SmallImage")));
-            this.Principal.Text = "Principal";
+            this.SupplierButton.Image = global::btr.winform48.Properties.Resources.factory_48px;
+            this.SupplierButton.LargeImage = global::btr.winform48.Properties.Resources.factory_48px;
+            this.SupplierButton.Name = "SupplierButton";
+            this.SupplierButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("SupplierButton.SmallImage")));
+            this.SupplierButton.Text = "Supplier";
             // 
             // SalesTab
             // 
@@ -180,6 +191,7 @@
             // FakturPanel
             // 
             this.FakturPanel.Items.Add(this.FakturButton);
+            this.FakturPanel.Items.Add(this.ribbonButton6);
             this.FakturPanel.Items.Add(this.FakturReportButton);
             this.FakturPanel.Name = "FakturPanel";
             this.FakturPanel.Text = "Faktur";
@@ -200,10 +212,21 @@
             this.FakturReportButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("FakturReportButton.SmallImage")));
             this.FakturReportButton.Text = "Faktur Report";
             // 
+            // ribbonButton6
+            // 
+            this.ribbonButton6.Image = global::btr.winform48.Properties.Resources.import_48px;
+            this.ribbonButton6.LargeImage = global::btr.winform48.Properties.Resources.import_48px;
+            this.ribbonButton6.Name = "ribbonButton6";
+            this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
+            this.ribbonButton6.Text = "Retur";
+            // 
             // MasterSalePanel
             // 
             this.MasterSalePanel.Items.Add(this.OutletButton);
+            this.MasterSalePanel.Items.Add(this.ribbonButton10);
+            this.MasterSalePanel.Items.Add(this.ribbonSeparator2);
             this.MasterSalePanel.Items.Add(this.SalesPersonButton);
+            this.MasterSalePanel.Items.Add(this.ribbonButton11);
             this.MasterSalePanel.Name = "MasterSalePanel";
             this.MasterSalePanel.Text = "Master Data";
             // 
@@ -215,6 +238,18 @@
             this.OutletButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("OutletButton.SmallImage")));
             this.OutletButton.Text = "Outlet";
             // 
+            // ribbonButton10
+            // 
+            this.ribbonButton10.Image = global::btr.winform48.Properties.Resources.real_estate_48px;
+            this.ribbonButton10.LargeImage = global::btr.winform48.Properties.Resources.real_estate_48px;
+            this.ribbonButton10.Name = "ribbonButton10";
+            this.ribbonButton10.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton10.SmallImage")));
+            this.ribbonButton10.Text = "Kategori";
+            // 
+            // ribbonSeparator2
+            // 
+            this.ribbonSeparator2.Name = "ribbonSeparator2";
+            // 
             // SalesPersonButton
             // 
             this.SalesPersonButton.Image = global::btr.winform48.Properties.Resources.caretaker_48px;
@@ -223,14 +258,20 @@
             this.SalesPersonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("SalesPersonButton.SmallImage")));
             this.SalesPersonButton.Text = "Sales Person";
             // 
-            // InventoryTab
+            // ribbonButton11
             // 
-            this.InventoryTab.Name = "InventoryTab";
-            this.InventoryTab.Panels.Add(this.ribbonPanel1);
-            this.InventoryTab.Panels.Add(this.ribbonPanel2);
-            this.InventoryTab.Panels.Add(this.ribbonPanel3);
-            this.InventoryTab.Panels.Add(this.MasterInventoryPanel);
-            this.InventoryTab.Text = "Inventory";
+            this.ribbonButton11.Image = global::btr.winform48.Properties.Resources.map_marker_48px;
+            this.ribbonButton11.LargeImage = global::btr.winform48.Properties.Resources.map_marker_48px;
+            this.ribbonButton11.Name = "ribbonButton11";
+            this.ribbonButton11.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton11.SmallImage")));
+            this.ribbonButton11.Text = "Wilayah";
+            // 
+            // DistributionTab
+            // 
+            this.DistributionTab.Name = "DistributionTab";
+            this.DistributionTab.Panels.Add(this.ribbonPanel1);
+            this.DistributionTab.Panels.Add(this.ribbonPanel2);
+            this.DistributionTab.Text = "Distribution";
             // 
             // ribbonPanel1
             // 
@@ -259,6 +300,9 @@
             // 
             this.ribbonPanel2.Items.Add(this.ribbonButton2);
             this.ribbonPanel2.Items.Add(this.ribbonButton5);
+            this.ribbonPanel2.Items.Add(this.ribbonSeparator3);
+            this.ribbonPanel2.Items.Add(this.ribbonButton12);
+            this.ribbonPanel2.Items.Add(this.ribbonButton13);
             this.ribbonPanel2.Name = "ribbonPanel2";
             this.ribbonPanel2.Text = "Delivery";
             // 
@@ -278,60 +322,102 @@
             this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
             this.ribbonButton5.Text = "Delivery Report";
             // 
-            // ribbonPanel3
+            // ribbonSeparator3
             // 
-            this.ribbonPanel3.Items.Add(this.ribbonButton3);
-            this.ribbonPanel3.Items.Add(this.ribbonButton6);
-            this.ribbonPanel3.Items.Add(this.ribbonButton7);
-            this.ribbonPanel3.Name = "ribbonPanel3";
-            this.ribbonPanel3.Text = "Stock Control";
+            this.ribbonSeparator3.Name = "ribbonSeparator3";
+            // 
+            // ribbonButton12
+            // 
+            this.ribbonButton12.Image = global::btr.winform48.Properties.Resources.driver_48px;
+            this.ribbonButton12.LargeImage = global::btr.winform48.Properties.Resources.driver_48px;
+            this.ribbonButton12.Name = "ribbonButton12";
+            this.ribbonButton12.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton12.SmallImage")));
+            this.ribbonButton12.Text = "Driver";
+            // 
+            // ribbonButton13
+            // 
+            this.ribbonButton13.Image = global::btr.winform48.Properties.Resources.route_48px;
+            this.ribbonButton13.LargeImage = global::btr.winform48.Properties.Resources.route_48px;
+            this.ribbonButton13.Name = "ribbonButton13";
+            this.ribbonButton13.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton13.SmallImage")));
+            this.ribbonButton13.Text = "Rute";
+            // 
+            // InventoryTab
+            // 
+            this.InventoryTab.Name = "InventoryTab";
+            this.InventoryTab.Panels.Add(this.ribbonPanel7);
+            this.InventoryTab.Panels.Add(this.ribbonPanel8);
+            this.InventoryTab.Panels.Add(this.ribbonPanel9);
+            this.InventoryTab.Text = "Inventory";
+            // 
+            // ribbonPanel7
+            // 
+            this.ribbonPanel7.Items.Add(this.ribbonButton14);
+            this.ribbonPanel7.Items.Add(this.ribbonButton15);
+            this.ribbonPanel7.Items.Add(this.ribbonButton16);
+            this.ribbonPanel7.Name = "ribbonPanel7";
+            this.ribbonPanel7.Text = "Stock Control";
+            // 
+            // ribbonButton14
+            // 
+            this.ribbonButton14.Image = global::btr.winform48.Properties.Resources.trolley_48px;
+            this.ribbonButton14.LargeImage = global::btr.winform48.Properties.Resources.trolley_48px;
+            this.ribbonButton14.Name = "ribbonButton14";
+            this.ribbonButton14.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton14.SmallImage")));
+            this.ribbonButton14.Text = "Mutasi";
+            // 
+            // ribbonButton15
+            // 
+            this.ribbonButton15.Image = global::btr.winform48.Properties.Resources.to_do_48px;
+            this.ribbonButton15.LargeImage = global::btr.winform48.Properties.Resources.to_do_48px;
+            this.ribbonButton15.Name = "ribbonButton15";
+            this.ribbonButton15.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton15.SmallImage")));
+            this.ribbonButton15.Text = "Adjustment";
+            // 
+            // ribbonButton16
+            // 
+            this.ribbonButton16.Image = global::btr.winform48.Properties.Resources.outline_48px;
+            this.ribbonButton16.LargeImage = global::btr.winform48.Properties.Resources.outline_48px;
+            this.ribbonButton16.Name = "ribbonButton16";
+            this.ribbonButton16.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton16.SmallImage")));
+            this.ribbonButton16.Text = "Kartu Stok";
+            // 
+            // ribbonPanel8
+            // 
+            this.ribbonPanel8.Items.Add(this.ribbonButton17);
+            this.ribbonPanel8.Items.Add(this.ribbonButton19);
+            this.ribbonPanel8.Name = "ribbonPanel8";
+            this.ribbonPanel8.Text = "Product";
+            // 
+            // ribbonButton17
+            // 
+            this.ribbonButton17.Image = global::btr.winform48.Properties.Resources.ingredients_48px;
+            this.ribbonButton17.LargeImage = global::btr.winform48.Properties.Resources.ingredients_48px;
+            this.ribbonButton17.Name = "ribbonButton17";
+            this.ribbonButton17.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton17.SmallImage")));
+            this.ribbonButton17.Text = "Barang";
+            // 
+            // ribbonButton19
+            // 
+            this.ribbonButton19.Image = global::btr.winform48.Properties.Resources.mobile_48px;
+            this.ribbonButton19.LargeImage = global::btr.winform48.Properties.Resources.mobile_48px;
+            this.ribbonButton19.Name = "ribbonButton19";
+            this.ribbonButton19.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton19.SmallImage")));
+            this.ribbonButton19.Text = "Kategori Brg";
+            // 
+            // ribbonPanel9
+            // 
+            this.ribbonPanel9.Items.Add(this.ribbonButton3);
+            this.ribbonPanel9.Name = "ribbonPanel9";
+            this.ribbonPanel9.Text = "Location";
             // 
             // ribbonButton3
             // 
-            this.ribbonButton3.Image = global::btr.winform48.Properties.Resources.trolley_48px1;
-            this.ribbonButton3.LargeImage = global::btr.winform48.Properties.Resources.trolley_48px1;
+            this.ribbonButton3.Image = global::btr.winform48.Properties.Resources.warehouse_48px;
+            this.ribbonButton3.LargeImage = global::btr.winform48.Properties.Resources.warehouse_48px;
             this.ribbonButton3.Name = "ribbonButton3";
             this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
-            this.ribbonButton3.Text = "Mutasi";
-            // 
-            // ribbonButton6
-            // 
-            this.ribbonButton6.Image = global::btr.winform48.Properties.Resources.to_do_48px;
-            this.ribbonButton6.LargeImage = global::btr.winform48.Properties.Resources.to_do_48px;
-            this.ribbonButton6.Name = "ribbonButton6";
-            this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
-            this.ribbonButton6.Text = "Adjustment";
-            // 
-            // ribbonButton7
-            // 
-            this.ribbonButton7.Image = global::btr.winform48.Properties.Resources.transaction_list_48px;
-            this.ribbonButton7.LargeImage = global::btr.winform48.Properties.Resources.transaction_list_48px;
-            this.ribbonButton7.Name = "ribbonButton7";
-            this.ribbonButton7.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.SmallImage")));
-            this.ribbonButton7.Text = "Buku Stok";
-            // 
-            // MasterInventoryPanel
-            // 
-            this.MasterInventoryPanel.Items.Add(this.ribbonButton8);
-            this.MasterInventoryPanel.Items.Add(this.ribbonButton9);
-            this.MasterInventoryPanel.Name = "MasterInventoryPanel";
-            this.MasterInventoryPanel.Text = "Data Master";
-            // 
-            // ribbonButton8
-            // 
-            this.ribbonButton8.Image = global::btr.winform48.Properties.Resources.ingredients_48px;
-            this.ribbonButton8.LargeImage = global::btr.winform48.Properties.Resources.ingredients_48px;
-            this.ribbonButton8.Name = "ribbonButton8";
-            this.ribbonButton8.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton8.SmallImage")));
-            this.ribbonButton8.Text = "Product";
-            // 
-            // ribbonButton9
-            // 
-            this.ribbonButton9.Image = global::btr.winform48.Properties.Resources.warehouse_48px;
-            this.ribbonButton9.LargeImage = global::btr.winform48.Properties.Resources.warehouse_48px;
-            this.ribbonButton9.Name = "ribbonButton9";
-            this.ribbonButton9.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton9.SmallImage")));
-            this.ribbonButton9.Text = "Warehouse";
+            this.ribbonButton3.Text = "Warehouse";
             // 
             // FinanceTab
             // 
@@ -340,11 +426,6 @@
             this.FinanceTab.Panels.Add(this.ribbonPanel5);
             this.FinanceTab.Panels.Add(this.ribbonPanel6);
             this.FinanceTab.Text = "Finance";
-            // 
-            // SettingTab
-            // 
-            this.SettingTab.Name = "SettingTab";
-            this.SettingTab.Text = "Setting";
             // 
             // ribbonPanel4
             // 
@@ -360,6 +441,11 @@
             // 
             this.ribbonPanel6.Name = "ribbonPanel6";
             this.ribbonPanel6.Text = "Tax";
+            // 
+            // SettingTab
+            // 
+            this.SettingTab.Name = "SettingTab";
+            this.SettingTab.Text = "Setting";
             // 
             // MainForm
             // 
@@ -387,7 +473,7 @@
         private System.Windows.Forms.RibbonPanel PurchaseOrderPanel;
         private System.Windows.Forms.RibbonTab SalesTab;
         private System.Windows.Forms.RibbonPanel FakturPanel;
-        private System.Windows.Forms.RibbonTab InventoryTab;
+        private System.Windows.Forms.RibbonTab DistributionTab;
         private System.Windows.Forms.RibbonTab FinanceTab;
         private System.Windows.Forms.RibbonPanel InvoicePanel;
         private System.Windows.Forms.RibbonTab SettingTab;
@@ -397,7 +483,7 @@
         private System.Windows.Forms.RibbonButton InvoiceButton;
         private System.Windows.Forms.RibbonButton InvoiceReportButton;
         private System.Windows.Forms.RibbonButton ClaimButton;
-        private System.Windows.Forms.RibbonButton Principal;
+        private System.Windows.Forms.RibbonButton SupplierButton;
         private System.Windows.Forms.RibbonButton FakturButton;
         private System.Windows.Forms.RibbonButton FakturReportButton;
         private System.Windows.Forms.RibbonPanel MasterSalePanel;
@@ -409,15 +495,27 @@
         private System.Windows.Forms.RibbonPanel MasterInventoryPanel;
         private System.Windows.Forms.RibbonButton ribbonButton1;
         private System.Windows.Forms.RibbonButton ribbonButton2;
-        private System.Windows.Forms.RibbonButton ribbonButton3;
         private System.Windows.Forms.RibbonButton ribbonButton4;
         private System.Windows.Forms.RibbonButton ribbonButton5;
-        private System.Windows.Forms.RibbonButton ribbonButton6;
-        private System.Windows.Forms.RibbonButton ribbonButton7;
-        private System.Windows.Forms.RibbonButton ribbonButton8;
-        private System.Windows.Forms.RibbonButton ribbonButton9;
         private System.Windows.Forms.RibbonPanel ribbonPanel4;
         private System.Windows.Forms.RibbonPanel ribbonPanel5;
         private System.Windows.Forms.RibbonPanel ribbonPanel6;
+        private System.Windows.Forms.RibbonButton ribbonButton10;
+        private System.Windows.Forms.RibbonSeparator ribbonSeparator2;
+        private System.Windows.Forms.RibbonButton ribbonButton11;
+        private System.Windows.Forms.RibbonSeparator ribbonSeparator3;
+        private System.Windows.Forms.RibbonButton ribbonButton12;
+        private System.Windows.Forms.RibbonButton ribbonButton13;
+        private System.Windows.Forms.RibbonTab InventoryTab;
+        private System.Windows.Forms.RibbonPanel ribbonPanel7;
+        private System.Windows.Forms.RibbonButton ribbonButton14;
+        private System.Windows.Forms.RibbonButton ribbonButton15;
+        private System.Windows.Forms.RibbonButton ribbonButton16;
+        private System.Windows.Forms.RibbonPanel ribbonPanel8;
+        private System.Windows.Forms.RibbonButton ribbonButton17;
+        private System.Windows.Forms.RibbonButton ribbonButton19;
+        private System.Windows.Forms.RibbonButton ribbonButton6;
+        private System.Windows.Forms.RibbonPanel ribbonPanel9;
+        private System.Windows.Forms.RibbonButton ribbonButton3;
     }
 }

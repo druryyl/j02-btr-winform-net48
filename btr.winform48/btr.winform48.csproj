@@ -193,5 +193,17 @@
   <ItemGroup>
     <None Include="Resources\to_do_48px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\real_estate_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_marker_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\driver_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\route_48px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
