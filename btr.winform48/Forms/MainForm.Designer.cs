@@ -43,8 +43,8 @@
             this.SalesTab = new System.Windows.Forms.RibbonTab();
             this.FakturPanel = new System.Windows.Forms.RibbonPanel();
             this.FakturButton = new System.Windows.Forms.RibbonButton();
-            this.FakturReportButton = new System.Windows.Forms.RibbonButton();
             this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
+            this.FakturReportButton = new System.Windows.Forms.RibbonButton();
             this.MasterSalePanel = new System.Windows.Forms.RibbonPanel();
             this.OutletButton = new System.Windows.Forms.RibbonButton();
             this.ribbonButton10 = new System.Windows.Forms.RibbonButton();
@@ -145,8 +145,8 @@
             // 
             // InvoiceButton
             // 
-            this.InvoiceButton.Image = global::btr.winform48.Properties.Resources.invoice_48px;
-            this.InvoiceButton.LargeImage = global::btr.winform48.Properties.Resources.invoice_48px;
+            this.InvoiceButton.Image = global::btr.winform48.Properties.Resources.flag_of_bremen_with_lesser_arms_48px;
+            this.InvoiceButton.LargeImage = global::btr.winform48.Properties.Resources.flag_of_bremen_with_lesser_arms_48px;
             this.InvoiceButton.Name = "InvoiceButton";
             this.InvoiceButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("InvoiceButton.SmallImage")));
             this.InvoiceButton.Text = "Invoice";
@@ -204,14 +204,6 @@
             this.FakturButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("FakturButton.SmallImage")));
             this.FakturButton.Text = "Faktur";
             // 
-            // FakturReportButton
-            // 
-            this.FakturReportButton.Image = global::btr.winform48.Properties.Resources.documents_48px;
-            this.FakturReportButton.LargeImage = global::btr.winform48.Properties.Resources.documents_48px;
-            this.FakturReportButton.Name = "FakturReportButton";
-            this.FakturReportButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("FakturReportButton.SmallImage")));
-            this.FakturReportButton.Text = "Faktur Report";
-            // 
             // ribbonButton6
             // 
             this.ribbonButton6.Image = global::btr.winform48.Properties.Resources.import_48px;
@@ -219,6 +211,14 @@
             this.ribbonButton6.Name = "ribbonButton6";
             this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
             this.ribbonButton6.Text = "Retur";
+            // 
+            // FakturReportButton
+            // 
+            this.FakturReportButton.Image = global::btr.winform48.Properties.Resources.documents_48px;
+            this.FakturReportButton.LargeImage = global::btr.winform48.Properties.Resources.documents_48px;
+            this.FakturReportButton.Name = "FakturReportButton";
+            this.FakturReportButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("FakturReportButton.SmallImage")));
+            this.FakturReportButton.Text = "Faktur Report";
             // 
             // MasterSalePanel
             // 
@@ -376,8 +376,8 @@
             // 
             // ribbonButton16
             // 
-            this.ribbonButton16.Image = global::btr.winform48.Properties.Resources.outline_48px;
-            this.ribbonButton16.LargeImage = global::btr.winform48.Properties.Resources.outline_48px;
+            this.ribbonButton16.Image = global::btr.winform48.Properties.Resources.opposite_opinion_48px;
+            this.ribbonButton16.LargeImage = global::btr.winform48.Properties.Resources.opposite_opinion_48px;
             this.ribbonButton16.Name = "ribbonButton16";
             this.ribbonButton16.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton16.SmallImage")));
             this.ribbonButton16.Text = "Kartu Stok";

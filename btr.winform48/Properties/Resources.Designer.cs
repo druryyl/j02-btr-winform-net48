@@ -143,6 +143,16 @@ namespace btr.winform48.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flag_of_bremen_with_lesser_arms_48px {
+            get {
+                object obj = ResourceManager.GetObject("flag_of_bremen_with_lesser_arms_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap import_48px {
             get {
                 object obj = ResourceManager.GetObject("import_48px", resourceCulture);
@@ -206,6 +216,16 @@ namespace btr.winform48.Properties {
         internal static System.Drawing.Bitmap mobile_48px {
             get {
                 object obj = ResourceManager.GetObject("mobile_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap opposite_opinion_48px {
+            get {
+                object obj = ResourceManager.GetObject("opposite_opinion_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
