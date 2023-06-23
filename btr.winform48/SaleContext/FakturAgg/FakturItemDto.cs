@@ -9,6 +9,8 @@ namespace btr.winform48.SaleContext.FakturAgg
     public class FakturItemDto
     {
         private double _discTotal = 0;
+        private string _disc = string.Empty;
+        private string _discRp = string.Empty;
         private string _qtyString = string.Empty;
         private int _qty1 = 0;
         private int _qty2 = 0;
@@ -37,20 +39,38 @@ namespace btr.winform48.SaleContext.FakturAgg
             { 
                 _qtyString = value;
                 var qtys = _qtyString.Split(';');
-                if (qtys.Length == 0) { qtys[0] = "0"; qtys[1] = "0"; qtys[2] = "0"; }
-                if (qtys.Length == 1) { qtys[1] = "0"; qtys[2] = "0"; }
-                if (qtys.Length == 2) { qtys[2] = "0"; }
-                _qty1 = Convert.ToInt32(qtys[0]);
-                _qty2 = Convert.ToInt32(qtys[1]);
-                _qtyBonus = Convert.ToInt32(qtys[2]);
+                if (qtys.Length == 0) 
+                { 
+                    _qty1 = 0; 
+                    _qty2 = 0; 
+                    _qtyBonus = 0; 
+                }
+                if (qtys.Length == 1)
+                {
+                    _qty1 = Convert.ToInt32(qtys[0]);
+                    _qty2 = 0;
+                    _qtyBonus = 0;
+                }
+                if (qtys.Length == 2)
+                {
+                    _qty1 = Convert.ToInt32(qtys[0]);
+                    _qty2 = Convert.ToInt32(qtys[1]); ;
+                    _qtyBonus = 0;
+                }
+                if (qtys.Length == 3)
+                {
+                    _qty1 = Convert.ToInt32(qtys[0]);
+                    _qty2 = Convert.ToInt32(qtys[1]);
+                    _qtyBonus = Convert.ToInt32(qtys[2]); 
+                }
             }
         }
         public string QtyDetil 
         { 
             get
             {
-                var satBesar = ListStokHargaSatuan.First().Satuan;
-                var satKecil = ListStokHargaSatuan.Last().Satuan;
+                var satBesar = ListStokHargaSatuan.FirstOrDefault()?.Satuan??string.Empty;
+                var satKecil = ListStokHargaSatuan.LastOrDefault()?.Satuan??string.Empty;
                 return $"{_qty1} {satBesar}\n{_qty2} {satKecil}\nBonus {_qtyBonus} {satKecil}";
             }
         }
@@ -58,25 +78,27 @@ namespace btr.winform48.SaleContext.FakturAgg
         {
             get 
             {
-                var result = _qty1 * ListStokHargaSatuan.First().Harga;
-                result += _qty2 * ListStokHargaSatuan.Last().Harga;
+                var result = _qty1 * ListStokHargaSatuan.FirstOrDefault()?.Harga??0;
+                result += _qty2 * ListStokHargaSatuan.LastOrDefault()?.Harga??0;
                 return result;
             }
         }
-        public string Disc { get; set; }
-        public string DiscRp 
-        {
-            get
+        public string Disc 
+        { 
+            get => _disc; 
+            set
             {
-                var discs = Qty.Split(';');
-                if (discs.Length == 0) { discs[0] = "0"; discs[1] = "0"; discs[2] = "0"; discs[3] = "0"; }
-                if (discs.Length == 1) { discs[1] = "0"; discs[2] = "0"; discs[3] = "0"; }
-                if (discs.Length == 2) { discs[2] = "0"; discs[3] = "0"; }
-                if (discs.Length == 3) { discs[3] = "0"; }
+                _disc = value;
+                var discs = (_disc == string.Empty ? "0" : _disc).Split(';').ToList();
+                if (discs.Count <= 0) discs.Add("0");
+                if (discs.Count <= 1) discs.Add("0");
+                if (discs.Count <= 2) discs.Add("0");
+                if (discs.Count <= 3) discs.Add("0");
+
                 double[] discRp = new double[4];
                 discRp[0] = SubTotal * Convert.ToDouble(discs[0]) / 100;
                 var newSubTotal = SubTotal - discRp[0];
-                discRp[1] =  newSubTotal * Convert.ToDouble(discs[1]) / 100;
+                discRp[1] = newSubTotal * Convert.ToDouble(discs[1]) / 100;
                 newSubTotal -= discRp[1];
                 discRp[2] = newSubTotal * Convert.ToDouble(discs[2]) / 100;
                 newSubTotal -= discRp[2];
@@ -86,10 +108,11 @@ namespace btr.winform48.SaleContext.FakturAgg
                 var result = $"Disc-1: {discRp[0]}\n";
                 result += $"Disc-2: {discRp[1]}\n";
                 result += $"Disc-3: {discRp[2]}\n";
-                result += $"Disc-4: {discRp[3]}\n";
-                return result;
+                result += $"Disc-4: {discRp[3]}";
+                _discRp = result;
             }
         }
+        public string DiscRp { get => _discRp; }
         public double DiscTotal { get => _discTotal; }
         public double Ppn { get; set; }
         public double PpnRp { get => (SubTotal - DiscTotal) * Ppn / 100; }

@@ -30,9 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FakturForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanelAtas1 = new System.Windows.Forms.Panel();
+            this.SalesPersonIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
+            this.SalesPersonIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
             this.FakturIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
             this.FakturIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
+            this.SalesPersonNameTextBox = new System.Windows.Forms.TextBox();
+            this.SalesPersonLabel = new System.Windows.Forms.Label();
             this.FakturDateTextBox = new System.Windows.Forms.DateTimePicker();
             this.FakturDateLabel = new System.Windows.Forms.Label();
             this.FakturIdLabel = new System.Windows.Forms.Label();
@@ -46,60 +51,56 @@
             this.PlafondLabel = new System.Windows.Forms.Label();
             this.CustomerLabel = new System.Windows.Forms.Label();
             this.PanelAtas3 = new System.Windows.Forms.Panel();
-            this.SalesPersonIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
-            this.SalesPersonIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
+            this.TermOfPaymentComboBox = new System.Windows.Forms.ComboBox();
+            this.TglRencanaKirimTextBox = new System.Windows.Forms.DateTimePicker();
+            this.TermOfPaymentLabel = new System.Windows.Forms.Label();
+            this.TglRencanaKirimLabel = new System.Windows.Forms.Label();
             this.WarehouseIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
             this.WarehouseIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
-            this.SalesPersonNameTextBox = new System.Windows.Forms.TextBox();
-            this.SalesPersonLabel = new System.Windows.Forms.Label();
             this.WarehouseNameTextBox = new System.Windows.Forms.TextBox();
             this.WrehouseLabel = new System.Windows.Forms.Label();
             this.PanelAtas4 = new System.Windows.Forms.Panel();
+            this.NoteTextBox = new System.Windows.Forms.TextBox();
+            this.NoteLabel = new System.Windows.Forms.Label();
             this.FakturItemGrid = new System.Windows.Forms.DataGridView();
             this.textBoxExt1 = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            this.NoteLabel = new System.Windows.Forms.Label();
-            this.TglRencanaKirimTextBox = new System.Windows.Forms.DateTimePicker();
-            this.TglRencanaKirimLabel = new System.Windows.Forms.Label();
-            this.TermOfPaymentComboBox = new System.Windows.Forms.ComboBox();
-            this.TermOfPaymentLabel = new System.Windows.Forms.Label();
-            this.NoteTextBox = new System.Windows.Forms.TextBox();
             this.PrintButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.PanelTengah = new System.Windows.Forms.Panel();
-            this.TotalLabel = new System.Windows.Forms.Label();
-            this.TotalTextBox = new System.Windows.Forms.NumericUpDown();
-            this.DiscountLainTextBox = new System.Windows.Forms.NumericUpDown();
-            this.DisconutLainLabel = new System.Windows.Forms.Label();
-            this.GrandTotalTextBox = new System.Windows.Forms.NumericUpDown();
-            this.GrandTotalLabel = new System.Windows.Forms.Label();
-            this.UangMukaTextBox = new System.Windows.Forms.NumericUpDown();
-            this.UangMukaLabel = new System.Windows.Forms.Label();
-            this.SisaTextBox = new System.Windows.Forms.NumericUpDown();
-            this.SisaLabel = new System.Windows.Forms.Label();
             this.BiayaLainTextBox = new System.Windows.Forms.NumericUpDown();
             this.BiayaLainLabel = new System.Windows.Forms.Label();
+            this.SisaTextBox = new System.Windows.Forms.NumericUpDown();
+            this.SisaLabel = new System.Windows.Forms.Label();
+            this.UangMukaTextBox = new System.Windows.Forms.NumericUpDown();
+            this.UangMukaLabel = new System.Windows.Forms.Label();
+            this.GrandTotalTextBox = new System.Windows.Forms.NumericUpDown();
+            this.GrandTotalLabel = new System.Windows.Forms.Label();
+            this.DiscountLainTextBox = new System.Windows.Forms.NumericUpDown();
+            this.DisconutLainLabel = new System.Windows.Forms.Label();
+            this.TotalTextBox = new System.Windows.Forms.NumericUpDown();
+            this.TotalLabel = new System.Windows.Forms.Label();
             this.PanelAtas1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SalesPersonIdTextBox)).BeginInit();
+            this.SalesPersonIdTextBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FakturIdTextBox)).BeginInit();
             this.FakturIdTextBox.SuspendLayout();
             this.PanelAtas2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerIdTextBox)).BeginInit();
             this.CustomerIdTextBox.SuspendLayout();
             this.PanelAtas3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SalesPersonIdTextBox)).BeginInit();
-            this.SalesPersonIdTextBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseIdTextBox)).BeginInit();
             this.WarehouseIdTextBox.SuspendLayout();
             this.PanelAtas4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FakturItemGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxExt1)).BeginInit();
             this.PanelTengah.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UangMukaTextBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SisaTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BiayaLainTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SisaTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UangMukaTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelAtas1
@@ -117,6 +118,30 @@
             this.PanelAtas1.Name = "PanelAtas1";
             this.PanelAtas1.Size = new System.Drawing.Size(200, 186);
             this.PanelAtas1.TabIndex = 8;
+            // 
+            // SalesPersonIdTextBox
+            // 
+            this.SalesPersonIdTextBox.BeforeTouchSize = new System.Drawing.Size(175, 28);
+            this.SalesPersonIdTextBox.Buttons.Add(this.SalesPersonIdButton);
+            this.SalesPersonIdTextBox.Controls.Add(this.SalesPersonIdButton);
+            this.SalesPersonIdTextBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SalesPersonIdTextBox.Location = new System.Drawing.Point(11, 112);
+            this.SalesPersonIdTextBox.Name = "SalesPersonIdTextBox";
+            this.SalesPersonIdTextBox.Size = new System.Drawing.Size(175, 28);
+            this.SalesPersonIdTextBox.TabIndex = 3;
+            // 
+            // SalesPersonIdButton
+            // 
+            this.SalesPersonIdButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SalesPersonIdButton.BeforeTouchSize = new System.Drawing.Size(18, 24);
+            this.SalesPersonIdButton.ButtonType = Syncfusion.Windows.Forms.Tools.ButtonTypes.Browse;
+            this.SalesPersonIdButton.FlatAppearance.BorderSize = 0;
+            this.SalesPersonIdButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SalesPersonIdButton.Image = ((System.Drawing.Image)(resources.GetObject("SalesPersonIdButton.Image")));
+            this.SalesPersonIdButton.Name = "SalesPersonIdButton";
+            this.SalesPersonIdButton.PreferredWidth = 18;
+            this.SalesPersonIdButton.TabIndex = 1;
+            this.SalesPersonIdButton.ThemeName = "WindowsXP";
             // 
             // FakturIdTextBox
             // 
@@ -140,6 +165,23 @@
             this.FakturIdButton.PreferredWidth = 18;
             this.FakturIdButton.TabIndex = 1;
             this.FakturIdButton.ThemeName = "WindowsXP";
+            // 
+            // SalesPersonNameTextBox
+            // 
+            this.SalesPersonNameTextBox.Location = new System.Drawing.Point(11, 146);
+            this.SalesPersonNameTextBox.Name = "SalesPersonNameTextBox";
+            this.SalesPersonNameTextBox.ReadOnly = true;
+            this.SalesPersonNameTextBox.Size = new System.Drawing.Size(176, 22);
+            this.SalesPersonNameTextBox.TabIndex = 4;
+            // 
+            // SalesPersonLabel
+            // 
+            this.SalesPersonLabel.AutoSize = true;
+            this.SalesPersonLabel.Location = new System.Drawing.Point(8, 96);
+            this.SalesPersonLabel.Name = "SalesPersonLabel";
+            this.SalesPersonLabel.Size = new System.Drawing.Size(71, 13);
+            this.SalesPersonLabel.TabIndex = 10;
+            this.SalesPersonLabel.Text = "Sales Person";
             // 
             // FakturDateTextBox
             // 
@@ -274,29 +316,45 @@
             this.PanelAtas3.Size = new System.Drawing.Size(200, 186);
             this.PanelAtas3.TabIndex = 10;
             // 
-            // SalesPersonIdTextBox
+            // TermOfPaymentComboBox
             // 
-            this.SalesPersonIdTextBox.BeforeTouchSize = new System.Drawing.Size(175, 28);
-            this.SalesPersonIdTextBox.Buttons.Add(this.SalesPersonIdButton);
-            this.SalesPersonIdTextBox.Controls.Add(this.SalesPersonIdButton);
-            this.SalesPersonIdTextBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SalesPersonIdTextBox.Location = new System.Drawing.Point(11, 112);
-            this.SalesPersonIdTextBox.Name = "SalesPersonIdTextBox";
-            this.SalesPersonIdTextBox.Size = new System.Drawing.Size(175, 28);
-            this.SalesPersonIdTextBox.TabIndex = 3;
+            this.TermOfPaymentComboBox.FormattingEnabled = true;
+            this.TermOfPaymentComboBox.Items.AddRange(new object[] {
+            "Net D-Days",
+            "Cash On Delivery",
+            "Cash Before Delivery",
+            "Cash In Advance"});
+            this.TermOfPaymentComboBox.Location = new System.Drawing.Point(11, 134);
+            this.TermOfPaymentComboBox.Name = "TermOfPaymentComboBox";
+            this.TermOfPaymentComboBox.Size = new System.Drawing.Size(175, 21);
+            this.TermOfPaymentComboBox.TabIndex = 12;
             // 
-            // SalesPersonIdButton
+            // TglRencanaKirimTextBox
             // 
-            this.SalesPersonIdButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SalesPersonIdButton.BeforeTouchSize = new System.Drawing.Size(18, 24);
-            this.SalesPersonIdButton.ButtonType = Syncfusion.Windows.Forms.Tools.ButtonTypes.Browse;
-            this.SalesPersonIdButton.FlatAppearance.BorderSize = 0;
-            this.SalesPersonIdButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SalesPersonIdButton.Image = ((System.Drawing.Image)(resources.GetObject("SalesPersonIdButton.Image")));
-            this.SalesPersonIdButton.Name = "SalesPersonIdButton";
-            this.SalesPersonIdButton.PreferredWidth = 18;
-            this.SalesPersonIdButton.TabIndex = 1;
-            this.SalesPersonIdButton.ThemeName = "WindowsXP";
+            this.TglRencanaKirimTextBox.CustomFormat = "ddd dd-MM-yyyy";
+            this.TglRencanaKirimTextBox.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.TglRencanaKirimTextBox.Location = new System.Drawing.Point(11, 93);
+            this.TglRencanaKirimTextBox.Name = "TglRencanaKirimTextBox";
+            this.TglRencanaKirimTextBox.Size = new System.Drawing.Size(176, 22);
+            this.TglRencanaKirimTextBox.TabIndex = 11;
+            // 
+            // TermOfPaymentLabel
+            // 
+            this.TermOfPaymentLabel.AutoSize = true;
+            this.TermOfPaymentLabel.Location = new System.Drawing.Point(8, 118);
+            this.TermOfPaymentLabel.Name = "TermOfPaymentLabel";
+            this.TermOfPaymentLabel.Size = new System.Drawing.Size(93, 13);
+            this.TermOfPaymentLabel.TabIndex = 13;
+            this.TermOfPaymentLabel.Text = "Term Of Payment";
+            // 
+            // TglRencanaKirimLabel
+            // 
+            this.TglRencanaKirimLabel.AutoSize = true;
+            this.TglRencanaKirimLabel.Location = new System.Drawing.Point(8, 77);
+            this.TglRencanaKirimLabel.Name = "TglRencanaKirimLabel";
+            this.TglRencanaKirimLabel.Size = new System.Drawing.Size(97, 13);
+            this.TglRencanaKirimLabel.TabIndex = 15;
+            this.TglRencanaKirimLabel.Text = "Tgl Rencana Kirim";
             // 
             // WarehouseIdTextBox
             // 
@@ -320,23 +378,6 @@
             this.WarehouseIdButton.PreferredWidth = 18;
             this.WarehouseIdButton.TabIndex = 1;
             this.WarehouseIdButton.ThemeName = "WindowsXP";
-            // 
-            // SalesPersonNameTextBox
-            // 
-            this.SalesPersonNameTextBox.Location = new System.Drawing.Point(11, 146);
-            this.SalesPersonNameTextBox.Name = "SalesPersonNameTextBox";
-            this.SalesPersonNameTextBox.ReadOnly = true;
-            this.SalesPersonNameTextBox.Size = new System.Drawing.Size(176, 22);
-            this.SalesPersonNameTextBox.TabIndex = 4;
-            // 
-            // SalesPersonLabel
-            // 
-            this.SalesPersonLabel.AutoSize = true;
-            this.SalesPersonLabel.Location = new System.Drawing.Point(8, 96);
-            this.SalesPersonLabel.Name = "SalesPersonLabel";
-            this.SalesPersonLabel.Size = new System.Drawing.Size(71, 13);
-            this.SalesPersonLabel.TabIndex = 10;
-            this.SalesPersonLabel.Text = "Sales Person";
             // 
             // WarehouseNameTextBox
             // 
@@ -368,77 +409,6 @@
             this.PanelAtas4.Size = new System.Drawing.Size(378, 186);
             this.PanelAtas4.TabIndex = 11;
             // 
-            // FakturItemGrid
-            // 
-            this.FakturItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FakturItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FakturItemGrid.Location = new System.Drawing.Point(6, 198);
-            this.FakturItemGrid.Name = "FakturItemGrid";
-            this.FakturItemGrid.Size = new System.Drawing.Size(852, 322);
-            this.FakturItemGrid.TabIndex = 12;
-            // 
-            // textBoxExt1
-            // 
-            this.textBoxExt1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
-            this.textBoxExt1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxExt1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
-            this.textBoxExt1.Location = new System.Drawing.Point(3, 3);
-            this.textBoxExt1.Name = "textBoxExt1";
-            this.textBoxExt1.Size = new System.Drawing.Size(97, 20);
-            this.textBoxExt1.TabIndex = 0;
-            this.textBoxExt1.ThemeName = "Metro";
-            // 
-            // NoteLabel
-            // 
-            this.NoteLabel.AutoSize = true;
-            this.NoteLabel.Location = new System.Drawing.Point(8, 8);
-            this.NoteLabel.Name = "NoteLabel";
-            this.NoteLabel.Size = new System.Drawing.Size(32, 13);
-            this.NoteLabel.TabIndex = 0;
-            this.NoteLabel.Text = "Note";
-            // 
-            // TglRencanaKirimTextBox
-            // 
-            this.TglRencanaKirimTextBox.CustomFormat = "ddd dd-MM-yyyy";
-            this.TglRencanaKirimTextBox.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.TglRencanaKirimTextBox.Location = new System.Drawing.Point(11, 93);
-            this.TglRencanaKirimTextBox.Name = "TglRencanaKirimTextBox";
-            this.TglRencanaKirimTextBox.Size = new System.Drawing.Size(176, 22);
-            this.TglRencanaKirimTextBox.TabIndex = 11;
-            // 
-            // TglRencanaKirimLabel
-            // 
-            this.TglRencanaKirimLabel.AutoSize = true;
-            this.TglRencanaKirimLabel.Location = new System.Drawing.Point(8, 77);
-            this.TglRencanaKirimLabel.Name = "TglRencanaKirimLabel";
-            this.TglRencanaKirimLabel.Size = new System.Drawing.Size(97, 13);
-            this.TglRencanaKirimLabel.TabIndex = 15;
-            this.TglRencanaKirimLabel.Text = "Tgl Rencana Kirim";
-            // 
-            // TermOfPaymentComboBox
-            // 
-            this.TermOfPaymentComboBox.FormattingEnabled = true;
-            this.TermOfPaymentComboBox.Items.AddRange(new object[] {
-            "Net D-Days",
-            "Cash On Delivery",
-            "Cash Before Delivery",
-            "Cash In Advance"});
-            this.TermOfPaymentComboBox.Location = new System.Drawing.Point(11, 134);
-            this.TermOfPaymentComboBox.Name = "TermOfPaymentComboBox";
-            this.TermOfPaymentComboBox.Size = new System.Drawing.Size(175, 21);
-            this.TermOfPaymentComboBox.TabIndex = 12;
-            // 
-            // TermOfPaymentLabel
-            // 
-            this.TermOfPaymentLabel.AutoSize = true;
-            this.TermOfPaymentLabel.Location = new System.Drawing.Point(8, 118);
-            this.TermOfPaymentLabel.Name = "TermOfPaymentLabel";
-            this.TermOfPaymentLabel.Size = new System.Drawing.Size(93, 13);
-            this.TermOfPaymentLabel.TabIndex = 13;
-            this.TermOfPaymentLabel.Text = "Term Of Payment";
-            // 
             // NoteTextBox
             // 
             this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -451,6 +421,46 @@
             this.NoteTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.NoteTextBox.Size = new System.Drawing.Size(355, 144);
             this.NoteTextBox.TabIndex = 13;
+            // 
+            // NoteLabel
+            // 
+            this.NoteLabel.AutoSize = true;
+            this.NoteLabel.Location = new System.Drawing.Point(8, 8);
+            this.NoteLabel.Name = "NoteLabel";
+            this.NoteLabel.Size = new System.Drawing.Size(32, 13);
+            this.NoteLabel.TabIndex = 0;
+            this.NoteLabel.Text = "Note";
+            // 
+            // FakturItemGrid
+            // 
+            this.FakturItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FakturItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.FakturItemGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            this.FakturItemGrid.Location = new System.Drawing.Point(6, 198);
+            this.FakturItemGrid.Name = "FakturItemGrid";
+            this.FakturItemGrid.Size = new System.Drawing.Size(852, 322);
+            this.FakturItemGrid.TabIndex = 12;
+            // 
+            // textBoxExt1
+            // 
+            this.textBoxExt1.BeforeTouchSize = new System.Drawing.Size(97, 20);
+            this.textBoxExt1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.textBoxExt1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxExt1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.textBoxExt1.Location = new System.Drawing.Point(3, 3);
+            this.textBoxExt1.Name = "textBoxExt1";
+            this.textBoxExt1.Size = new System.Drawing.Size(97, 20);
+            this.textBoxExt1.TabIndex = 0;
+            this.textBoxExt1.ThemeName = "Metro";
             // 
             // PrintButton
             // 
@@ -505,103 +515,29 @@
             this.PanelTengah.Size = new System.Drawing.Size(138, 322);
             this.PanelTengah.TabIndex = 17;
             // 
-            // TotalLabel
+            // BiayaLainTextBox
             // 
-            this.TotalLabel.AutoSize = true;
-            this.TotalLabel.Location = new System.Drawing.Point(8, 8);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(32, 13);
-            this.TotalLabel.TabIndex = 4;
-            this.TotalLabel.Text = "Total";
-            // 
-            // TotalTextBox
-            // 
-            this.TotalTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalTextBox.Location = new System.Drawing.Point(11, 24);
-            this.TotalTextBox.Maximum = new decimal(new int[] {
+            this.BiayaLainTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BiayaLainTextBox.Location = new System.Drawing.Point(11, 102);
+            this.BiayaLainTextBox.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
-            this.TotalTextBox.Name = "TotalTextBox";
-            this.TotalTextBox.ReadOnly = true;
-            this.TotalTextBox.Size = new System.Drawing.Size(117, 20);
-            this.TotalTextBox.TabIndex = 14;
-            this.TotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TotalTextBox.ThousandsSeparator = true;
+            this.BiayaLainTextBox.Name = "BiayaLainTextBox";
+            this.BiayaLainTextBox.Size = new System.Drawing.Size(117, 20);
+            this.BiayaLainTextBox.TabIndex = 16;
+            this.BiayaLainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.BiayaLainTextBox.ThousandsSeparator = true;
             // 
-            // DiscountLainTextBox
+            // BiayaLainLabel
             // 
-            this.DiscountLainTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DiscountLainTextBox.Location = new System.Drawing.Point(11, 63);
-            this.DiscountLainTextBox.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.DiscountLainTextBox.Name = "DiscountLainTextBox";
-            this.DiscountLainTextBox.Size = new System.Drawing.Size(117, 20);
-            this.DiscountLainTextBox.TabIndex = 15;
-            this.DiscountLainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.DiscountLainTextBox.ThousandsSeparator = true;
-            // 
-            // DisconutLainLabel
-            // 
-            this.DisconutLainLabel.AutoSize = true;
-            this.DisconutLainLabel.Location = new System.Drawing.Point(8, 47);
-            this.DisconutLainLabel.Name = "DisconutLainLabel";
-            this.DisconutLainLabel.Size = new System.Drawing.Size(77, 13);
-            this.DisconutLainLabel.TabIndex = 6;
-            this.DisconutLainLabel.Text = "Discount Lain";
-            // 
-            // GrandTotalTextBox
-            // 
-            this.GrandTotalTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GrandTotalTextBox.Location = new System.Drawing.Point(9, 141);
-            this.GrandTotalTextBox.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.GrandTotalTextBox.Name = "GrandTotalTextBox";
-            this.GrandTotalTextBox.ReadOnly = true;
-            this.GrandTotalTextBox.Size = new System.Drawing.Size(117, 20);
-            this.GrandTotalTextBox.TabIndex = 17;
-            this.GrandTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.GrandTotalTextBox.ThousandsSeparator = true;
-            // 
-            // GrandTotalLabel
-            // 
-            this.GrandTotalLabel.AutoSize = true;
-            this.GrandTotalLabel.Location = new System.Drawing.Point(8, 125);
-            this.GrandTotalLabel.Name = "GrandTotalLabel";
-            this.GrandTotalLabel.Size = new System.Drawing.Size(67, 13);
-            this.GrandTotalLabel.TabIndex = 8;
-            this.GrandTotalLabel.Text = "Grand Total";
-            // 
-            // UangMukaTextBox
-            // 
-            this.UangMukaTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UangMukaTextBox.Location = new System.Drawing.Point(11, 209);
-            this.UangMukaTextBox.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.UangMukaTextBox.Name = "UangMukaTextBox";
-            this.UangMukaTextBox.Size = new System.Drawing.Size(117, 20);
-            this.UangMukaTextBox.TabIndex = 18;
-            this.UangMukaTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.UangMukaTextBox.ThousandsSeparator = true;
-            // 
-            // UangMukaLabel
-            // 
-            this.UangMukaLabel.AutoSize = true;
-            this.UangMukaLabel.Location = new System.Drawing.Point(8, 193);
-            this.UangMukaLabel.Name = "UangMukaLabel";
-            this.UangMukaLabel.Size = new System.Drawing.Size(67, 13);
-            this.UangMukaLabel.TabIndex = 10;
-            this.UangMukaLabel.Text = "Uang Muka";
+            this.BiayaLainLabel.AutoSize = true;
+            this.BiayaLainLabel.Location = new System.Drawing.Point(8, 86);
+            this.BiayaLainLabel.Name = "BiayaLainLabel";
+            this.BiayaLainLabel.Size = new System.Drawing.Size(57, 13);
+            this.BiayaLainLabel.TabIndex = 14;
+            this.BiayaLainLabel.Text = "Biaya Lain";
             // 
             // SisaTextBox
             // 
@@ -628,29 +564,103 @@
             this.SisaLabel.TabIndex = 12;
             this.SisaLabel.Text = "Sisa";
             // 
-            // BiayaLainTextBox
+            // UangMukaTextBox
             // 
-            this.BiayaLainTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BiayaLainTextBox.Location = new System.Drawing.Point(11, 102);
-            this.BiayaLainTextBox.Maximum = new decimal(new int[] {
+            this.UangMukaTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UangMukaTextBox.Location = new System.Drawing.Point(11, 209);
+            this.UangMukaTextBox.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
-            this.BiayaLainTextBox.Name = "BiayaLainTextBox";
-            this.BiayaLainTextBox.Size = new System.Drawing.Size(117, 20);
-            this.BiayaLainTextBox.TabIndex = 16;
-            this.BiayaLainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.BiayaLainTextBox.ThousandsSeparator = true;
+            this.UangMukaTextBox.Name = "UangMukaTextBox";
+            this.UangMukaTextBox.Size = new System.Drawing.Size(117, 20);
+            this.UangMukaTextBox.TabIndex = 18;
+            this.UangMukaTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UangMukaTextBox.ThousandsSeparator = true;
             // 
-            // BiayaLainLabel
+            // UangMukaLabel
             // 
-            this.BiayaLainLabel.AutoSize = true;
-            this.BiayaLainLabel.Location = new System.Drawing.Point(8, 86);
-            this.BiayaLainLabel.Name = "BiayaLainLabel";
-            this.BiayaLainLabel.Size = new System.Drawing.Size(57, 13);
-            this.BiayaLainLabel.TabIndex = 14;
-            this.BiayaLainLabel.Text = "Biaya Lain";
+            this.UangMukaLabel.AutoSize = true;
+            this.UangMukaLabel.Location = new System.Drawing.Point(8, 193);
+            this.UangMukaLabel.Name = "UangMukaLabel";
+            this.UangMukaLabel.Size = new System.Drawing.Size(67, 13);
+            this.UangMukaLabel.TabIndex = 10;
+            this.UangMukaLabel.Text = "Uang Muka";
+            // 
+            // GrandTotalTextBox
+            // 
+            this.GrandTotalTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GrandTotalTextBox.Location = new System.Drawing.Point(9, 141);
+            this.GrandTotalTextBox.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.GrandTotalTextBox.Name = "GrandTotalTextBox";
+            this.GrandTotalTextBox.ReadOnly = true;
+            this.GrandTotalTextBox.Size = new System.Drawing.Size(117, 20);
+            this.GrandTotalTextBox.TabIndex = 17;
+            this.GrandTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.GrandTotalTextBox.ThousandsSeparator = true;
+            // 
+            // GrandTotalLabel
+            // 
+            this.GrandTotalLabel.AutoSize = true;
+            this.GrandTotalLabel.Location = new System.Drawing.Point(8, 125);
+            this.GrandTotalLabel.Name = "GrandTotalLabel";
+            this.GrandTotalLabel.Size = new System.Drawing.Size(67, 13);
+            this.GrandTotalLabel.TabIndex = 8;
+            this.GrandTotalLabel.Text = "Grand Total";
+            // 
+            // DiscountLainTextBox
+            // 
+            this.DiscountLainTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiscountLainTextBox.Location = new System.Drawing.Point(11, 63);
+            this.DiscountLainTextBox.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.DiscountLainTextBox.Name = "DiscountLainTextBox";
+            this.DiscountLainTextBox.Size = new System.Drawing.Size(117, 20);
+            this.DiscountLainTextBox.TabIndex = 15;
+            this.DiscountLainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.DiscountLainTextBox.ThousandsSeparator = true;
+            // 
+            // DisconutLainLabel
+            // 
+            this.DisconutLainLabel.AutoSize = true;
+            this.DisconutLainLabel.Location = new System.Drawing.Point(8, 47);
+            this.DisconutLainLabel.Name = "DisconutLainLabel";
+            this.DisconutLainLabel.Size = new System.Drawing.Size(77, 13);
+            this.DisconutLainLabel.TabIndex = 6;
+            this.DisconutLainLabel.Text = "Discount Lain";
+            // 
+            // TotalTextBox
+            // 
+            this.TotalTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotalTextBox.Location = new System.Drawing.Point(11, 24);
+            this.TotalTextBox.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.TotalTextBox.Name = "TotalTextBox";
+            this.TotalTextBox.ReadOnly = true;
+            this.TotalTextBox.Size = new System.Drawing.Size(117, 20);
+            this.TotalTextBox.TabIndex = 14;
+            this.TotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TotalTextBox.ThousandsSeparator = true;
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.AutoSize = true;
+            this.TotalLabel.Location = new System.Drawing.Point(8, 8);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(32, 13);
+            this.TotalLabel.TabIndex = 4;
+            this.TotalLabel.Text = "Total";
             // 
             // FakturForm
             // 
@@ -672,6 +682,9 @@
             this.Text = "Faktur Jual";
             this.PanelAtas1.ResumeLayout(false);
             this.PanelAtas1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SalesPersonIdTextBox)).EndInit();
+            this.SalesPersonIdTextBox.ResumeLayout(false);
+            this.SalesPersonIdTextBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FakturIdTextBox)).EndInit();
             this.FakturIdTextBox.ResumeLayout(false);
             this.FakturIdTextBox.PerformLayout();
@@ -682,9 +695,6 @@
             this.CustomerIdTextBox.PerformLayout();
             this.PanelAtas3.ResumeLayout(false);
             this.PanelAtas3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SalesPersonIdTextBox)).EndInit();
-            this.SalesPersonIdTextBox.ResumeLayout(false);
-            this.SalesPersonIdTextBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseIdTextBox)).EndInit();
             this.WarehouseIdTextBox.ResumeLayout(false);
             this.WarehouseIdTextBox.PerformLayout();
@@ -694,12 +704,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.textBoxExt1)).EndInit();
             this.PanelTengah.ResumeLayout(false);
             this.PanelTengah.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UangMukaTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SisaTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BiayaLainTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SisaTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UangMukaTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).EndInit();
             this.ResumeLayout(false);
 
         }

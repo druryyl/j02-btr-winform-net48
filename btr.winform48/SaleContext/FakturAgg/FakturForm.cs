@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,26 +24,37 @@ namespace btr.winform48.SaleContext.FakturAgg
         {
             SeedSampleItem();
             RefreshGrid();
+            foreach(DataGridViewColumn col in FakturItemGrid.Columns)
+            {
+                col.DefaultCellStyle.Font = new Font("Consolas", 8f);
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+                if (col.ReadOnly)
+                    col.DefaultCellStyle.BackColor = Color.Beige;
+            }
+
             //  hide
-            FakturItemGrid.Columns["Satuan"].Visible = false;
+            FakturItemGrid.Columns["DiscTotal"].Visible = false;
+            FakturItemGrid.Columns["PpnRp"].Visible = false;
             //  width
-            FakturItemGrid.Columns["BrgId"].Width = 20;
-            FakturItemGrid.Columns["BrgName"].Width = 100;
-            FakturItemGrid.Columns["StokHarga"].Width = 80;
-            FakturItemGrid.Columns["Qty"].Width = 30;
-            FakturItemGrid.Columns["QtyDetil"].Width = 50;
-            FakturItemGrid.Columns["SubTotal"].Width = 50;
-            FakturItemGrid.Columns["Disc"].Width = 20;
-            FakturItemGrid.Columns["DiscDetil"].Width = 50;
-            FakturItemGrid.Columns["Ppn"].Width = 10;
-            FakturItemGrid.Columns["Total"].Width = 50;
+            FakturItemGrid.Columns["BrgId"].Width = 50;
+            FakturItemGrid.Columns["BrgName"].Width = 150;
+            FakturItemGrid.Columns["StokHarga"].Width = 120;
+            FakturItemGrid.Columns["Qty"].Width = 50;
+            FakturItemGrid.Columns["QtyDetil"].Width = 80;
+            FakturItemGrid.Columns["SubTotal"].Width = 80;
+            FakturItemGrid.Columns["Disc"].Width = 50;
+            FakturItemGrid.Columns["DiscRp"].Width = 120;
+            FakturItemGrid.Columns["Ppn"].Width = 25;
+            FakturItemGrid.Columns["Total"].Width = 80;
             //  right align
-            FakturItemGrid.Columns["SubTotal"].ValueType = typeof(double);
-            FakturItemGrid.Columns["Total"].ValueType = typeof(double);
+            FakturItemGrid.Columns["StokHarga"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+            FakturItemGrid.Columns["QtyDetil"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+            FakturItemGrid.Columns["SubTotal"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+            FakturItemGrid.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
             //  multi-line
             FakturItemGrid.Columns["StokHarga"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             FakturItemGrid.Columns["QtyDetil"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            FakturItemGrid.Columns["DiscDetil"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            FakturItemGrid.Columns["DiscRp"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
         private void RefreshGrid()
         {
@@ -73,7 +85,7 @@ namespace btr.winform48.SaleContext.FakturAgg
             {
                 BrgId = "BR031B",
                 BrgName = "Indomie Rebus Ayam Bawang",
-                Qty = "5 karton\n",
+                Qty = "5",
                 Disc = "10;0;0;0",
                 Ppn = 11,
                 ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>
