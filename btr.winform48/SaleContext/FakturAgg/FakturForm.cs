@@ -42,8 +42,8 @@ namespace btr.winform48.SaleContext.FakturAgg
             FakturItemGrid.Columns["Qty"].Width = 50;
             FakturItemGrid.Columns["QtyDetil"].Width = 80;
             FakturItemGrid.Columns["SubTotal"].Width = 80;
-            FakturItemGrid.Columns["Disc"].Width = 50;
-            FakturItemGrid.Columns["DiscRp"].Width = 120;
+            FakturItemGrid.Columns["Disc"].Width = 65;
+            FakturItemGrid.Columns["DiscRp"].Width = 100;
             FakturItemGrid.Columns["Ppn"].Width = 25;
             FakturItemGrid.Columns["Total"].Width = 80;
             //  right align
@@ -55,6 +55,12 @@ namespace btr.winform48.SaleContext.FakturAgg
             FakturItemGrid.Columns["StokHarga"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             FakturItemGrid.Columns["QtyDetil"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             FakturItemGrid.Columns["DiscRp"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //  number-format
+            FakturItemGrid.Columns["SubTotal"].DefaultCellStyle.Format = "#,##0.00";
+            FakturItemGrid.Columns["Total"].DefaultCellStyle.Format = "#,##0.00";
+            //  auto-resize-rows
+            FakturItemGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            FakturItemGrid.AutoResizeRows();
         }
         private void RefreshGrid()
         {
@@ -71,7 +77,6 @@ namespace btr.winform48.SaleContext.FakturAgg
             _listItem.Add(new FakturItemDto
             {
                 BrgId = "BR012A",
-                BrgName = "Indomie Goreng",
                 Qty = "10;5;6",
                 Disc = "10;0;0;0",
                 Ppn = 11,
@@ -81,10 +86,11 @@ namespace btr.winform48.SaleContext.FakturAgg
                     new FakturItemStokHargaSatuan(25,2450,"pcs"),
                 }
             });
+            _listItem.Last().ReCalc();
+            _listItem.Last().SetBrgName("Indomie Goreng");
             _listItem.Add(new FakturItemDto
             {
                 BrgId = "BR031B",
-                BrgName = "Indomie Rebus Ayam Bawang",
                 Qty = "5",
                 Disc = "10;0;0;0",
                 Ppn = 11,
@@ -94,6 +100,8 @@ namespace btr.winform48.SaleContext.FakturAgg
                     new FakturItemStokHargaSatuan(12,2350,"pcs"),
                 }
             });
+            _listItem.Last().ReCalc();
+            _listItem.Last().SetBrgName("Indomie Rebus Ayam Bawang");
         }
     }
 }

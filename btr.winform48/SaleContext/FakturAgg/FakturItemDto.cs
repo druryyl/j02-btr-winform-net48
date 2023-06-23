@@ -8,116 +8,143 @@ namespace btr.winform48.SaleContext.FakturAgg
 {
     public class FakturItemDto
     {
-        private double _discTotal = 0;
+        private string _brgName = string.Empty;
         private string _disc = string.Empty;
         private string _discRp = string.Empty;
-        private string _qtyString = string.Empty;
-        private int _qty1 = 0;
-        private int _qty2 = 0;
-        private int _qtyBonus = 0;
+        private double _discTotal = 0;
 
+        private string _qty = string.Empty;
+        private int[] _qtyInt = new int[3];
+        private string _qtyDetil = string.Empty;
+        private double _subTotal = 0;
+        private double _ppn = 0;
+        private double _ppnRp = 0;
+        private double _total = 0;
         public FakturItemDto()
         {
             ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>();
         }
 
         public string BrgId { get; set; }
-        public string BrgName { get; set;}
-        public string StokHarga 
+        public string BrgName { get => _brgName; }
+
+        public string StokHarga
         {
             get
             {
-                return string.Join(Environment.NewLine, 
+                return string.Join(Environment.NewLine,
                     ListStokHargaSatuan
                     .Select(x => $"{x.Stok} {x.Satuan} @{x.Harga}"));
-            } 
-        }
-        public string Qty 
-        { 
-            get => _qtyString; 
-            set 
-            { 
-                _qtyString = value;
-                var qtys = _qtyString.Split(';');
-                if (qtys.Length == 0) 
-                { 
-                    _qty1 = 0; 
-                    _qty2 = 0; 
-                    _qtyBonus = 0; 
-                }
-                if (qtys.Length == 1)
-                {
-                    _qty1 = Convert.ToInt32(qtys[0]);
-                    _qty2 = 0;
-                    _qtyBonus = 0;
-                }
-                if (qtys.Length == 2)
-                {
-                    _qty1 = Convert.ToInt32(qtys[0]);
-                    _qty2 = Convert.ToInt32(qtys[1]); ;
-                    _qtyBonus = 0;
-                }
-                if (qtys.Length == 3)
-                {
-                    _qty1 = Convert.ToInt32(qtys[0]);
-                    _qty2 = Convert.ToInt32(qtys[1]);
-                    _qtyBonus = Convert.ToInt32(qtys[2]); 
-                }
             }
         }
-        public string QtyDetil 
-        { 
-            get
-            {
-                var satBesar = ListStokHargaSatuan.FirstOrDefault()?.Satuan??string.Empty;
-                var satKecil = ListStokHargaSatuan.LastOrDefault()?.Satuan??string.Empty;
-                return $"{_qty1} {satBesar}\n{_qty2} {satKecil}\nBonus {_qtyBonus} {satKecil}";
-            }
-        }
-        public double SubTotal 
+        public string Qty
         {
-            get 
+            get => _qty;
+            set
             {
-                var result = _qty1 * ListStokHargaSatuan.FirstOrDefault()?.Harga??0;
-                result += _qty2 * ListStokHargaSatuan.LastOrDefault()?.Harga??0;
-                return result;
+                _qty = value;
+                ReCalc();
             }
         }
-        public string Disc 
-        { 
-            get => _disc; 
+        public string QtyDetil { get => _qtyDetil; }
+
+        public double SubTotal { get => _subTotal; }
+
+        public string Disc
+        {
+            get => _disc;
             set
             {
                 _disc = value;
-                var discs = (_disc == string.Empty ? "0" : _disc).Split(';').ToList();
-                if (discs.Count <= 0) discs.Add("0");
-                if (discs.Count <= 1) discs.Add("0");
-                if (discs.Count <= 2) discs.Add("0");
-                if (discs.Count <= 3) discs.Add("0");
-
-                double[] discRp = new double[4];
-                discRp[0] = SubTotal * Convert.ToDouble(discs[0]) / 100;
-                var newSubTotal = SubTotal - discRp[0];
-                discRp[1] = newSubTotal * Convert.ToDouble(discs[1]) / 100;
-                newSubTotal -= discRp[1];
-                discRp[2] = newSubTotal * Convert.ToDouble(discs[2]) / 100;
-                newSubTotal -= discRp[2];
-                discRp[3] = newSubTotal * Convert.ToDouble(discs[3]) / 100;
-                _discTotal = discRp[0] + discRp[1] + discRp[2] + discRp[3];
-
-                var result = $"Disc-1: {discRp[0]}\n";
-                result += $"Disc-2: {discRp[1]}\n";
-                result += $"Disc-3: {discRp[2]}\n";
-                result += $"Disc-4: {discRp[3]}";
-                _discRp = result;
+                ReCalc();
             }
         }
         public string DiscRp { get => _discRp; }
         public double DiscTotal { get => _discTotal; }
-        public double Ppn { get; set; }
-        public double PpnRp { get => (SubTotal - DiscTotal) * Ppn / 100; }
-        public double Total { get => SubTotal - DiscTotal + PpnRp; }
+        public double Ppn 
+        { 
+            get => _ppn; 
+            set
+            {
+                _ppn = value;
+                ReCalc();
+            }
+        }
+        public double PpnRp { get => _ppnRp; }
+        public double Total { get => _total; }
         public List<FakturItemStokHargaSatuan> ListStokHargaSatuan { get; set; }
+        public void ReCalc()
+        {
+            ReCalcQty();
+            ReCalcSubTotal();
+            ReCalcDisc();
+            _ppnRp = (SubTotal - DiscTotal) * Ppn / 100;
+            _total = SubTotal - DiscTotal + PpnRp;
+        }
+        public void SetBrgName(string name) => _brgName = name;
+
+        #region PRIVATE-HELPER
+        private List<double> ParseStringMultiNumber(string str, int size)
+        {
+            var result = new List<double>();
+            for (int i = 0; i < size; i++)
+                result.Add(0);
+
+            var resultStr = (str == string.Empty ? "0" : str).Split(';').ToList();
+
+            var x = 0;
+            foreach (var item in resultStr)
+            {
+                if (x >= result.Count) break;
+
+                if (int.TryParse(item, out var temp))
+                    result[x] = temp;
+                x++;
+            }
+            return result;
+        }
+        private void ReCalcQty()
+        {
+            var qtys = ParseStringMultiNumber(_qty, 3);
+            _qtyInt[0] = (int)qtys[0];
+            _qtyInt[1] = (int)qtys[1];
+            _qtyInt[2] = (int)qtys[2];
+            var satBesar = ListStokHargaSatuan.FirstOrDefault()?.Satuan ?? string.Empty;
+            var satKecil = ListStokHargaSatuan.LastOrDefault()?.Satuan ?? string.Empty;
+            _qtyDetil = $"{_qtyInt[0]} {satBesar}\n{_qtyInt[1]} {satKecil}\nBonus {_qtyInt[2]} {satKecil}";
+        }
+
+        private void ReCalcDisc()
+        {
+            var discs = ParseStringMultiNumber(_disc, 4);
+
+            double[] discRp = new double[4];
+            discRp[0] = SubTotal * discs[0] / 100;
+            var newSubTotal = SubTotal - discRp[0];
+            discRp[1] = newSubTotal * discs[1] / 100;
+            newSubTotal -= discRp[1];
+            discRp[2] = newSubTotal * discs[2] / 100;
+            newSubTotal -= discRp[2];
+            discRp[3] = newSubTotal * discs[3] / 100;
+            _discTotal = discRp[0] + discRp[1] + discRp[2] + discRp[3];
+
+            var discFormated1 = discRp[0] == 0 ? "-" : $"{discRp[0]:#,##0.00}";
+            var discFormated2 = discRp[1] == 0 ? "-" : $"{discRp[1]:#,##0.00}";
+            var discFormated3 = discRp[2] == 0 ? "-" : $"{discRp[2]:#,##0.00}";
+            var discFormated4 = discRp[3] == 0 ? "-" : $"{discRp[3]:#,##0.00}";
+            var result = $"1: {discFormated1}\n";
+            result += $"2: {discFormated2}\n";
+            result += $"3: {discFormated3}\n";
+            result += $"4: {discFormated4}";
+            _discRp = result;
+        }
+        private void ReCalcSubTotal()
+        {
+            var result = _qtyInt[0] * ListStokHargaSatuan.FirstOrDefault()?.Harga ?? 0;
+            result += _qtyInt[1] * ListStokHargaSatuan.LastOrDefault()?.Harga ?? 0;
+            _subTotal = result;
+        }
+        #endregion
     }
 
     public class FakturItemStokHargaSatuan
