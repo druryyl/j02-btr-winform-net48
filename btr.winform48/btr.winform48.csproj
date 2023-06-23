@@ -121,12 +121,13 @@
     <Compile Include="Infrastructure\SalesContext\SalesPersonService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaleContext\Forms\FakturForm.cs">
+    <Compile Include="SaleContext\FakturAgg\FakturForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SaleContext\Forms\FakturForm.Designer.cs">
+    <Compile Include="SaleContext\FakturAgg\FakturForm.Designer.cs">
       <DependentUpon>FakturForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SaleContext\FakturAgg\FakturItemDto.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,7 +144,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SaleContext\Forms\FakturForm.resx">
+    <EmbeddedResource Include="SaleContext\FakturAgg\FakturForm.resx">
       <DependentUpon>FakturForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

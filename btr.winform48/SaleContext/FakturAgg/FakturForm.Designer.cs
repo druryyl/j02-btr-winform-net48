@@ -1,4 +1,4 @@
-﻿namespace btr.winform48.SaleContext.Forms
+﻿namespace btr.winform48.SaleContext.FakturAgg
 {
     partial class FakturForm
     {
