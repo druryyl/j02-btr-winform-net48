@@ -15,6 +15,11 @@ namespace btr.winform48.SaleContext.Forms
         public FakturForm()
         {
             InitializeComponent();
+            InitGrid();
+        }
+
+        private void InitGrid()
+        {
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using btr.winform48.SaleContext.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,13 @@ namespace btr.winform48.Forms
         {
             InitializeComponent();
             Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.White;
+        }
+
+        private void PoButton_Click(object sender, EventArgs e)
+        {
+            var form = new FakturForm();
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }

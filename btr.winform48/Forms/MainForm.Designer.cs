@@ -126,6 +126,7 @@
             this.PoButton.Name = "PoButton";
             this.PoButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("PoButton.SmallImage")));
             this.PoButton.Text = "PO";
+            this.PoButton.Click += new System.EventHandler(this.PoButton_Click);
             // 
             // ReportPoButton
             // 
@@ -452,7 +453,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(846, 495);
             this.Controls.Add(this.ribbon1);
