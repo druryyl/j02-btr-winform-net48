@@ -82,7 +82,7 @@ namespace btr.winform48.SaleContext.FakturAgg
                 Ppn = 11,
                 ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>
                 {
-                    new FakturItemStokHargaSatuan(120,35000,"karton"),
+                    new FakturItemStokHargaSatuan(120,35000,"box"),
                     new FakturItemStokHargaSatuan(25,2450,"pcs"),
                 }
             });
@@ -96,7 +96,7 @@ namespace btr.winform48.SaleContext.FakturAgg
                 Ppn = 11,
                 ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>
                 {
-                    new FakturItemStokHargaSatuan(80,33000,"karton"),
+                    new FakturItemStokHargaSatuan(80,33000,"box"),
                     new FakturItemStokHargaSatuan(12,2350,"pcs"),
                 }
             });
