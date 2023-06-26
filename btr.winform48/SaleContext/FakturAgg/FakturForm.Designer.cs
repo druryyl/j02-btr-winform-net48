@@ -41,8 +41,6 @@
             this.FakturDateLabel = new System.Windows.Forms.Label();
             this.FakturIdLabel = new System.Windows.Forms.Label();
             this.PanelAtas2 = new System.Windows.Forms.Panel();
-            this.CreditBalanceTextBox = new System.Windows.Forms.TextBox();
-            this.PlafondTextBox = new System.Windows.Forms.TextBox();
             this.CustomerNameTextBox = new System.Windows.Forms.TextBox();
             this.CustomerIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
             this.CustomerIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
@@ -79,6 +77,8 @@
             this.DisconutLainLabel = new System.Windows.Forms.Label();
             this.TotalTextBox = new System.Windows.Forms.NumericUpDown();
             this.TotalLabel = new System.Windows.Forms.Label();
+            this.PlafondTextBox = new System.Windows.Forms.NumericUpDown();
+            this.CreditBalanceTextBox = new System.Windows.Forms.NumericUpDown();
             this.PanelAtas1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SalesPersonIdTextBox)).BeginInit();
             this.SalesPersonIdTextBox.SuspendLayout();
@@ -100,6 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlafondTextBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CreditBalanceTextBox)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelAtas1
@@ -225,22 +227,6 @@
             this.PanelAtas2.Size = new System.Drawing.Size(200, 186);
             this.PanelAtas2.TabIndex = 9;
             // 
-            // CreditBalanceTextBox
-            // 
-            this.CreditBalanceTextBox.Location = new System.Drawing.Point(11, 139);
-            this.CreditBalanceTextBox.Name = "CreditBalanceTextBox";
-            this.CreditBalanceTextBox.ReadOnly = true;
-            this.CreditBalanceTextBox.Size = new System.Drawing.Size(176, 22);
-            this.CreditBalanceTextBox.TabIndex = 8;
-            // 
-            // PlafondTextBox
-            // 
-            this.PlafondTextBox.Location = new System.Drawing.Point(11, 99);
-            this.PlafondTextBox.Name = "PlafondTextBox";
-            this.PlafondTextBox.ReadOnly = true;
-            this.PlafondTextBox.Size = new System.Drawing.Size(176, 22);
-            this.PlafondTextBox.TabIndex = 7;
-            // 
             // CustomerNameTextBox
             // 
             this.CustomerNameTextBox.Location = new System.Drawing.Point(11, 56);
@@ -271,12 +257,11 @@
             this.CustomerIdButton.PreferredWidth = 18;
             this.CustomerIdButton.TabIndex = 1;
             this.CustomerIdButton.ThemeName = "WindowsXP";
-            this.CustomerIdButton.Click += new System.EventHandler(this.CustomerIdButton_Click);
             // 
             // CreditBalanceLabel
             // 
             this.CreditBalanceLabel.AutoSize = true;
-            this.CreditBalanceLabel.Location = new System.Drawing.Point(8, 123);
+            this.CreditBalanceLabel.Location = new System.Drawing.Point(8, 122);
             this.CreditBalanceLabel.Name = "CreditBalanceLabel";
             this.CreditBalanceLabel.Size = new System.Drawing.Size(80, 13);
             this.CreditBalanceLabel.TabIndex = 12;
@@ -378,7 +363,6 @@
             this.WarehouseIdButton.PreferredWidth = 18;
             this.WarehouseIdButton.TabIndex = 1;
             this.WarehouseIdButton.ThemeName = "WindowsXP";
-            this.WarehouseIdButton.Click += new System.EventHandler(this.WarehouseIdButton_Click);
             // 
             // WarehouseNameTextBox
             // 
@@ -655,6 +639,38 @@
             this.TotalLabel.TabIndex = 4;
             this.TotalLabel.Text = "Total";
             // 
+            // PlafondTextBox
+            // 
+            this.PlafondTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlafondTextBox.Location = new System.Drawing.Point(11, 99);
+            this.PlafondTextBox.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.PlafondTextBox.Name = "PlafondTextBox";
+            this.PlafondTextBox.ReadOnly = true;
+            this.PlafondTextBox.Size = new System.Drawing.Size(173, 20);
+            this.PlafondTextBox.TabIndex = 15;
+            this.PlafondTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.PlafondTextBox.ThousandsSeparator = true;
+            // 
+            // CreditBalanceTextBox
+            // 
+            this.CreditBalanceTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreditBalanceTextBox.Location = new System.Drawing.Point(11, 138);
+            this.CreditBalanceTextBox.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.CreditBalanceTextBox.Name = "CreditBalanceTextBox";
+            this.CreditBalanceTextBox.ReadOnly = true;
+            this.CreditBalanceTextBox.Size = new System.Drawing.Size(173, 20);
+            this.CreditBalanceTextBox.TabIndex = 16;
+            this.CreditBalanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.CreditBalanceTextBox.ThousandsSeparator = true;
+            // 
             // FakturForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -703,6 +719,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.GrandTotalTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiscountLainTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlafondTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CreditBalanceTextBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -731,9 +749,7 @@
         private Syncfusion.Windows.Forms.Tools.ButtonEditChildButton CustomerIdButton;
         private Syncfusion.Windows.Forms.Tools.ButtonEdit WarehouseIdTextBox;
         private Syncfusion.Windows.Forms.Tools.ButtonEditChildButton WarehouseIdButton;
-        private System.Windows.Forms.TextBox PlafondTextBox;
         private System.Windows.Forms.TextBox CustomerNameTextBox;
-        private System.Windows.Forms.TextBox CreditBalanceTextBox;
         private Syncfusion.Windows.Forms.Tools.ButtonEdit SalesPersonIdTextBox;
         private Syncfusion.Windows.Forms.Tools.ButtonEditChildButton SalesPersonIdButton;
         private System.Windows.Forms.DateTimePicker TglRencanaKirimTextBox;
@@ -758,5 +774,7 @@
         private System.Windows.Forms.Label TotalLabel;
         private System.Windows.Forms.NumericUpDown BiayaLainTextBox;
         private System.Windows.Forms.Label BiayaLainLabel;
+        private System.Windows.Forms.NumericUpDown CreditBalanceTextBox;
+        private System.Windows.Forms.NumericUpDown PlafondTextBox;
     }
 }

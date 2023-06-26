@@ -110,6 +110,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\Periode.cs" />
+    <Compile Include="SaleContext\FakturAgg\IFakturView.cs" />
     <Compile Include="SharedForm\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
