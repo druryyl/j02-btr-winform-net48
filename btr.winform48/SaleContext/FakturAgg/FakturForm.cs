@@ -1,4 +1,6 @@
-﻿using Microsoft.SqlServer.Server;
+﻿using btr.winform48.Helper;
+using btr.winform48.SharedForm;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -103,5 +105,95 @@ namespace btr.winform48.SaleContext.FakturAgg
             _listItem.Last().ReCalc();
             _listItem.Last().SetBrgName("Indomie Rebus Ayam Bawang");
         }
+
+        private void CustomerIdButton_Click(object sender, EventArgs e)
+        {
+            var list = new List<BrgModel>
+            {
+                new BrgModel("BR001", "Indomie Goreng",10, "box"),
+                new BrgModel("BR002", "Indomie Rebus Ayam Bawang asd asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf ",13,"box"),
+                new BrgModel("BR003", "Indomie Rebus Soto",13,"box"),
+                new BrgModel("BR004", "Indomie Goreng Padang",14,"box"),
+                new BrgModel("BR005", "Indomie Goreng Telor Asin",15,"box"),
+                new BrgModel("BR006", "Indomie Goreng Sambal Matah",16,"box"),
+                new BrgModel("BR007", "Indomie Goreng Sambal Bajak",21,"box"),
+                new BrgModel("BR008", "Mi Sedap Goreng",7,"box"),
+                new BrgModel("BR009", "Mi Sedap Rebus White Curry",110,"box"),
+                new BrgModel("BR00A", "Mi Sedap Rebus Soto",130,"box"),
+                new BrgModel("BR00B", "Mi Sedap Rebus Kaldu Sapi",75,"box"),
+                new BrgModel("BR00C", "Mi Sedap Goreng Hype Korea",25,"box"),
+                new BrgModel("BR00D", "Mi Sedap Rebus Kaldu Ayam",130,"box"),
+            };
+
+            var form = new BrowserForm<BrgModel, string>(list, CustomerIdTextBox.Text, x => x.BrgName);
+            var resultDialog = form.ShowDialog();
+            if (resultDialog == DialogResult.OK)
+                CustomerIdTextBox.Text = form.ReturnedValue;
+        }
+
+        private void WarehouseIdButton_Click(object sender, EventArgs e)
+        {
+            var fakturBrowser = new FakturBrowser();
+            var form = new BrowserForm<FakturModel, string>(fakturBrowser, WarehouseIdTextBox.Text, x => x.CustomerName);
+            var resultDialog = form.ShowDialog();
+            if (resultDialog == DialogResult.OK)
+                WarehouseIdTextBox.Text = form.ReturnedValue;
+        }
+    }
+
+    public class BrgModel
+    {
+        public BrgModel(string id, string name, int qty, string satuan)
+        {
+            BrgId = id;
+            BrgName = name;
+            Stok = qty;
+            Satuan= satuan;
+        }
+        public string BrgId { get; set; }
+        public string BrgName { get; set; }
+        public int Stok { get; set; }
+        public string Satuan { get; set; }
+    }
+
+    public class FakturBrowser : IDateBrowser<FakturModel>
+    {
+        public IEnumerable<FakturModel> Browse(Periode periode)
+        {
+            var list = new List<FakturModel>
+            {
+                new FakturModel("BR001", new DateTime(2023,6,26), "Indomaret"),
+                new FakturModel("BR002", new DateTime(2023,6,26), "Alfamart"),
+                new FakturModel("BR003", new DateTime(2023,6,26), "Alfamart"),
+                new FakturModel("BR004", new DateTime(2023,6,27), "Wallpart"),
+                new FakturModel("BR005", new DateTime(2023,6,27), "Gading Mart"),
+                new FakturModel("BR006", new DateTime(2023,6,27), "Mirota"),
+                new FakturModel("BR007", new DateTime(2023,6,28), "Indomaret"),
+                new FakturModel("BR008", new DateTime(2023,6,28), "Mirota"),
+                new FakturModel("BR009", new DateTime(2023,6,28), "Cemara 7"),
+                new FakturModel("BR00A", new DateTime(2023,6,29), "Cemara 7"),
+                new FakturModel("BR00B", new DateTime(2023,6,29), "Gading Mart"),
+                new FakturModel("BR00C", new DateTime(2023,6,29), "Alfamart"),
+                new FakturModel("BR00D", new DateTime(2023,6,29), "Wallmart"),
+            };
+
+            return list
+                .Where(x => x.FakturDate >= periode.Tgl1)
+                .Where(x => x.FakturDate <= periode.Tgl2);
+        }
+    }
+
+    public class FakturModel
+    {
+        public FakturModel(string fakturId, DateTime fakturDate, string customerName)
+        {
+            FakturId = fakturId;
+            FakturDate = fakturDate;
+            CustomerName = customerName;
+        }
+        public string FakturId { get; set; }
+        public DateTime FakturDate { get; set; }
+        public string CustomerName { get; set; }
+
     }
 }

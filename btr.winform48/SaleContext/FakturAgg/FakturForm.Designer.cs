@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FakturForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanelAtas1 = new System.Windows.Forms.Panel();
             this.SalesPersonIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
             this.SalesPersonIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
@@ -272,6 +271,7 @@
             this.CustomerIdButton.PreferredWidth = 18;
             this.CustomerIdButton.TabIndex = 1;
             this.CustomerIdButton.ThemeName = "WindowsXP";
+            this.CustomerIdButton.Click += new System.EventHandler(this.CustomerIdButton_Click);
             // 
             // CreditBalanceLabel
             // 
@@ -378,6 +378,7 @@
             this.WarehouseIdButton.PreferredWidth = 18;
             this.WarehouseIdButton.TabIndex = 1;
             this.WarehouseIdButton.ThemeName = "WindowsXP";
+            this.WarehouseIdButton.Click += new System.EventHandler(this.WarehouseIdButton_Click);
             // 
             // WarehouseNameTextBox
             // 
@@ -437,14 +438,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FakturItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.FakturItemGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.FakturItemGrid.Location = new System.Drawing.Point(6, 198);
             this.FakturItemGrid.Name = "FakturItemGrid";
             this.FakturItemGrid.Size = new System.Drawing.Size(852, 322);
