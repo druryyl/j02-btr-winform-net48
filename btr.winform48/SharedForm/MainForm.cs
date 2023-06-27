@@ -21,8 +21,11 @@ namespace btr.winform48.Forms
 
         private void PoButton_Click(object sender, EventArgs e)
         {
-            var form = new FakturForm();
-            form.MdiParent = this;
+            var form = new FakturForm
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                MdiParent = this
+            };
             form.Show();
         }
     }

@@ -40,6 +40,8 @@
             // 
             // BrowserGrid
             // 
+            this.BrowserGrid.AllowUserToAddRows = false;
+            this.BrowserGrid.AllowUserToDeleteRows = false;
             this.BrowserGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -117,6 +119,7 @@
             this.MinimizeBox = false;
             this.Name = "BrowserForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Browser";
             ((System.ComponentModel.ISupportInitialize)(this.BrowserGrid)).EndInit();
             this.panel1.ResumeLayout(false);

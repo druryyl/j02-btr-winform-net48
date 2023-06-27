@@ -109,8 +109,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\Periode.cs" />
-    <Compile Include="SaleContext\FakturAgg\IFakturView.cs" />
+    <Compile Include="InventoryContext\StokAgg\Services\ListBrgStokService.cs" />
+    <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
+    <Compile Include="SaleContext\FakturAgg\Services\ListFakturService.cs" />
     <Compile Include="SharedForm\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>

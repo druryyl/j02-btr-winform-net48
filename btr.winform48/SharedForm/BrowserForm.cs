@@ -17,43 +17,69 @@ namespace btr.winform48.SharedForm
         public string ReturnedValue { get; set; }
 
         private IEnumerable<T> ListDataFiltered { get; set; }
+
         //  property selector untuk field yang akan di-filter
-        private Func<T, TKey> PropertySelector { get; set; }
-        private IDateBrowser<T> DateBrowser { get; set; }
+        private readonly Func<T, TKey> _propertySelector = null;
+        private readonly IDateBrowser<T> _dateBrowser = null;
+        private readonly IStringBrowser<T> _stringBrowser = null;
+        private readonly string _filter2nd;
 
         //  constructor standard
         public BrowserForm(IEnumerable<T> listData, string returnedValue, Func<T, TKey> propertySelector)
         {
             InitializeComponent();
-
-            FilterDate1TextBox.Visible = false;
-            FilterDate2TextBox.Visible = false;
-            SearchButton.Visible = false;
-            const int shiftUp = 30;
-            panel1.Size = new Size(panel1.Size.Width, panel1.Size.Height - shiftUp);
-            BrowserGrid.Location = new Point(BrowserGrid.Location.X, BrowserGrid.Location.Y - shiftUp);
-            BrowserGrid.Size = new Size(BrowserGrid.Width, BrowserGrid.Height + shiftUp);
+            HideDateInput();
 
             ListData = listData;
-            PropertySelector = propertySelector;
+            _propertySelector = propertySelector;
             RefreshGrid();
             ReturnedValue = returnedValue;
         }
-        
+
         //  constructor dengan date filter
         public BrowserForm(IDateBrowser<T> browseDate, string returnedValue, Func<T, TKey> propertySelector)
         {
             InitializeComponent();
 
-            FilterDate1TextBox.Visible = true;
-            FilterDate2TextBox.Visible = true;
-            SearchButton.Visible = true;
+            //FilterDate1TextBox.Visible = true;
+            //FilterDate2TextBox.Visible = true;
+            //SearchButton.Visible = true;
 
-            DateBrowser = browseDate;
-            ListData = DateBrowser.Browse(new Periode(DateTime.Now));
-            PropertySelector = propertySelector;
+            _dateBrowser = browseDate;
+            ListData = _dateBrowser.Browse(new Periode(DateTime.Now));
+            _propertySelector = propertySelector;
             RefreshGrid();
             ReturnedValue = returnedValue;
+        }
+
+        public BrowserForm(IStringBrowser<T> browser, string returnedValue, string filter2nd, Func<T, TKey> propertySelector)
+        {
+            InitializeComponent();
+            HideDateInput();
+
+            _stringBrowser = browser;
+            _filter2nd = filter2nd;
+            ListData = new List<T>();
+            _propertySelector = propertySelector;
+            RefreshGrid();
+            ReturnedValue = returnedValue;
+        }
+
+        private void RePopulateListData()
+        {
+            if (_dateBrowser != null)
+            {
+                ListData = _dateBrowser.Browse(new Periode(FilterDate1TextBox.Value, FilterDate2TextBox.Value));
+                return;
+            }
+            if (_stringBrowser != null)
+            {
+                if (FilterTextBox.Text.Length == 0)
+                    ListData = new List<T>();
+                else
+                    ListData = _stringBrowser.Browse(FilterTextBox.Text, _filter2nd);
+                return;
+            }
         }
 
         private void RefreshGrid()
@@ -67,7 +93,7 @@ namespace btr.winform48.SharedForm
             {
                 var keywords = keyword.ToLower().Split(' ');
                 ListDataFiltered = ListData
-                    .Where(x => keywords.All(word => PropertySelector(x).ToString().ToLower().Contains(word)))
+                    .Where(x => keywords.All(word => _propertySelector(x).ToString().ToLower().Contains(word)))
                     .ToList();
             }
 
@@ -116,14 +142,27 @@ namespace btr.winform48.SharedForm
         {
             if (e.KeyCode == Keys.Enter)
             {
+                RePopulateListData();
                 RefreshGrid();
             }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            ListData = DateBrowser.Browse(new Periode(FilterDate1TextBox.Value, FilterDate2TextBox.Value));
+            RePopulateListData();
             RefreshGrid();
         }
+
+        private void HideDateInput()
+        {
+            FilterDate1TextBox.Visible = false;
+            FilterDate2TextBox.Visible = false;
+            SearchButton.Visible = false;
+            const int shiftUp = 30;
+            panel1.Size = new Size(panel1.Size.Width, panel1.Size.Height - shiftUp);
+            BrowserGrid.Location = new Point(BrowserGrid.Location.X, BrowserGrid.Location.Y - shiftUp);
+            BrowserGrid.Size = new Size(BrowserGrid.Width, BrowserGrid.Height + shiftUp);
+        }
+
     }
 }

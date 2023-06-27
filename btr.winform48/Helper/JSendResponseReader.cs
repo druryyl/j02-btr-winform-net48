@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace btr.winform48.Helper
 {
@@ -24,13 +25,13 @@ namespace btr.winform48.Helper
             Guard.Argument(() => response).NotNull();
 
             if (response.Content is null)
-                throw new ArgumentException($"Error Remote: ({(int)response.StatusCode}) {response.ErrorException.Message}");
+                throw new InvalidOperationException($"Error Remote: ({(int)response.StatusCode}) {response.ErrorException.Message}");
 
             var resultFailed = JsonConvert.DeserializeObject<JSend<string>>(response.Content);
             if (resultFailed != null)
                 throw new ArgumentException(resultFailed.Data);
             else
-                throw new ArgumentException($"Error Remote: ({(int)response.StatusCode}) {response.ErrorException.Message}");
+                throw new InvalidOperationException($"Error Remote: ({(int)response.StatusCode}) {response.ErrorException.Message}");
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using btr.winform48.Helper;
+using btr.winform48.SaleContext.FakturAgg.Services;
+using btr.winform48.SaleContext.StokAgg;
 using btr.winform48.SharedForm;
 using Microsoft.SqlServer.Server;
+using Syncfusion.Windows.Forms.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,34 +16,18 @@ using System.Windows.Forms;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
-    public partial class FakturForm : Form, IFakturView
+    public partial class FakturForm : Form
     {
-
-        public event EventHandler FakturIdBrowse;
-        public event EventHandler SalesPersonIdBrowse;
-        public event EventHandler CustomerIdBrowse;
-        public event EventHandler WarehouseIdIdBrowse;
-        public event EventHandler Save;
-        public event EventHandler Delete;
-        public event EventHandler Print;
-
         private List<FakturItemDto> _listItem = new List<FakturItemDto>();
+        private readonly IListFakturService _listFakturService;
+        private readonly IGetFakturService _getFakturService;
+
         public FakturForm()
         {
             InitializeComponent();
-            InitEvent();
             InitGrid();
-        }
-
-        private void InitEvent()
-        {
-            FakturIdButton.Click += delegate { FakturIdBrowse?.Invoke(this, EventArgs.Empty); };
-            SalesPersonIdButton.Click += delegate { SalesPersonIdBrowse?.Invoke(this, EventArgs.Empty); };
-            CustomerIdButton.Click += delegate { CustomerIdBrowse?.Invoke(this, EventArgs.Empty); };
-            WarehouseIdButton.Click += delegate { WarehouseIdIdBrowse?.Invoke(this, EventArgs.Empty); };
-            SaveButton.Click += delegate { Save?.Invoke(this, EventArgs.Empty); };
-            DeleteButton.Click += delegate { Delete?.Invoke(this, EventArgs.Empty); };
-            PrintButton.Click += delegate { Print?.Invoke(this, EventArgs.Empty); };
+            _listFakturService = new ListFakturService();
+            _getFakturService = new GetFakturService();
         }
 
         private void InitGrid()
@@ -54,14 +41,21 @@ namespace btr.winform48.SaleContext.FakturAgg
                 if (col.ReadOnly)
                     col.DefaultCellStyle.BackColor = Color.Beige;
             }
+            DataGridViewButtonColumn buttonCol = new DataGridViewButtonColumn();
+            buttonCol.HeaderText = "Find"; // Set the column header text
+            buttonCol.Text = "..."; // Set the button text
+            buttonCol.Name= "Find"; // Set the button text
+            buttonCol.DefaultCellStyle.BackColor = Color.Brown;
+            FakturItemGrid.Columns.Insert(1,buttonCol);
 
             //  hide
             FakturItemGrid.Columns["DiscTotal"].Visible = false;
             FakturItemGrid.Columns["PpnRp"].Visible = false;
             //  width
             FakturItemGrid.Columns["BrgId"].Width = 50;
+            FakturItemGrid.Columns["Find"].Width = 20;
             FakturItemGrid.Columns["BrgName"].Width = 150;
-            FakturItemGrid.Columns["StokHarga"].Width = 120;
+            FakturItemGrid.Columns["StokHarga"].Width = 100;
             FakturItemGrid.Columns["Qty"].Width = 50;
             FakturItemGrid.Columns["QtyDetil"].Width = 80;
             FakturItemGrid.Columns["SubTotal"].Width = 80;
@@ -95,109 +89,90 @@ namespace btr.winform48.SaleContext.FakturAgg
             FakturItemGrid.DataSource = binding;
         }
 
-        public string FakturId 
-        { 
-            get => FakturIdTextBox.Text; 
-            set => FakturIdTextBox.Text = value; 
-        }
-        public DateTime FakturDate 
-        { 
-            get => FakturDateTextBox.Value; 
-            set => FakturDateTextBox.Value = value; 
-        }
-        public string SalesPersonId 
-        { 
-            get => SalesPersonIdTextBox.Text; 
-            set => SalesPersonIdTextBox.Text = value; 
-        }
-        public string SalesPersonaName 
-        { 
-            get => SalesPersonNameTextBox.Text; 
-            set => SalesPersonNameTextBox.Text = value; 
-        }
-        public string CustomerId 
-        { 
-            get => CustomerIdTextBox.Text; 
-            set => CustomerIdTextBox.Text = value; 
-        }
-        public string CustomerName 
-        { 
-            get => CustomerNameTextBox.Text; 
-            set => CustomerNameTextBox.Text = value; 
-        }
-        public decimal Plafond 
-        { 
-            get => PlafondTextBox.Value; 
-            set => PlafondTextBox.Value = value; 
-        }
-        public decimal CreditBalance 
-        { 
-            get => CreditBalanceTextBox.Value;
-            set => CreditBalanceTextBox.Value = value; 
-        }
-        public string WarehouseId 
-        { 
-            get => WarehouseIdTextBox.Text;
-            set => WarehouseIdTextBox.Text = value; 
-        }
-        public string WarehouseName 
-        { 
-            get => WarehouseIdTextBox.Text;
-            set => WarehouseIdTextBox.Text = value; 
-        }
-        public DateTime TglRecanaKirim 
-        { 
-            get => TglRencanaKirimTextBox.Value;
-            set => TglRencanaKirimTextBox.Value = value; 
-        }
-        public int TermOfPayment 
+        private void FakturIdButton_Click(object sender, EventArgs e)
         {
-            get => TermOfPaymentComboBox.SelectedIndex;
-            set => TermOfPaymentComboBox.SelectedIndex = value; 
-        }
-        public string Note 
-        { 
-            get => NoteTextBox.Text;
-            set => NoteTextBox.Text = value; 
-        }
-        public decimal Total 
-        { 
-            get => TotalTextBox.Value;
-            set => TotalTextBox.Value = value; 
-        }
-        public decimal DiscountLain 
-        { 
-            get => DiscountLainTextBox.Value;
-            set => DiscountLainTextBox.Value = value; 
-        }
-        public decimal BiayaLain 
-        { 
-            get => BiayaLainTextBox.Value;
-            set => BiayaLainTextBox.Value = value; 
-        }
-        public decimal GrandTotal 
-        { 
-            get => GrandTotalTextBox.Value;
-            set => GrandTotalTextBox.Value = value; 
-        }
-        public decimal UangMuka 
-        { 
-            get => UangMukaTextBox.Value;
-            set => UangMukaTextBox.Value = value; 
-        }
-        public decimal Sisa 
-        { 
-            get => SisaTextBox.Value;
-            set => SisaTextBox.Value = value; 
-        }
-        public List<FakturItemDto> ListItems 
-        { 
-            get => _listItem; 
-            set => _listItem = value; 
+            var service = new ListFakturService();
+            var form = new BrowserForm<ListFakturResponse, string>(service, FakturIdTextBox.Text, x => x.CustomerName);
+            var resultDialog = form.ShowDialog();
+            if (resultDialog == DialogResult.OK)
+                FakturIdTextBox.Text = form.ReturnedValue;
+            FakturDateTextBox.Focus();
         }
 
+        private void FakturIdTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            var textbox = (ButtonEdit)sender;
+            if (textbox.Text.Length == 0)
+            {
+                e.Cancel = false;
+                return;
+            }
 
-        #region RESEARCH
+            GetFakturResponse faktur = null;
+            try
+            {
+                faktur = _getFakturService.Execute(textbox.Text);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (faktur is null)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            FakturDateTextBox.Value = faktur.FakturDate.ToDate();
+            SalesPersonIdTextBox.Text = faktur.SalesPersonId;
+            SalesPersonNameTextBox.Text = faktur.SalesPersonName;
+            CustomerIdTextBox.Text = faktur.CustomerId;
+            CustomerNameTextBox.Text = faktur.CustomerName;
+            PlafondTextBox.Value = (decimal)faktur.Plafond;
+            CreditBalanceTextBox.Value = (decimal)faktur.CreditBalance;
+            WarehouseIdTextBox.Text = faktur.WarehouseId;
+            WarehouseNameTextBox.Text = faktur.WarehouseName;
+            TglRencanaKirimTextBox.Value = faktur.TglRencanaKirim.ToDate();
+            TotalTextBox.Value = (decimal)faktur.Total;
+            GrandTotalTextBox.Value = (decimal)faktur.GrandTotal;
+
+            _listItem.Clear();
+            foreach(var item in faktur.ListItem)
+            {
+                var qtyString = string.Join(";", item.ListQtyHarga.Select(x => x.Qty.ToString()));
+                var discString = string.Join(";", item.ListDiscount.Select(x => x.DiscountProsen.ToString()));
+                var listQtyHarga = item.ListQtyHarga
+                    .Where(x => x.HargaJual != 0)
+                    .Select(x => new FakturItemStokHargaSatuan(x.Qty, x.HargaJual, x.Satuan));
+                var newItem = new FakturItemDto
+                {
+                    BrgId = item.BrgId,
+                    Qty = qtyString,
+                    Disc = discString,
+                    ListStokHargaSatuan = listQtyHarga.ToList(),
+                };
+                newItem.SetBrgName(item.BrgName);
+                newItem.ReCalc();
+                _listItem.Add(newItem);
+            }
+            RefreshGrid();
+        }
+
+        private void FakturItemGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+            if (e.ColumnIndex == grid.Columns["Find"].Index && e.RowIndex >= 0)
+            {
+                var service = new ListBrgStokService();
+                var form = new BrowserForm<ListBrgStokResponse, string>(service, FakturIdTextBox.Text, WarehouseIdTextBox.Text, x => x.BrgName);
+                var resultDialog = form.ShowDialog();
+                if (resultDialog == DialogResult.OK)
+                    grid.CurrentRow.Cells["BrgId"].Value = form.ReturnedValue;
+            }
+        }
+    }
+
+        #region RESEARCH INSIDE FORM
         //private void SeedSampleItem()
         //{
         //    _listItem.Clear();
@@ -265,63 +240,62 @@ namespace btr.winform48.SaleContext.FakturAgg
         //        WarehouseIdTextBox.Text = form.ReturnedValue;
         //}
         #endregion
+
+        #region RESEARCH
+        //public class BrgModel
+        //{
+        //    public BrgModel(string id, string name, int qty, string satuan)
+        //    {
+        //        BrgId = id;
+        //        BrgName = name;
+        //        Stok = qty;
+        //        Satuan= satuan;
+        //    }
+        //    public string BrgId { get; set; }
+        //    public string BrgName { get; set; }
+        //    public int Stok { get; set; }
+        //    public string Satuan { get; set; }
+        //}
+
+        //public class FakturBrowser : IDateBrowser<FakturModel>
+        //{
+        //    public IEnumerable<FakturModel> Browse(Periode periode)
+        //    {
+        //        var list = new List<FakturModel>
+        //        {
+        //            new FakturModel("BR001", new DateTime(2023,6,26), "Indomaret"),
+        //            new FakturModel("BR002", new DateTime(2023,6,26), "Alfamart"),
+        //            new FakturModel("BR003", new DateTime(2023,6,26), "Alfamart"),
+        //            new FakturModel("BR004", new DateTime(2023,6,27), "Wallpart"),
+        //            new FakturModel("BR005", new DateTime(2023,6,27), "Gading Mart"),
+        //            new FakturModel("BR006", new DateTime(2023,6,27), "Mirota"),
+        //            new FakturModel("BR007", new DateTime(2023,6,28), "Indomaret"),
+        //            new FakturModel("BR008", new DateTime(2023,6,28), "Mirota"),
+        //            new FakturModel("BR009", new DateTime(2023,6,28), "Cemara 7"),
+        //            new FakturModel("BR00A", new DateTime(2023,6,29), "Cemara 7"),
+        //            new FakturModel("BR00B", new DateTime(2023,6,29), "Gading Mart"),
+        //            new FakturModel("BR00C", new DateTime(2023,6,29), "Alfamart"),
+        //            new FakturModel("BR00D", new DateTime(2023,6,29), "Wallmart"),
+        //        };
+
+        //        return list
+        //            .Where(x => x.FakturDate >= periode.Tgl1)
+        //            .Where(x => x.FakturDate <= periode.Tgl2);
+        //    }
+        //}
+
+        //public class FakturModel
+        //{
+        //    public FakturModel(string fakturId, DateTime fakturDate, string customerName)
+        //    {
+        //        FakturId = fakturId;
+        //        FakturDate = fakturDate;
+        //        CustomerName = customerName;
+        //    }
+        //    public string FakturId { get; set; }
+        //    public DateTime FakturDate { get; set; }
+        //    public string CustomerName { get; set; }
+
+        //}
+        #endregion
     }
-
-    #region RESEARCH
-    //public class BrgModel
-    //{
-    //    public BrgModel(string id, string name, int qty, string satuan)
-    //    {
-    //        BrgId = id;
-    //        BrgName = name;
-    //        Stok = qty;
-    //        Satuan= satuan;
-    //    }
-    //    public string BrgId { get; set; }
-    //    public string BrgName { get; set; }
-    //    public int Stok { get; set; }
-    //    public string Satuan { get; set; }
-    //}
-
-    //public class FakturBrowser : IDateBrowser<FakturModel>
-    //{
-    //    public IEnumerable<FakturModel> Browse(Periode periode)
-    //    {
-    //        var list = new List<FakturModel>
-    //        {
-    //            new FakturModel("BR001", new DateTime(2023,6,26), "Indomaret"),
-    //            new FakturModel("BR002", new DateTime(2023,6,26), "Alfamart"),
-    //            new FakturModel("BR003", new DateTime(2023,6,26), "Alfamart"),
-    //            new FakturModel("BR004", new DateTime(2023,6,27), "Wallpart"),
-    //            new FakturModel("BR005", new DateTime(2023,6,27), "Gading Mart"),
-    //            new FakturModel("BR006", new DateTime(2023,6,27), "Mirota"),
-    //            new FakturModel("BR007", new DateTime(2023,6,28), "Indomaret"),
-    //            new FakturModel("BR008", new DateTime(2023,6,28), "Mirota"),
-    //            new FakturModel("BR009", new DateTime(2023,6,28), "Cemara 7"),
-    //            new FakturModel("BR00A", new DateTime(2023,6,29), "Cemara 7"),
-    //            new FakturModel("BR00B", new DateTime(2023,6,29), "Gading Mart"),
-    //            new FakturModel("BR00C", new DateTime(2023,6,29), "Alfamart"),
-    //            new FakturModel("BR00D", new DateTime(2023,6,29), "Wallmart"),
-    //        };
-
-    //        return list
-    //            .Where(x => x.FakturDate >= periode.Tgl1)
-    //            .Where(x => x.FakturDate <= periode.Tgl2);
-    //    }
-    //}
-
-    //public class FakturModel
-    //{
-    //    public FakturModel(string fakturId, DateTime fakturDate, string customerName)
-    //    {
-    //        FakturId = fakturId;
-    //        FakturDate = fakturDate;
-    //        CustomerName = customerName;
-    //    }
-    //    public string FakturId { get; set; }
-    //    public DateTime FakturDate { get; set; }
-    //    public string CustomerName { get; set; }
-
-    //}
-    #endregion
-}

@@ -7,4 +7,8 @@ namespace btr.winform48.SharedForm
     {
         IEnumerable<T> Browse(Periode periode);
     }
+    public interface IStringBrowser<T>
+    {
+        IEnumerable<T> Browse(string keyword, string filter);
+    }
 }
