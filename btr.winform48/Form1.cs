@@ -1,5 +1,4 @@
-﻿using btr.winform48.Infrastructure.SalesContext;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,16 +12,14 @@ namespace btr.winform48
 {
     public partial class SalesPersonForm : Form
     {
-        private List<SalesPersonModel> _listPerson;
-        private SalesPersonService _salesPersonService;
         private BindingSource _bindingSource;
 
         public SalesPersonForm()
         {
             InitializeComponent();
-            _salesPersonService = new SalesPersonService();
+            //_salesPersonService = new SalesPersonService();
 
-            _listPerson = new List<SalesPersonModel>();
+            //_listPerson = new List<SalesPersonModel>();
 
             ReBinding();
             LoadSalesPerson();
@@ -30,8 +27,8 @@ namespace btr.winform48
 
         private void LoadSalesPerson()
         {
-            _listPerson.Clear();
-            _listPerson = _salesPersonService.ListData().ToList();
+            //_listPerson.Clear();
+            //_listPerson = _salesPersonService.ListData().ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -43,7 +40,7 @@ namespace btr.winform48
         {
             _bindingSource = new BindingSource
             {
-                DataSource = _listPerson
+                //DataSource = _listPerson
             };
             ListGrid.DataSource = _bindingSource;
         }

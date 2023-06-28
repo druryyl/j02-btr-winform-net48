@@ -281,6 +281,7 @@
             this.CustomerIdTextBox.Name = "CustomerIdTextBox";
             this.CustomerIdTextBox.Size = new System.Drawing.Size(175, 28);
             this.CustomerIdTextBox.TabIndex = 5;
+            this.CustomerIdTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.CustomerIdTextBox_Validating);
             // 
             // CustomerIdButton
             // 
@@ -293,6 +294,7 @@
             this.CustomerIdButton.PreferredWidth = 18;
             this.CustomerIdButton.TabIndex = 1;
             this.CustomerIdButton.ThemeName = "WindowsXP";
+            this.CustomerIdButton.Click += new System.EventHandler(this.CustomerIdButton_Click);
             // 
             // CreditBalanceLabel
             // 
@@ -387,6 +389,7 @@
             this.WarehouseIdTextBox.Name = "WarehouseIdTextBox";
             this.WarehouseIdTextBox.Size = new System.Drawing.Size(175, 28);
             this.WarehouseIdTextBox.TabIndex = 9;
+            this.WarehouseIdTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.WarehouseIdTextBox_Validating);
             // 
             // WarehouseIdButton
             // 
@@ -399,6 +402,7 @@
             this.WarehouseIdButton.PreferredWidth = 18;
             this.WarehouseIdButton.TabIndex = 1;
             this.WarehouseIdButton.ThemeName = "WindowsXP";
+            this.WarehouseIdButton.Click += new System.EventHandler(this.WarehouseIdButton_Click);
             // 
             // WarehouseNameTextBox
             // 

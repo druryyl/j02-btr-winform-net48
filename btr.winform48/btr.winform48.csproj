@@ -113,6 +113,10 @@
     <Compile Include="Helper\Periode.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\GetBrgService.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\ListBrgStokService.cs" />
+    <Compile Include="InventoryContext\WarehouseAgg\Services\GetWarehouseService.cs" />
+    <Compile Include="InventoryContext\WarehouseAgg\Services\ListWarehouseService.cs" />
+    <Compile Include="SaleContext\CustomerAgg\Services\GetCustomerService.cs" />
+    <Compile Include="SaleContext\CustomerAgg\Services\ListCustomerService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\ListFakturService.cs" />
     <Compile Include="SaleContext\SalesPersonAgg\Services\GetSalesPersonService.cs" />
@@ -132,8 +136,6 @@
     </Compile>
     <Compile Include="Helper\JSendEnvelope.cs" />
     <Compile Include="Helper\JSendResponseReader.cs" />
-    <Compile Include="SaleContext\SalesPersonAgg\SalesPersonModel.cs" />
-    <Compile Include="SaleContext\SalesPersonAgg\SalesPersonService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaleContext\FakturAgg\FakturForm.cs">
