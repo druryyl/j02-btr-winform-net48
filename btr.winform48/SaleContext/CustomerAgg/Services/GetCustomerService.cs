@@ -8,19 +8,9 @@ using System.Threading.Tasks;
 
 namespace btr.winform48.SaleContext.CustomerAgg.Services
 {
-    public interface IGetCustomerService
+    public interface IGetCustomerService : IGetDataService<GetCustomerResponse>
     {
-        GetCustomerResponse Execute(string id);
     }
-
-    public class GetCustomerResponse
-    {
-        public string CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public double Plafond { get; set; }
-        public double CreditBalance{ get; set; }
-    }
-
 
     public class GetCustomerService : IGetCustomerService
     {
@@ -45,5 +35,12 @@ namespace btr.winform48.SaleContext.CustomerAgg.Services
             var result = JSendResponse.Read(response);
             return result;
         }
+    }
+    public class GetCustomerResponse
+    {
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public double Plafond { get; set; }
+        public double CreditBalance { get; set; }
     }
 }

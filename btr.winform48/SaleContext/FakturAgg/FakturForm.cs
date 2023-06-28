@@ -294,8 +294,6 @@ namespace btr.winform48.SaleContext.FakturAgg
             }
             WarehouseNameTextBox.Text = model.WarehouseName;
         }
-
-
     }
 
     #region RESEARCH INSIDE FORM

@@ -8,17 +8,9 @@ using System.Threading.Tasks;
 
 namespace btr.winform48.InventoryContext.WarehouseAgg.Services
 {
-    public interface IGetWarehouseService
+    public interface IGetWarehouseService : IGetDataService<GetWarehouseResponse>
     {
-        GetWarehouseResponse Execute(string id);
     }
-
-    public class GetWarehouseResponse
-    {
-        public string WarehouseId { get; set; }
-        public string WarehouseName { get; set; }
-    }
-
 
     public class GetWarehouseService : IGetWarehouseService
     {
@@ -44,4 +36,10 @@ namespace btr.winform48.InventoryContext.WarehouseAgg.Services
             return result;
         }
     }
+    public class GetWarehouseResponse
+    {
+        public string WarehouseId { get; set; }
+        public string WarehouseName { get; set; }
+    }
+
 }

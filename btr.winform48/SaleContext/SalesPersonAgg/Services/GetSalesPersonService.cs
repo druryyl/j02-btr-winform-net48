@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace btr.winform48.SaleContext.SalesPersonAgg.Services
 {
-    public interface IGetSalesPersonService
+    public interface IGetSalesPersonService : IGetDataService<GetSalesPersonResponse>
     {
-        GetSalesPersonResponse Execute(string id);
     }
 
     public class GetSalesPersonResponse
@@ -20,7 +19,7 @@ namespace btr.winform48.SaleContext.SalesPersonAgg.Services
     }
 
 
-    public class GetSalesPersonService : IGetSalesPersonService
+    public class GetSalesPersonService :  IGetSalesPersonService
     {
         public GetSalesPersonResponse Execute(string id)
         {

@@ -8,11 +8,34 @@ using System.Threading.Tasks;
 
 namespace btr.winform48.SaleContext.FakturAgg.Services
 {
-    public interface IGetFakturService
+    public interface IGetFakturService : IGetDataService<GetFakturResponse>
     {
-        GetFakturResponse Execute(string id);
     }
 
+    public class GetFakturService : IGetFakturService
+    {
+        public GetFakturResponse Execute(string id)
+        {
+            var result = Task.Run(() => Execute_(id)).GetAwaiter().GetResult();
+            return result;
+        }
+        private const string _baseUrl = "https://localhost:7003";
+
+        private async Task<GetFakturResponse> Execute_(string id)
+        {
+            var endpoint = $"{_baseUrl}/api/Faktur/";
+            var client = new RestClient(endpoint);
+            var req = new RestRequest("{id}")
+                .AddUrlSegment("id", id);
+
+            //  EXECUTE
+            var response = await client.ExecuteGetAsync<JSend<GetFakturResponse>>(req);
+
+            //  RETURN
+            var result = JSendResponse.Read(response);
+            return result;
+        }
+    }
     public class GetFakturResponse
     {
         public string FakturId { get; set; }
@@ -95,30 +118,4 @@ namespace btr.winform48.SaleContext.FakturAgg.Services
         public double DiscountRp { get; set; }
     }
 
-    public class GetFakturService : IGetFakturService
-    {
-        public GetFakturResponse Execute(string id)
-        {
-            var result = Task.Run(() => Execute_(id)).GetAwaiter().GetResult();
-            return result;
-        }
-        private const string _baseUrl = "https://localhost:7003";
-
-        private async Task<GetFakturResponse> Execute_(string id)
-        {
-            var endpoint = $"{_baseUrl}/api/Faktur/";
-            var client = new RestClient(endpoint);
-            var req = new RestRequest("{id}")
-                .AddUrlSegment("id", id);
-
-            //  EXECUTE
-            var response = await client.ExecuteGetAsync<JSend<GetFakturResponse>>(req);
-
-            //  RETURN
-            var result = JSendResponse.Read(response);
-            return result;
-        }
-
-
-    }
 }

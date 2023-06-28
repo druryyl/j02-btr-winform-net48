@@ -110,6 +110,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\IServiceBase.cs" />
     <Compile Include="Helper\Periode.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\GetBrgService.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\ListBrgStokService.cs" />
