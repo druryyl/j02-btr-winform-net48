@@ -130,6 +130,7 @@
             this.SalesPersonIdTextBox.Name = "SalesPersonIdTextBox";
             this.SalesPersonIdTextBox.Size = new System.Drawing.Size(175, 28);
             this.SalesPersonIdTextBox.TabIndex = 3;
+            this.SalesPersonIdTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.SalesPersonIdTextBox_Validating);
             // 
             // SalesPersonIdButton
             // 
@@ -143,6 +144,7 @@
             this.SalesPersonIdButton.PreferredWidth = 18;
             this.SalesPersonIdButton.TabIndex = 1;
             this.SalesPersonIdButton.ThemeName = "WindowsXP";
+            this.SalesPersonIdButton.Click += new System.EventHandler(this.SalesPersonIdButton_Click);
             // 
             // FakturIdTextBox
             // 
@@ -461,7 +463,6 @@
             this.FakturItemGrid.Size = new System.Drawing.Size(852, 322);
             this.FakturItemGrid.TabIndex = 12;
             this.FakturItemGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FakturItemGrid_CellClick);
-            this.FakturItemGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.FakturItemGrid_CellValidating);
             // 
             // textBoxExt1
             // 

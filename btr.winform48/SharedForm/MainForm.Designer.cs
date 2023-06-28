@@ -135,6 +135,7 @@
             this.ReportPoButton.Name = "ReportPoButton";
             this.ReportPoButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("ReportPoButton.SmallImage")));
             this.ReportPoButton.Text = "PO Report";
+            this.ReportPoButton.Click += new System.EventHandler(this.ReportPoButton_Click);
             // 
             // InvoicePanel
             // 

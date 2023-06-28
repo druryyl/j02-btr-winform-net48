@@ -115,6 +115,8 @@
     <Compile Include="InventoryContext\StokAgg\Services\ListBrgStokService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\ListFakturService.cs" />
+    <Compile Include="SaleContext\SalesPersonAgg\Services\GetSalesPersonService.cs" />
+    <Compile Include="SaleContext\SalesPersonAgg\Services\ListSalesPersonService.cs" />
     <Compile Include="SharedForm\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +143,12 @@
       <DependentUpon>FakturForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SaleContext\FakturAgg\FakturItemDto.cs" />
+    <Compile Include="SharedForm\PrintPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SharedForm\PrintPreviewForm.Designer.cs">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -162,6 +170,9 @@
     </Compile>
     <EmbeddedResource Include="SaleContext\FakturAgg\FakturForm.resx">
       <DependentUpon>FakturForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SharedForm\PrintPreviewForm.resx">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

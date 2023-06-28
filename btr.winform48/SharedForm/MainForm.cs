@@ -1,4 +1,5 @@
 ﻿using btr.winform48.SaleContext.FakturAgg;
+using btr.winform48.SharedForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,15 @@ namespace btr.winform48.Forms
             {
                 StartPosition = FormStartPosition.CenterScreen,
                 MdiParent = this
+            };
+            form.Show();
+        }
+
+        private void ReportPoButton_Click(object sender, EventArgs e)
+        {
+            var form = new PrintPreviewForm()
+            {
+                StartPosition = FormStartPosition.CenterScreen,
             };
             form.Show();
         }

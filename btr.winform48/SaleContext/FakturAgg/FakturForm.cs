@@ -1,5 +1,6 @@
 ﻿using btr.winform48.Helper;
 using btr.winform48.SaleContext.FakturAgg.Services;
+using btr.winform48.SaleContext.SalesPersonAgg.Services;
 using btr.winform48.SaleContext.StokAgg;
 using btr.winform48.SharedForm;
 using Microsoft.SqlServer.Server;
@@ -21,6 +22,8 @@ namespace btr.winform48.SaleContext.FakturAgg
         private List<FakturItemDto> _listItem = new List<FakturItemDto>();
         private readonly IListFakturService _listFakturService;
         private readonly IGetFakturService _getFakturService;
+        private readonly IListSalesPersonService _listSalesPersonService;
+        private readonly IGetSalesPersonService _getSalesPersonService;
 
         public FakturForm()
         {
@@ -28,6 +31,8 @@ namespace btr.winform48.SaleContext.FakturAgg
             InitGrid();
             _listFakturService = new ListFakturService();
             _getFakturService = new GetFakturService();
+            _listSalesPersonService = new ListSalesPersonService();
+            _getSalesPersonService = new GetSalesPersonService();
         }
 
         private void InitGrid()
@@ -36,7 +41,7 @@ namespace btr.winform48.SaleContext.FakturAgg
             RefreshGrid();
             foreach(DataGridViewColumn col in FakturItemGrid.Columns)
             {
-                col.DefaultCellStyle.Font = new Font("Consolas", 8f);
+                col.DefaultCellStyle.Font = new Font("Consolas", 8.25f);
                 col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
                 if (col.ReadOnly)
                     col.DefaultCellStyle.BackColor = Color.Beige;
@@ -91,8 +96,7 @@ namespace btr.winform48.SaleContext.FakturAgg
 
         private void FakturIdButton_Click(object sender, EventArgs e)
         {
-            var service = new ListFakturService();
-            var form = new BrowserForm<ListFakturResponse, string>(service, FakturIdTextBox.Text, x => x.CustomerName);
+            var form = new BrowserForm<ListFakturResponse, string>(_listFakturService, FakturIdTextBox.Text, x => x.CustomerName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
                 FakturIdTextBox.Text = form.ReturnedValue;
@@ -163,6 +167,9 @@ namespace btr.winform48.SaleContext.FakturAgg
             var grid = (DataGridView)sender;
             if (e.ColumnIndex == grid.Columns["Find"].Index && e.RowIndex >= 0)
             {
+                if (WarehouseIdTextBox.Text.Length == 0)
+                    return;
+
                 var service = new ListBrgStokService();
                 var form = new BrowserForm<ListBrgStokResponse, string>(service, FakturIdTextBox.Text, WarehouseIdTextBox.Text, x => x.BrgName);
                 var resultDialog = form.ShowDialog();
@@ -171,26 +178,40 @@ namespace btr.winform48.SaleContext.FakturAgg
             }
         }
 
-        private void FakturItemGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void SalesPersonIdButton_Click(object sender, EventArgs e)
         {
-            //var grid = (DataGridView)sender;
-            //if (e.ColumnIndex == grid.Columns["BrgId"].Index)
-            //{
+            var list = _listSalesPersonService.Execute();
+            var form = new BrowserForm<ListSalesPersonResponse, string>(list, SalesPersonIdTextBox.Text, x => x.SalesPersonName);
+            var resultDialog = form.ShowDialog();
+            if (resultDialog == DialogResult.OK)
+                SalesPersonIdTextBox.Text = form.ReturnedValue;
+            WarehouseIdTextBox.Focus();
+        }
 
-            //}
-            //if (grid.IsCurrentCellDirty) // Check if the cell value has changed
-            //{
-            //    // Validate the cell value
-            //    string newValue = e.FormattedValue.ToString();
-            //    if (!IsValidInput(newValue))
-            //    {
-            //        // Display an error message or take any other appropriate action
-            //        MessageBox.Show("Invalid input!");
+        private void SalesPersonIdTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            var textbox = (ButtonEdit)sender;
+            if (textbox.Text.Length == 0)
+            {
+                e.Cancel = false;
+                return;
+            }
 
-            //        // Cancel the event to prevent focus from leaving the cell
-            //        e.Cancel = true;
-            //    }
-            //}
+            GetSalesPersonResponse model = null;
+            try
+            {
+                model = _getSalesPersonService.Execute(textbox.Text);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (model is null)
+            {
+                e.Cancel = true;
+                return;
+            }
+            SalesPersonNameTextBox.Text = model.SalesPersonName;
         }
     }
 

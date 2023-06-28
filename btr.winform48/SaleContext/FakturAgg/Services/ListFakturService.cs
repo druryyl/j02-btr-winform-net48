@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
-    public interface IListFakturService
+    public interface IListFakturService : IDateBrowser<ListFakturResponse>
     {
         IEnumerable<ListFakturResponse> Execute(string tgl1, string tgl2);
     }
@@ -21,7 +21,7 @@ namespace btr.winform48.SaleContext.FakturAgg
         public string CustomerName { get; set; }
     }
 
-    public class ListFakturService : IListFakturService, IDateBrowser<ListFakturResponse>
+    public class ListFakturService : IListFakturService
     {
         private const string _baseUrl = "https://localhost:7003";
 
