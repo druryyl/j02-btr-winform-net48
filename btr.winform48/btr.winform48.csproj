@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\Periode.cs" />
+    <Compile Include="InventoryContext\StokAgg\Services\GetBrgService.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\ListBrgStokService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\ListFakturService.cs" />

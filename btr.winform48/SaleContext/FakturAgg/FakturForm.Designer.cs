@@ -461,6 +461,7 @@
             this.FakturItemGrid.Size = new System.Drawing.Size(852, 322);
             this.FakturItemGrid.TabIndex = 12;
             this.FakturItemGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FakturItemGrid_CellClick);
+            this.FakturItemGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.FakturItemGrid_CellValidating);
             // 
             // textBoxExt1
             // 

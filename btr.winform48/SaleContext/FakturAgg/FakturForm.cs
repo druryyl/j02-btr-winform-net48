@@ -170,6 +170,28 @@ namespace btr.winform48.SaleContext.FakturAgg
                     grid.CurrentRow.Cells["BrgId"].Value = form.ReturnedValue;
             }
         }
+
+        private void FakturItemGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            //var grid = (DataGridView)sender;
+            //if (e.ColumnIndex == grid.Columns["BrgId"].Index)
+            //{
+
+            //}
+            //if (grid.IsCurrentCellDirty) // Check if the cell value has changed
+            //{
+            //    // Validate the cell value
+            //    string newValue = e.FormattedValue.ToString();
+            //    if (!IsValidInput(newValue))
+            //    {
+            //        // Display an error message or take any other appropriate action
+            //        MessageBox.Show("Invalid input!");
+
+            //        // Cancel the event to prevent focus from leaving the cell
+            //        e.Cancel = true;
+            //    }
+            //}
+        }
     }
 
         #region RESEARCH INSIDE FORM

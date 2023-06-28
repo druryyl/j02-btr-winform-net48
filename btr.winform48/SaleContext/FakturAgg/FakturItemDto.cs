@@ -1,4 +1,5 @@
-﻿using System;
+﻿using btr.winform48.SaleContext.StokAgg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace btr.winform48.SaleContext.FakturAgg
 {
     public class FakturItemDto
     {
+        private string _brgId = string.Empty;
         private string _brgName = string.Empty;
         private string _disc = string.Empty;
         private string _discRp = string.Empty;
@@ -20,12 +22,28 @@ namespace btr.winform48.SaleContext.FakturAgg
         private double _ppn = 0;
         private double _ppnRp = 0;
         private double _total = 0;
+
+        private readonly IGetBrgHargaService _getBrgHargaService;
+
         public FakturItemDto()
         {
             ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>();
         }
 
-        public string BrgId { get; set; }
+        public string BrgId 
+        { 
+            get => _brgId;
+            set
+            {
+                _brgId = value;
+                var service = new GetBrgHargaService();
+                var response = service.Execute(_brgId);
+                _brgName = response.BrgName;
+                ListStokHargaSatuan = response.ListSatuanHarga
+                    .Select(x => new FakturItemStokHargaSatuan(x.Stok, x.HargaJual, x.Satuan))
+                    .ToList();
+            } 
+        }
         public string BrgName { get => _brgName; }
 
         public string StokHarga
