@@ -8,29 +8,29 @@ using MediatR;
 
 namespace btr.application.SalesContext.SalesPersonAgg.UseCases
 {
-    public class GetDataSalesPersonQuery : IRequest<GetDataSalesPersonResponse>, ISalesPersonKey
+    public class GetSalesPersonQuery : IRequest<GetSalesPersonResponse>, ISalesPersonKey
     {
-        public GetDataSalesPersonQuery(string id) => SalesPersonId = id;
+        public GetSalesPersonQuery(string id) => SalesPersonId = id;
         public string SalesPersonId { get; }
     }
 
-    public class GetDataSalesPersonResponse
+    public class GetSalesPersonResponse
     {
         public string SalesPersonId { get; set; }
         public string SalesPersonName { get; set; }
     }
 
-    public class GetDataSalesPersonHandler : IRequestHandler<GetDataSalesPersonQuery, GetDataSalesPersonResponse>
+    public class GetSalesPersonHandler : IRequestHandler<GetSalesPersonQuery, GetSalesPersonResponse>
     {
         private SalesPersonModel _aggRoot = new SalesPersonModel();
         private readonly ISalesPersonBuilder _builder;
 
-        public GetDataSalesPersonHandler(ISalesPersonBuilder builder)
+        public GetSalesPersonHandler(ISalesPersonBuilder builder)
         {
             _builder = builder;
         }
 
-        public Task<GetDataSalesPersonResponse> Handle(GetDataSalesPersonQuery request,
+        public Task<GetSalesPersonResponse> Handle(GetSalesPersonQuery request,
             CancellationToken cancellationToken)
         {
             //  GUARD
@@ -46,9 +46,9 @@ namespace btr.application.SalesContext.SalesPersonAgg.UseCases
             return Task.FromResult(GenResponse());
         }
 
-        private GetDataSalesPersonResponse GenResponse()
+        private GetSalesPersonResponse GenResponse()
         {
-            var result = _aggRoot.Adapt<GetDataSalesPersonResponse>();
+            var result = _aggRoot.Adapt<GetSalesPersonResponse>();
             return result;
         }
     }

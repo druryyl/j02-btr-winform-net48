@@ -25,13 +25,8 @@ namespace btr.winform48.SharedForm
         private void PoButton_Click(object sender, EventArgs e)
         {
             _fakturForm.StartPosition = FormStartPosition.CenterScreen;
+            _fakturForm.MdiParent = this;
             _fakturForm.Show();
-            //var form = new FakturForm
-            //{
-            //    StartPosition = FormStartPosition.CenterScreen,
-            //    MdiParent = this
-            //};
-            //form.Show();
         }
 
         private void ReportPoButton_Click(object sender, EventArgs e)

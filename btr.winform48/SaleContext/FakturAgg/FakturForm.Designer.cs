@@ -57,7 +57,7 @@
             this.WarehouseIdTextBox = new Syncfusion.Windows.Forms.Tools.ButtonEdit();
             this.WarehouseIdButton = new Syncfusion.Windows.Forms.Tools.ButtonEditChildButton();
             this.WarehouseNameTextBox = new System.Windows.Forms.TextBox();
-            this.WrehouseLabel = new System.Windows.Forms.Label();
+            this.WarehouseLabel = new System.Windows.Forms.Label();
             this.PanelAtas4 = new System.Windows.Forms.Panel();
             this.NoteTextBox = new System.Windows.Forms.TextBox();
             this.NoteLabel = new System.Windows.Forms.Label();
@@ -281,7 +281,7 @@
             this.CustomerIdTextBox.Name = "CustomerIdTextBox";
             this.CustomerIdTextBox.Size = new System.Drawing.Size(175, 28);
             this.CustomerIdTextBox.TabIndex = 5;
-            this.CustomerIdTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.CustomerIdTextBox_Validating);
+            this.CustomerIdTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.CustomerIdTextBox_ValidatingAsync);
             // 
             // CustomerIdButton
             // 
@@ -333,7 +333,7 @@
             this.PanelAtas3.Controls.Add(this.TglRencanaKirimLabel);
             this.PanelAtas3.Controls.Add(this.WarehouseIdTextBox);
             this.PanelAtas3.Controls.Add(this.WarehouseNameTextBox);
-            this.PanelAtas3.Controls.Add(this.WrehouseLabel);
+            this.PanelAtas3.Controls.Add(this.WarehouseLabel);
             this.PanelAtas3.Location = new System.Drawing.Point(418, 6);
             this.PanelAtas3.Name = "PanelAtas3";
             this.PanelAtas3.Size = new System.Drawing.Size(200, 186);
@@ -412,14 +412,14 @@
             this.WarehouseNameTextBox.Size = new System.Drawing.Size(176, 22);
             this.WarehouseNameTextBox.TabIndex = 10;
             // 
-            // WrehouseLabel
+            // WarehouseLabel
             // 
-            this.WrehouseLabel.AutoSize = true;
-            this.WrehouseLabel.Location = new System.Drawing.Point(8, 8);
-            this.WrehouseLabel.Name = "WrehouseLabel";
-            this.WrehouseLabel.Size = new System.Drawing.Size(66, 13);
-            this.WrehouseLabel.TabIndex = 4;
-            this.WrehouseLabel.Text = "Warehouse";
+            this.WarehouseLabel.AutoSize = true;
+            this.WarehouseLabel.Location = new System.Drawing.Point(8, 8);
+            this.WarehouseLabel.Name = "WarehouseLabel";
+            this.WarehouseLabel.Size = new System.Drawing.Size(66, 13);
+            this.WarehouseLabel.TabIndex = 4;
+            this.WarehouseLabel.Text = "Warehouse";
             // 
             // PanelAtas4
             // 
@@ -749,7 +749,7 @@
         private System.Windows.Forms.TextBox SalesPersonNameTextBox;
         private System.Windows.Forms.Label SalesPersonLabel;
         private System.Windows.Forms.TextBox WarehouseNameTextBox;
-        private System.Windows.Forms.Label WrehouseLabel;
+        private System.Windows.Forms.Label WarehouseLabel;
         private System.Windows.Forms.Panel PanelAtas4;
         private System.Windows.Forms.DataGridView FakturItemGrid;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxExt1;

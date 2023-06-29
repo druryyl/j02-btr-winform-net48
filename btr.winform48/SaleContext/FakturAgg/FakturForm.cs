@@ -1,10 +1,6 @@
 ﻿using btr.winform48.Helper;
-using btr.winform48.InventoryContext.WarehouseAgg.Services;
-using btr.winform48.SaleContext.CustomerAgg.Services;
 using btr.winform48.SaleContext.FakturAgg.Services;
-using btr.winform48.SaleContext.SalesPersonAgg.Services;
 using btr.winform48.SharedForm;
-using Microsoft.SqlServer.Server;
 using Syncfusion.Windows.Forms.Tools;
 using System;
 using System.Collections.Generic;
@@ -12,12 +8,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using btr.winform48.InventoryContext.StokAgg.Services;
 using MediatR;
 using btr.application.InventoryContext.WarehouseAgg.UseCases;
+using btr.application.SalesContext.CustomerAgg.UseCases;
+using btr.application.SalesContext.SalesPersonAgg.UseCases;
+using System.Threading.Tasks;
+using System.Security.Authentication.ExtendedProtection;
+using Polly;
+using btr.nuna.Domain;
+using btr.application.SalesContext.FakturAgg.UseCases;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
@@ -26,28 +27,12 @@ namespace btr.winform48.SaleContext.FakturAgg
         private List<FakturItemDto> _listItem = new List<FakturItemDto>();
 
         private readonly IMediator _mediator;
-        private readonly IListFakturService _listFakturService;
-        private readonly IGetFakturService _getFakturService;
-        private readonly IListSalesPersonService _listSalesPersonService;
-        private readonly IGetSalesPersonService _getSalesPersonService;
-        private readonly IListCustomerService _listCustomerService;
-        private readonly IGetCustomerService _getCustomerService;
-        //private readonly IListWarehouseService _listWarehouseService;
-        //private readonly IGetWarehouseService _getWarehouseService;
 
         public FakturForm(IMediator mediator)
         {
             InitializeComponent();
             InitGrid();
             _mediator = mediator;
-            //_listFakturService = new ListFakturService();
-            //_getFakturService = new GetFakturService();
-            //_listSalesPersonService = new ListSalesPersonService();
-            //_getSalesPersonService = new GetSalesPersonService();
-            //_listCustomerService = new ListCustomerService();
-            //_getCustomerService = new GetCustomerService();
-            //_listWarehouseService = new ListWarehouseService();
-            //_getWarehouseService = new GetWarehouseService();
         }
 
         private void InitGrid()
@@ -109,13 +94,22 @@ namespace btr.winform48.SaleContext.FakturAgg
             FakturItemGrid.DataSource = binding;
         }
 
-        private void FakturIdButton_Click(object sender, EventArgs e)
+        private async void FakturIdButton_Click(object sender, EventArgs e)
         {
-            var form = new BrowserForm<ListFakturResponse, string>(_listFakturService, FakturIdTextBox.Text, x => x.CustomerName);
+            //var form = new BrowserForm<ListFakturResponse, string>(_listFakturService, FakturIdTextBox.Text, x => x.CustomerName);
+            //var resultDialog = form.ShowDialog();
+            //if (resultDialog == DialogResult.OK)
+            //    FakturIdTextBox.Text = form.ReturnedValue;
+            //FakturDateTextBox.Focus();
+
+            var now = DateTime.Now.ToString("yyyy-MM-dd");
+            var query = new ListFakturQuery(now, now);
+            var list = await _mediator.Send(query);
+            var form = new BrowserForm<ListDataSalesPersonResponse, string>(list, SalesPersonIdTextBox.Text, x => x.SalesPersonName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
-                FakturIdTextBox.Text = form.ReturnedValue;
-            FakturDateTextBox.Focus();
+                SalesPersonIdTextBox.Text = form.ReturnedValue;
+            CustomerIdTextBox.Focus();
         }
 
         private void FakturIdTextBox_Validating(object sender, CancelEventArgs e)
@@ -142,7 +136,7 @@ namespace btr.winform48.SaleContext.FakturAgg
                 return;
             }
 
-            FakturDateTextBox.Value = faktur.FakturDate.ToDate();
+            //FakturDateTextBox.Value = faktur.FakturDate.ToDate();
             SalesPersonIdTextBox.Text = faktur.SalesPersonId;
             SalesPersonNameTextBox.Text = faktur.SalesPersonName;
             CustomerIdTextBox.Text = faktur.CustomerId;
@@ -151,7 +145,7 @@ namespace btr.winform48.SaleContext.FakturAgg
             CreditBalanceTextBox.Value = (decimal)faktur.CreditBalance;
             WarehouseIdTextBox.Text = faktur.WarehouseId;
             WarehouseNameTextBox.Text = faktur.WarehouseName;
-            TglRencanaKirimTextBox.Value = faktur.TglRencanaKirim.ToDate();
+            //TglRencanaKirimTextBox.Value = faktur.TglRencanaKirim.ToDate();
             TotalTextBox.Value = (decimal)faktur.Total;
             GrandTotalTextBox.Value = (decimal)faktur.GrandTotal;
 
@@ -193,83 +187,60 @@ namespace btr.winform48.SaleContext.FakturAgg
             }
         }
 
-        private void SalesPersonIdButton_Click(object sender, EventArgs e)
+        private async void SalesPersonIdButton_Click(object sender, EventArgs e)
         {
-            var list = _listSalesPersonService.Execute();
-            var form = new BrowserForm<ListSalesPersonResponse, string>(list, SalesPersonIdTextBox.Text, x => x.SalesPersonName);
+            var query = new ListDataSalesPersonQuery();
+            var list = await _mediator.Send(query);
+            var form = new BrowserForm<ListDataSalesPersonResponse, string>(list, SalesPersonIdTextBox.Text, x => x.SalesPersonName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
                 SalesPersonIdTextBox.Text = form.ReturnedValue;
             CustomerIdTextBox.Focus();
         }
 
-        private void SalesPersonIdTextBox_Validating(object sender, CancelEventArgs e)
+        private async void SalesPersonIdTextBox_Validating(object sender, CancelEventArgs e)
         {
             var textbox = (ButtonEdit)sender;
-            if (textbox.Text.Length == 0)
-            {
-                e.Cancel = false;
-                return;
-            }
+            var policy = Policy<GetSalesPersonResponse>
+                .Handle<KeyNotFoundException>()
+                .FallbackAsync(new GetSalesPersonResponse());
+            var query = new GetSalesPersonQuery(textbox.Text);
+            Task<GetSalesPersonResponse> queryFunc() => _mediator.Send(query);
 
-            GetSalesPersonResponse model = null;
-            try
-            {
-                model = _getSalesPersonService.Execute(textbox.Text);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (model is null)
-            {
-                e.Cancel = true;
-                return;
-            }
-            SalesPersonNameTextBox.Text = model.SalesPersonName;
+            var result = await policy.ExecuteAsync(queryFunc);
+            result.RemoveNull();
+            SalesPersonNameTextBox.Text = result.SalesPersonName;
         }
 
-        private void CustomerIdButton_Click(object sender, EventArgs e)
+        private async void CustomerIdButton_Click(object sender, EventArgs e)
         {
-            var list = _listCustomerService.Execute();
-            var form = new BrowserForm<ListCustomerResponse, string>(list, CustomerIdTextBox.Text, x => x.CustomerName);
+            var query = new ListCustomerQuery();
+            var result = await _mediator.Send(query);
+            var form = new BrowserForm<ListCustomerResponse, string>(result, CustomerIdTextBox.Text, x => x.CustomerName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
                 CustomerIdTextBox.Text = form.ReturnedValue;
             WarehouseIdTextBox.Focus();
         }
 
-        private void CustomerIdTextBox_Validating(object sender, CancelEventArgs e)
+        private async void CustomerIdTextBox_ValidatingAsync(object sender, CancelEventArgs e)
         {
             var textbox = (ButtonEdit)sender;
-            if (textbox.Text.Length == 0)
-            {
-                e.Cancel = false;
-                return;
-            }
+            var policy = Policy<GetCustomerResponse>
+                .Handle<KeyNotFoundException>()
+                .FallbackAsync(new GetCustomerResponse());
+            var query = new GetCustomerQuery(textbox.Text);
+            Task<GetCustomerResponse> queryFunc() => _mediator.Send(query);
 
-            GetCustomerResponse model = null;
-            try
-            {
-                model = _getCustomerService.Execute(textbox.Text);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (model is null)
-            {
-                e.Cancel = true;
-                return;
-            }
-            CustomerNameTextBox.Text = model.CustomerName;
+            var result = await policy.ExecuteAsync(queryFunc);
+            result.RemoveNull();
+            CustomerNameTextBox.Text = result.CustomerName;
         }
-        private void WarehouseIdButton_Click(object sender, EventArgs e)
+
+        private async void WarehouseIdButton_Click(object sender, EventArgs e)
         {
             var query = new ListWarehouseQuery();
-            var list = Task.Run(() => _mediator.Send(query)).GetAwaiter().GetResult();
-
-            //var list = _listWarehouseService.Execute();
+            var list = await _mediator.Send(query);
             var form = new BrowserForm<ListWarehouseResponse, string>(list, WarehouseIdTextBox.Text, x => x.WarehouseName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
@@ -277,160 +248,18 @@ namespace btr.winform48.SaleContext.FakturAgg
             WarehouseIdTextBox.Focus();
         }
 
-        private void WarehouseIdTextBox_Validating(object sender, CancelEventArgs e)
+        private async void WarehouseIdTextBox_Validating(object sender, CancelEventArgs e)
         {
             var textbox = (ButtonEdit)sender;
-            if (textbox.Text.Length == 0)
-            {
-                e.Cancel = false;
-                return;
-            }
+            var policy = Policy<GetWarehouseResponse>
+                .Handle<KeyNotFoundException>()
+                .FallbackAsync(new GetWarehouseResponse());
+            var query = new GetWarehouseQuery(textbox.Text);
+            Task<GetWarehouseResponse> queryFunc() => _mediator.Send(query);
 
-            GetWarehouseResponse result = null;
-            try
-            {
-                var query = new GetWarehouseQuery(textbox.Text);
-                result = Task.Run(() => _mediator.Send(query)).GetAwaiter().GetResult();
-
-                //model = _getWarehouseService.Execute(textbox.Text);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (result is null)
-            {
-                e.Cancel = true;
-                return;
-            }
+            var result = await policy.ExecuteAsync(queryFunc);
+            result.RemoveNull();
             WarehouseNameTextBox.Text = result.WarehouseName;
         }
     }
-
-    #region RESEARCH INSIDE FORM
-    //private void SeedSampleItem()
-    //{
-    //    _listItem.Clear();
-    //    _listItem.Add(new FakturItemDto
-    //    {
-    //        BrgId = "BR012A",
-    //        Qty = "10;5;6",
-    //        Disc = "10;0;0;0",
-    //        Ppn = 11,
-    //        ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>
-    //        {
-    //            new FakturItemStokHargaSatuan(120,35000,"box"),
-    //            new FakturItemStokHargaSatuan(25,2450,"pcs"),
-    //        }
-    //    });
-    //    _listItem.Last().ReCalc();
-    //    _listItem.Last().SetBrgName("Indomie Goreng");
-    //    _listItem.Add(new FakturItemDto
-    //    {
-    //        BrgId = "BR031B",
-    //        Qty = "5",
-    //        Disc = "10;0;0;0",
-    //        Ppn = 11,
-    //        ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>
-    //        {
-    //            new FakturItemStokHargaSatuan(80,33000,"box"),
-    //            new FakturItemStokHargaSatuan(12,2350,"pcs"),
-    //        }
-    //    });
-    //    _listItem.Last().ReCalc();
-    //    _listItem.Last().SetBrgName("Indomie Rebus Ayam Bawang");
-    //}
-
-    //private void CustomerIdButton_Click(object sender, EventArgs e)
-    //{
-    //    var list = new List<BrgModel>
-    //    {
-    //        new BrgModel("BR001", "Indomie Goreng",10, "box"),
-    //        new BrgModel("BR002", "Indomie Rebus Ayam Bawang asd asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf ",13,"box"),
-    //        new BrgModel("BR003", "Indomie Rebus Soto",13,"box"),
-    //        new BrgModel("BR004", "Indomie Goreng Padang",14,"box"),
-    //        new BrgModel("BR005", "Indomie Goreng Telor Asin",15,"box"),
-    //        new BrgModel("BR006", "Indomie Goreng Sambal Matah",16,"box"),
-    //        new BrgModel("BR007", "Indomie Goreng Sambal Bajak",21,"box"),
-    //        new BrgModel("BR008", "Mi Sedap Goreng",7,"box"),
-    //        new BrgModel("BR009", "Mi Sedap Rebus White Curry",110,"box"),
-    //        new BrgModel("BR00A", "Mi Sedap Rebus Soto",130,"box"),
-    //        new BrgModel("BR00B", "Mi Sedap Rebus Kaldu Sapi",75,"box"),
-    //        new BrgModel("BR00C", "Mi Sedap Goreng Hype Korea",25,"box"),
-    //        new BrgModel("BR00D", "Mi Sedap Rebus Kaldu Ayam",130,"box"),
-    //    };
-
-    //    var form = new BrowserForm<BrgModel, string>(list, CustomerIdTextBox.Text, x => x.BrgName);
-    //    var resultDialog = form.ShowDialog();
-    //    if (resultDialog == DialogResult.OK)
-    //        CustomerIdTextBox.Text = form.ReturnedValue;
-    //}
-
-    //private void WarehouseIdButton_Click(object sender, EventArgs e)
-    //{
-    //    var fakturBrowser = new FakturBrowser();
-    //    var form = new BrowserForm<FakturModel, string>(fakturBrowser, WarehouseIdTextBox.Text, x => x.CustomerName);
-    //    var resultDialog = form.ShowDialog();
-    //    if (resultDialog == DialogResult.OK)
-    //        WarehouseIdTextBox.Text = form.ReturnedValue;
-    //}
-    #endregion
-
-    #region RESEARCH
-    //public class BrgModel
-    //{
-    //    public BrgModel(string id, string name, int qty, string satuan)
-    //    {
-    //        BrgId = id;
-    //        BrgName = name;
-    //        Stok = qty;
-    //        Satuan= satuan;
-    //    }
-    //    public string BrgId { get; set; }
-    //    public string BrgName { get; set; }
-    //    public int Stok { get; set; }
-    //    public string Satuan { get; set; }
-    //}
-
-    //public class FakturBrowser : IDateBrowser<FakturModel>
-    //{
-    //    public IEnumerable<FakturModel> Browse(Periode periode)
-    //    {
-    //        var list = new List<FakturModel>
-    //        {
-    //            new FakturModel("BR001", new DateTime(2023,6,26), "Indomaret"),
-    //            new FakturModel("BR002", new DateTime(2023,6,26), "Alfamart"),
-    //            new FakturModel("BR003", new DateTime(2023,6,26), "Alfamart"),
-    //            new FakturModel("BR004", new DateTime(2023,6,27), "Wallpart"),
-    //            new FakturModel("BR005", new DateTime(2023,6,27), "Gading Mart"),
-    //            new FakturModel("BR006", new DateTime(2023,6,27), "Mirota"),
-    //            new FakturModel("BR007", new DateTime(2023,6,28), "Indomaret"),
-    //            new FakturModel("BR008", new DateTime(2023,6,28), "Mirota"),
-    //            new FakturModel("BR009", new DateTime(2023,6,28), "Cemara 7"),
-    //            new FakturModel("BR00A", new DateTime(2023,6,29), "Cemara 7"),
-    //            new FakturModel("BR00B", new DateTime(2023,6,29), "Gading Mart"),
-    //            new FakturModel("BR00C", new DateTime(2023,6,29), "Alfamart"),
-    //            new FakturModel("BR00D", new DateTime(2023,6,29), "Wallmart"),
-    //        };
-
-    //        return list
-    //            .Where(x => x.FakturDate >= periode.Tgl1)
-    //            .Where(x => x.FakturDate <= periode.Tgl2);
-    //    }
-    //}
-
-    //public class FakturModel
-    //{
-    //    public FakturModel(string fakturId, DateTime fakturDate, string customerName)
-    //    {
-    //        FakturId = fakturId;
-    //        FakturDate = fakturDate;
-    //        CustomerName = customerName;
-    //    }
-    //    public string FakturId { get; set; }
-    //    public DateTime FakturDate { get; set; }
-    //    public string CustomerName { get; set; }
-
-    //}
-    #endregion
 }
