@@ -11,6 +11,7 @@ using btr.nuna.Application;
 using btr.nuna.Domain;
 using btr.nuna.Infrastructure;
 using btr.winform48.SharedForm;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
@@ -40,7 +41,7 @@ namespace btr.winform48
     {
         services.AddMediatR(cfg => cfg
             .RegisterServicesFromAssembly(typeof(ApplicationAssemblyAnchor).Assembly));
-        services.AddValidatorsFromAssembly(Assembly.Load("ProxyEdc.Application"));
+        services.AddValidatorsFromAssembly(Assembly.Load("btr.application"));
 
         services.AddScoped<INunaCounterBL, NunaCounterBL>();
         services.AddScoped<DateTimeProvider, DateTimeProvider>();
