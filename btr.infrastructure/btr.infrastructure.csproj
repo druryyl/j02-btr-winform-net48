@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Helpers\ConnStringHelper.cs" />
     <Compile Include="Helpers\DatabaseOptions.cs" />
+    <Compile Include="InfrastructureAssemblyAnchor.cs" />
     <Compile Include="InventoryContext\BrgDal.cs" />
     <Compile Include="InventoryContext\BrgSatuanHargaDal.cs" />
     <Compile Include="InventoryContext\StokDal.cs" />
