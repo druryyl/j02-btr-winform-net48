@@ -42,8 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="InventoryContext\BrgDal.cs" />
+    <Compile Include="InventoryContext\BrgSatuanHargaDal.cs" />
+    <Compile Include="InventoryContext\StokDal.cs" />
+    <Compile Include="InventoryContext\StokMutasiDal.cs" />
+    <Compile Include="InventoryContext\WarehouseDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalesContext\SalesPersonAgg\SalesPersonModel.cs" />
+    <Compile Include="SalesContext\CustomerDal.cs" />
+    <Compile Include="SalesContext\FakturDal.cs" />
+    <Compile Include="SalesContext\FakturDiscountDal.cs" />
+    <Compile Include="SalesContext\FakturItemDal.cs" />
+    <Compile Include="SalesContext\FakturQtyHargaDal.cs" />
+    <Compile Include="SalesContext\SalesPersonDal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PurchasingContext\SupplierAgg\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

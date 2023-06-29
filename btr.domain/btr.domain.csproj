@@ -42,10 +42,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="FinanceContext\HutangAgg\HutangModel.cs" />
+    <Compile Include="FinanceContext\HutangAgg\IHutangKey.cs" />
+    <Compile Include="FinanceContext\PiutangAgg\PiutangModel.cs" />
+    <Compile Include="InventoryContext\BrgAgg\BrgModel.cs" />
+    <Compile Include="InventoryContext\BrgAgg\BrgSatuanHargaModel.cs" />
+    <Compile Include="InventoryContext\DeliveryAgg\DeliveryModel.cs" />
+    <Compile Include="InventoryContext\GoodReceiptAgg\GoodReceiptModel.cs" />
+    <Compile Include="InventoryContext\StokAgg\StokModel.cs" />
+    <Compile Include="InventoryContext\StokAgg\StokMutasiModel.cs" />
+    <Compile Include="InventoryContext\WarehouseAgg\IWarehouseKey.cs" />
+    <Compile Include="InventoryContext\WarehouseAgg\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseContext\InvoiceAgg\InvoiceModel.cs" />
+    <Compile Include="PurchaseContext\KlaimAgg\KlaimModel.cs" />
+    <Compile Include="PurchaseContext\PrinsipalAgg\IPrinsipalKey.cs" />
+    <Compile Include="PurchaseContext\PrinsipalAgg\PrinsipalModel.cs" />
+    <Compile Include="PurchaseContext\PurchaseOrderAgg\PurchaseOrderModel.cs" />
+    <Compile Include="SalesContext\CustomerAgg\CustomerModel.cs" />
+    <Compile Include="SalesContext\CustomerAgg\ICustomerKey.cs" />
+    <Compile Include="SalesContext\FakturAgg\FakturDiscountModel.cs" />
+    <Compile Include="SalesContext\FakturAgg\FakturItemModel.cs" />
+    <Compile Include="SalesContext\FakturAgg\FakturModel.cs" />
+    <Compile Include="SalesContext\FakturAgg\FakturQtyHargaModel.cs" />
+    <Compile Include="SalesContext\FakturAgg\IFakturDiscountKey.cs" />
+    <Compile Include="SalesContext\FakturAgg\IFakturItemKey.cs" />
+    <Compile Include="SalesContext\FakturAgg\IFakturKey.cs" />
+    <Compile Include="SalesContext\FakturAgg\IFakturStokHargaKey.cs" />
+    <Compile Include="SalesContext\SalesPersonAgg\ISalesPersonKey.cs" />
+    <Compile Include="SalesContext\SalesPersonAgg\SalesPersonModel.cs" />
+    <Compile Include="SupportContext\UserAgg\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
+    <Folder Include="FinanceContext\CreaditNoteAgg\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
