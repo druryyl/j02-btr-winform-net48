@@ -7,28 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using btr.application.SalesContext.SalesPersonAgg.Contracts;
+using btr.domain.SalesContext.SalesPersonAgg;
 
 namespace btr.winform48
 {
     public partial class SalesPersonForm : Form
     {
         private BindingSource _bindingSource;
-
-        public SalesPersonForm()
+        private readonly ISalesPersonDal _salesPersonDal;
+        private List<SalesPersonModel> _listPerson;
+        public SalesPersonForm(ISalesPersonDal salesPersonDal)
         {
+            _salesPersonDal = salesPersonDal;
             InitializeComponent();
             //_salesPersonService = new SalesPersonService();
 
-            //_listPerson = new List<SalesPersonModel>();
+            _listPerson = new List<SalesPersonModel>();
 
-            ReBinding();
             LoadSalesPerson();
+            ReBinding();
         }
 
         private void LoadSalesPerson()
         {
-            //_listPerson.Clear();
-            //_listPerson = _salesPersonService.ListData().ToList();
+            _listPerson.Clear();
+            _listPerson = _salesPersonDal.ListData().ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,7 +44,7 @@ namespace btr.winform48
         {
             _bindingSource = new BindingSource
             {
-                //DataSource = _listPerson
+                DataSource = _listPerson
             };
             ListGrid.DataSource = _bindingSource;
         }

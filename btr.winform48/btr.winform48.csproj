@@ -226,6 +226,7 @@
     <Compile Include="SharedForm\PrintPreviewForm.Designer.cs">
       <DependentUpon>PrintPreviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinformAssemblyAnchor.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,6 +356,10 @@
       <Project>{17098751-662a-450a-ae8f-5a7224f134ec}</Project>
       <Name>btr.application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\btr.domain\btr.domain.csproj">
+      <Project>{ace2ad5e-370d-42f8-87b8-aba7eb912caf}</Project>
+      <Name>btr.domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\btr.infrastructure\btr.infrastructure.csproj">
       <Project>{40cea902-0397-4184-8a68-a2915fdad475}</Project>
       <Name>btr.infrastructure</Name>
@@ -366,6 +371,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\app-wallpaper-3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

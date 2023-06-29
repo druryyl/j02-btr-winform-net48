@@ -35,7 +35,15 @@ namespace btr.winform48
                 .AddJsonFile($"appsettings.{Environment.MachineName}.json", true, true)
                 .Build();
 
-            Application.Run(new MainForm());
+            ConfigureServices(services, configuration);
+            
+            using (var sp = services.BuildServiceProvider())
+            {
+                var form = sp.GetRequiredService<MainForm>();
+                Application.Run(form);
+            }
+            
+            //Application.Run(new MainForm());
         }
     private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
@@ -108,8 +116,16 @@ namespace btr.winform48
                     .AsSelfWithInterfaces()
                     .WithScopedLifetime());
 
+        services
+            .Scan(selector => selector
+                .FromAssemblyOf<WinformAssemblyAnchor>()
+                    .AddClasses(c => c.AssignableTo(typeof(Form)))
+                    .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                    .AsSelf()
+                    .WithScopedLifetime());
 
-        services.AddScoped<MainForm>();
+        // services.AddScoped<SalesPersonForm>();
+        // services.AddScoped<MainForm>();
         //services.AddScoped<ITestService, TestService>();
     }        
     }
