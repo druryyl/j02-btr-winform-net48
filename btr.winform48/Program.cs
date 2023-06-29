@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using btr.winform48.SharedForm;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace btr.winform48
 {
@@ -17,6 +18,13 @@ namespace btr.winform48
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var services = new ServiceCollection();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{Environment.MachineName}.json", true, true)
+                .Build();
+
             Application.Run(new MainForm());
         }
     }
