@@ -1,52 +1,55 @@
-﻿using btr.application.InventoryContext.WarehouseAgg.Contracts;
+﻿using System.Collections.Generic;
+using btr.application.InventoryContext.WarehouseAgg.Contracts;
 using btr.domain.InventoryContext.WarehouseAgg;
-using Nuna.Lib.CleanArchHelper;
-using Nuna.Lib.ValidationHelper;
+using btr.nuna.Application;
+using btr.nuna.Domain;
 
-namespace btr.application.InventoryContext.WarehouseAgg.Workers;
-
-public interface IWarehouseBuilder : INunaBuilder<WarehouseModel>
+namespace btr.application.InventoryContext.WarehouseAgg.Workers
 {
-    IWarehouseBuilder CreateNew();
-    IWarehouseBuilder Load(IWarehouseKey warehouseKey);
-    IWarehouseBuilder Name(string name);
-}
-public class WarehouseBuilder : IWarehouseBuilder
-{
-    private WarehouseModel _aggRoot = new();
-    private readonly IWarehouseDal _warehouseDal;
-
-    public WarehouseBuilder(IWarehouseDal warehouseDal)
+    public interface IWarehouseBuilder : INunaBuilder<WarehouseModel>
     {
-        _warehouseDal = warehouseDal;
+        IWarehouseBuilder CreateNew();
+        IWarehouseBuilder Load(IWarehouseKey warehouseKey);
+        IWarehouseBuilder Name(string name);
     }
 
-    public WarehouseModel Build()
+    public class WarehouseBuilder : IWarehouseBuilder
     {
-        _aggRoot.RemoveNull();
-        return _aggRoot;
-    }
+        private WarehouseModel _aggRoot = new WarehouseModel();
+        private readonly IWarehouseDal _warehouseDal;
 
-    public IWarehouseBuilder CreateNew()
-    {
-        _aggRoot = new WarehouseModel
+        public WarehouseBuilder(IWarehouseDal warehouseDal)
         {
-            WarehouseName = string.Empty,
-            WarehouseId = string.Empty
-        };
-        return this;
-    }
+            _warehouseDal = warehouseDal;
+        }
 
-    public IWarehouseBuilder Load(IWarehouseKey warehouseKey)
-    {
-        _aggRoot = _warehouseDal.GetData(warehouseKey)
-                   ?? throw new KeyNotFoundException($"WarehouseId not found ({warehouseKey.WarehouseId})");
-        return this;
-    }
+        public WarehouseModel Build()
+        {
+            _aggRoot.RemoveNull();
+            return _aggRoot;
+        }
 
-    public IWarehouseBuilder Name(string name)
-    {
-        _aggRoot.WarehouseName = name;
-        return this;
+        public IWarehouseBuilder CreateNew()
+        {
+            _aggRoot = new WarehouseModel
+            {
+                WarehouseName = string.Empty,
+                WarehouseId = string.Empty
+            };
+            return this;
+        }
+
+        public IWarehouseBuilder Load(IWarehouseKey warehouseKey)
+        {
+            _aggRoot = _warehouseDal.GetData(warehouseKey)
+                       ?? throw new KeyNotFoundException($"WarehouseId not found ({warehouseKey.WarehouseId})");
+            return this;
+        }
+
+        public IWarehouseBuilder Name(string name)
+        {
+            _aggRoot.WarehouseName = name;
+            return this;
+        }
     }
 }

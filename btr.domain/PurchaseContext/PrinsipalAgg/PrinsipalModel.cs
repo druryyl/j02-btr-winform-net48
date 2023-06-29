@@ -1,7 +1,8 @@
-﻿namespace btr.domain.PurchaseContext.PrinsipalAgg;
-
-public class PrinsipalModel : IPrinsipalKey
+﻿namespace btr.domain.PurchaseContext.PrinsipalAgg
 {
-    public string PrinsipalId { get; set; }
-    public string PrinsipalName { get; set; }
+    public class PrinsipalModel : IPrinsipalKey
+    {
+        public string PrinsipalId { get; set; }
+        public string PrinsipalName { get; set; }
+    }
 }

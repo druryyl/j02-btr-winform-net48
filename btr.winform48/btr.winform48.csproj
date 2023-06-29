@@ -278,7 +278,12 @@
   <ItemGroup>
     <None Include="Resources\flag_of_bremen_with_lesser_arms_48px.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\btr.nuna\btr.nuna.csproj">
+      <Project>{b110355b-480d-4017-82dc-c3e74fa198e6}</Project>
+      <Name>btr.nuna</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\app-wallpaper-3.jpg" />
   </ItemGroup>

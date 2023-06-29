@@ -1,12 +1,8 @@
-﻿namespace btr.domain.SupportContext.UserAgg;
-
-public class UserModel : IUserKey
+﻿namespace btr.domain.SupportContext.UserAgg
 {
-    public string UserId { get; set; }
-    public string UserName { get; set; }
-}
-
-public interface IUserKey
-{
-    string UserId { get; }
+    public class UserModel : IUserKey
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+    }
 }

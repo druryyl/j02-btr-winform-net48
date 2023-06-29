@@ -1,14 +1,11 @@
-﻿using btr.winform48.Helper;
-using btr.winform48.SharedForm;
-using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using btr.winform48.Helper;
+using RestSharp;
 
-namespace btr.winform48.SaleContext.FakturAgg
+namespace btr.winform48.SaleContext.CustomerAgg.Services
 {
     public interface IListCustomerService
     {

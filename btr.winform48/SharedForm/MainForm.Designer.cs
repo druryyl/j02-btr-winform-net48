@@ -1,4 +1,4 @@
-﻿namespace btr.winform48.Forms
+﻿namespace btr.winform48.SharedForm
 {
     partial class MainForm
     {

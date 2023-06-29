@@ -1,12 +1,10 @@
-﻿namespace btr.domain.InventoryContext.DeliveryAgg;
+﻿using System;
 
-public class DeliveryModel : IDeliveryKey
+namespace btr.domain.InventoryContext.DeliveryAgg
 {
-    public string DeliveryId { get; set; }
-    public DateTime DeliveryDate { get; set; }
-}
-
-public interface IDeliveryKey
-{
-    string DeliveryId { get; }
+    public class DeliveryModel : IDeliveryKey
+    {
+        public string DeliveryId { get; set; }
+        public DateTime DeliveryDate { get; set; }
+    }
 }

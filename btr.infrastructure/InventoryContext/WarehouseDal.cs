@@ -1,42 +1,44 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using btr.application.InventoryContext.WarehouseAgg.Contracts;
 using btr.domain.InventoryContext.WarehouseAgg;
 using btr.infrastructure.Helpers;
+using btr.nuna.Infrastructure;
 using Dapper;
-using Microsoft.Extensions.Options;
-using Nuna.Lib.DataAccessHelper;
 
-namespace btr.infrastructure.InventoryAgg;
-
-public class WarehouseDal : IWarehouseDal
+namespace btr.infrastructure.InventoryContext
 {
-    private readonly DatabaseOptions _opt;
-
-    public WarehouseDal(IOptions<DatabaseOptions> opt)
+    public class WarehouseDal : IWarehouseDal
     {
-        _opt = opt.Value;
-    }
+        private readonly DatabaseOptions _opt;
 
-    public void Insert(WarehouseModel model)
-    {
-        const string sql = @"
+        public WarehouseDal(DatabaseOptions opt)
+        {
+            _opt = opt;
+        }
+
+        public void Insert(WarehouseModel model)
+        {
+            const string sql = @"
             INSERT INTO BTR_Warehouse(
                 WarehouseId, WarehouseName)
             VALUES (
                 @WarehouseId, @WarehouseName)";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
-        dp.AddParam("@WarehouseName", model.WarehouseName, SqlDbType.VarChar);
+            var dp = new DynamicParameters();
+            dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
+            dp.AddParam("@WarehouseName", model.WarehouseName, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
 
-    public void Update(WarehouseModel model)
-    {
-        const string sql = @"
+        public void Update(WarehouseModel model)
+        {
+            const string sql = @"
             UPDATE 
                 BTR_Warehouse
             SET
@@ -44,32 +46,36 @@ public class WarehouseDal : IWarehouseDal
             WHERE
                 WarehouseId = @WarehouseId ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
-        dp.AddParam("@WarehouseName", model.WarehouseName, SqlDbType.VarChar);
+            var dp = new DynamicParameters();
+            dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
+            dp.AddParam("@WarehouseName", model.WarehouseName, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
 
-    public void Delete(IWarehouseKey key)
-    {
-        const string sql = @"
+        public void Delete(IWarehouseKey key)
+        {
+            const string sql = @"
             DELETE FROM 
                 BTR_Warehouse
             WHERE
                 WarehouseId = @WarehouseId ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@WarehouseId", key.WarehouseId, SqlDbType.VarChar);
+            var dp = new DynamicParameters();
+            dp.AddParam("@WarehouseId", key.WarehouseId, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
 
-    public WarehouseModel GetData(IWarehouseKey key)
-    {
-        const string sql = @"
+        public WarehouseModel GetData(IWarehouseKey key)
+        {
+            const string sql = @"
             SELECT
                 WarehouseId, WarehouseName
             FROM
@@ -77,22 +83,27 @@ public class WarehouseDal : IWarehouseDal
             WHERE
                 WarehouseId = @WarehouseId ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@WarehouseId", key.WarehouseId, SqlDbType.VarChar);
+            var dp = new DynamicParameters();
+            dp.AddParam("@WarehouseId", key.WarehouseId, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        return conn.ReadSingle<WarehouseModel>(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                return conn.ReadSingle<WarehouseModel>(sql, dp);
+            }
+        }
 
-    public IEnumerable<WarehouseModel> ListData()
-    {
-        const string sql = @"
+        public IEnumerable<WarehouseModel> ListData()
+        {
+            const string sql = @"
             SELECT
                 WarehouseId, WarehouseName
             FROM
                 BTR_Warehouse";
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        return conn.Read<WarehouseModel>(sql);
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                return conn.Read<WarehouseModel>(sql);
+            }
+        }
     }
 }

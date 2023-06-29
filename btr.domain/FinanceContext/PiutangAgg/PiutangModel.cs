@@ -1,13 +1,11 @@
-﻿namespace btr.domain.FinanceContext.PiutangAgg;
+﻿using System;
 
-public class PiutangModel : IPiutangKey
+namespace btr.domain.FinanceContext.PiutangAgg
 {
-    public string PiutangId { get; set; }
-    public DateTime PiutangDate { get; set; }
-    public string UserId { get; set; }
-}
-
-public interface IPiutangKey
-{
-    string PiutangId { get;  }
+    public class PiutangModel : IPiutangKey
+    {
+        public string PiutangId { get; set; }
+        public DateTime PiutangDate { get; set; }
+        public string UserId { get; set; }
+    }
 }

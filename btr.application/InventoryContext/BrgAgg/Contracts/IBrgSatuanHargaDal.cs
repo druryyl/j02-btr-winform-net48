@@ -1,11 +1,12 @@
 ﻿using btr.domain.InventoryContext.BrgAgg;
-using Nuna.Lib.DataAccessHelper;
+using btr.nuna.Infrastructure;
 
-namespace btr.application.InventoryContext.BrgAgg.Contracts;
-
-public interface IBrgSatuanHargaDal :
-    IInsertBulk<BrgSatuanHargaModel>,
-    IDelete<IBrgKey>,
-    IListData<BrgSatuanHargaModel, IBrgKey>
+namespace btr.application.InventoryContext.BrgAgg.Contracts
 {
+    public interface IBrgSatuanHargaDal :
+        IInsertBulk<BrgSatuanHargaModel>,
+        IDelete<IBrgKey>,
+        IListData<BrgSatuanHargaModel, IBrgKey>
+    {
+    }
 }

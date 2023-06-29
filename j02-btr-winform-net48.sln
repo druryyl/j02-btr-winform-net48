@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.application", "btr.appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.infrastructure", "btr.infrastructure\btr.infrastructure.csproj", "{40CEA902-0397-4184-8A68-A2915FDAD475}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.nuna", "btr.nuna\btr.nuna.csproj", "{B110355B-480D-4017-82DC-C3E74FA198E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{40CEA902-0397-4184-8A68-A2915FDAD475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CEA902-0397-4184-8A68-A2915FDAD475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CEA902-0397-4184-8A68-A2915FDAD475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B110355B-480D-4017-82DC-C3E74FA198E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B110355B-480D-4017-82DC-C3E74FA198E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B110355B-480D-4017-82DC-C3E74FA198E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B110355B-480D-4017-82DC-C3E74FA198E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

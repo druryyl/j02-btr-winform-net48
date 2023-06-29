@@ -1,6 +1,7 @@
-﻿namespace btr.domain.InventoryContext.WarehouseAgg;
-
-public interface IWarehouseKey
+﻿namespace btr.domain.InventoryContext.WarehouseAgg
 {
-    string WarehouseId { get; }
+    public interface IWarehouseKey
+    {
+        string WarehouseId { get; }
+    }
 }

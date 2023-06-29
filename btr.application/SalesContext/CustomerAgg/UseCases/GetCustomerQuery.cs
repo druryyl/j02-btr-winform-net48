@@ -1,50 +1,56 @@
-﻿using btr.application.SalesContext.CustomerAgg.Workers;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using btr.application.SalesContext.CustomerAgg.Workers;
 using btr.domain.SalesContext.CustomerAgg;
 using Dawn;
 using Mapster;
 using MediatR;
 
-namespace btr.application.SalesContext.CustomerAgg.UseCases;
-
-public record GetCustomerQuery(string CustomerId) 
-    : IRequest<GetCustomerResponse>, ICustomerKey;
-
-public class GetCustomerResponse
+namespace btr.application.SalesContext.CustomerAgg.UseCases
 {
-    public string CustomerId { get; set; }
-    public string CustomerName { get; set; }
-    public double Plafond { get; set; }
-    public double CreditBalance { get; set; }
-}
-
-public class GetCustomerHandler : IRequestHandler<GetCustomerQuery, GetCustomerResponse>
-{
-    private CustomerModel _aggRoot = new();
-    private readonly ICustomerBuilder _builder;
-
-    public GetCustomerHandler(ICustomerBuilder builder)
+    public class GetCustomerQuery : IRequest<GetCustomerResponse>, ICustomerKey
     {
-        _builder = builder;
+        public GetCustomerQuery(string id) => CustomerId = id;
+        public string CustomerId { get; }
     }
 
-    public Task<GetCustomerResponse> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
+    public class GetCustomerResponse
     {
-        //  GUARD
-        Guard.Argument(() => request).NotNull()
-            .Member(x => x.CustomerId, y => y.NotEmpty());
-        
-        //  BUILD
-        _aggRoot = _builder
-            .Load(request)
-            .Build();
-        
-        //  APPLY
-        return Task.FromResult(GenResponse());
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public double Plafond { get; set; }
+        public double CreditBalance { get; set; }
     }
-    
-    private GetCustomerResponse GenResponse()
+
+    public class GetCustomerHandler : IRequestHandler<GetCustomerQuery, GetCustomerResponse>
     {
-        var result = _aggRoot.Adapt<GetCustomerResponse>();
-        return result;
+        private CustomerModel _aggRoot = new CustomerModel();
+        private readonly ICustomerBuilder _builder;
+
+        public GetCustomerHandler(ICustomerBuilder builder)
+        {
+            _builder = builder;
+        }
+
+        public Task<GetCustomerResponse> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
+        {
+            //  GUARD
+            Guard.Argument(() => request).NotNull()
+                .Member(x => x.CustomerId, y => y.NotEmpty());
+
+            //  BUILD
+            _aggRoot = _builder
+                .Load(request)
+                .Build();
+
+            //  APPLY
+            return Task.FromResult(GenResponse());
+        }
+
+        private GetCustomerResponse GenResponse()
+        {
+            var result = _aggRoot.Adapt<GetCustomerResponse>();
+            return result;
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace btr.domain.SalesContext.CustomerAgg;
-
-public interface ICustomerKey
+﻿namespace btr.domain.SalesContext.CustomerAgg
 {
-    string CustomerId { get; }
+    public interface ICustomerKey
+    {
+        string CustomerId { get; }
+    }
 }
+

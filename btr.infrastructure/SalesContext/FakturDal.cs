@@ -1,27 +1,27 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using btr.application.SalesContext.FakturAgg.Contracts;
 using btr.domain.SalesContext.FakturAgg;
 using btr.infrastructure.Helpers;
+using btr.nuna.Domain;
+using btr.nuna.Infrastructure;
 using Dapper;
-using Microsoft.Extensions.Options;
-using Nuna.Lib.DataAccessHelper;
-using Nuna.Lib.ValidationHelper;
 
-namespace btr.infrastructure.SalesContext;
-
-public class FakturDal : IFakturDal
+namespace btr.infrastructure.SalesContext
 {
-    private readonly DatabaseOptions _opt;
-
-    public FakturDal(IOptions<DatabaseOptions> opt)
+    public class FakturDal : IFakturDal
     {
-        _opt = opt.Value;
-    }
+        private readonly DatabaseOptions _opt;
 
-    public void Insert(FakturModel model)
-    {
-        const string sql = @"
+        public FakturDal(DatabaseOptions opt)
+        {
+            _opt = opt;
+        }
+
+        public void Insert(FakturModel model)
+        {
+            const string sql = @"
             INSERT INTO BTR_Faktur(
                 FakturId, FakturDate, SalesPersonId, CustomerId,
                 WarehouseId, TglRencanaKirim, TermOfPayment, Total,
@@ -33,35 +33,37 @@ public class FakturDal : IFakturDal
                 @DiscountLain, @BiayaLain, @GrandTotal, @UangMuka, @KurangBayar, 
                 @CreateTime, @LastUpdate, @UserId) ";
 
-        var dp = new DynamicParameters();
+            var dp = new DynamicParameters();
 
-        dp.AddParam("@FakturId", model.FakturId, SqlDbType.VarChar); 
-        dp.AddParam("@FakturDate", model.FakturDate, SqlDbType.DateTime); 
-        
-        dp.AddParam("@SalesPersonId", model.SalesPersonId, SqlDbType.VarChar); 
-        dp.AddParam("@CustomerId", model.CustomerId, SqlDbType.VarChar);
-        dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar); 
-        dp.AddParam("@TglRencanaKirim", model.TglRencanaKirim, SqlDbType.DateTime); 
-        dp.AddParam("@TermOfPayment", model.TermOfPayment, SqlDbType.VarChar); 
-        
-        dp.AddParam("@Total", model.Total, SqlDbType.Decimal);
-        dp.AddParam("@DiscountLain", model.DiscountLain, SqlDbType.Decimal); 
-        dp.AddParam("@BiayaLain", model.BiayaLain, SqlDbType.Decimal); 
-        dp.AddParam("@GrandTotal", model.GrandTotal, SqlDbType.Decimal); 
-        dp.AddParam("@UangMuka", model.UangMuka, SqlDbType.Decimal); 
-        dp.AddParam("@KurangBayar", model.KurangBayar, SqlDbType.Decimal); 
-        
-        dp.AddParam("@CreateTime", model.CreateTime, SqlDbType.DateTime); 
-        dp.AddParam("@LastUpdate", model.LastUpdate, SqlDbType.DateTime); 
-        dp.AddParam("@UserId", model.UserId, SqlDbType.VarChar);
+            dp.AddParam("@FakturId", model.FakturId, SqlDbType.VarChar);
+            dp.AddParam("@FakturDate", model.FakturDate, SqlDbType.DateTime);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            dp.AddParam("@SalesPersonId", model.SalesPersonId, SqlDbType.VarChar);
+            dp.AddParam("@CustomerId", model.CustomerId, SqlDbType.VarChar);
+            dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
+            dp.AddParam("@TglRencanaKirim", model.TglRencanaKirim, SqlDbType.DateTime);
+            dp.AddParam("@TermOfPayment", model.TermOfPayment, SqlDbType.VarChar);
 
-    public void Update(FakturModel model)
-    {
-        const string sql = @"
+            dp.AddParam("@Total", model.Total, SqlDbType.Decimal);
+            dp.AddParam("@DiscountLain", model.DiscountLain, SqlDbType.Decimal);
+            dp.AddParam("@BiayaLain", model.BiayaLain, SqlDbType.Decimal);
+            dp.AddParam("@GrandTotal", model.GrandTotal, SqlDbType.Decimal);
+            dp.AddParam("@UangMuka", model.UangMuka, SqlDbType.Decimal);
+            dp.AddParam("@KurangBayar", model.KurangBayar, SqlDbType.Decimal);
+
+            dp.AddParam("@CreateTime", model.CreateTime, SqlDbType.DateTime);
+            dp.AddParam("@LastUpdate", model.LastUpdate, SqlDbType.DateTime);
+            dp.AddParam("@UserId", model.UserId, SqlDbType.VarChar);
+
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
+
+        public void Update(FakturModel model)
+        {
+            const string sql = @"
             UPDATE 
                 BTR_Faktur
             SET
@@ -83,50 +85,54 @@ public class FakturDal : IFakturDal
             WHERE
                 FakturId = @FakturId ";
 
-        var dp = new DynamicParameters();
+            var dp = new DynamicParameters();
 
-        dp.AddParam("@FakturId", model.FakturId, SqlDbType.VarChar); 
-        dp.AddParam("@FakturDate", model.FakturDate, SqlDbType.DateTime); 
-        
-        dp.AddParam("@SalesPersonId", model.SalesPersonId, SqlDbType.VarChar); 
-        dp.AddParam("@CustomerId", model.CustomerId, SqlDbType.VarChar);
-        dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar); 
-        dp.AddParam("@TglRencanaKirim", model.TglRencanaKirim, SqlDbType.DateTime); 
-        dp.AddParam("@TermOfPayment", model.TermOfPayment, SqlDbType.VarChar); 
-        
-        dp.AddParam("@Total", model.Total, SqlDbType.Decimal);
-        dp.AddParam("@DiscountLain", model.DiscountLain, SqlDbType.Decimal); 
-        dp.AddParam("@BiayaLain", model.BiayaLain, SqlDbType.Decimal); 
-        dp.AddParam("@GrandTotal", model.GrandTotal, SqlDbType.Decimal); 
-        dp.AddParam("@UangMuka", model.UangMuka, SqlDbType.Decimal); 
-        dp.AddParam("@KurangBayar", model.KurangBayar, SqlDbType.Decimal); 
-        
-        dp.AddParam("@CreateTime", model.CreateTime, SqlDbType.DateTime); 
-        dp.AddParam("@LastUpdate", model.LastUpdate, SqlDbType.DateTime); 
-        dp.AddParam("@UserId", model.UserId, SqlDbType.VarChar);
+            dp.AddParam("@FakturId", model.FakturId, SqlDbType.VarChar);
+            dp.AddParam("@FakturDate", model.FakturDate, SqlDbType.DateTime);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            dp.AddParam("@SalesPersonId", model.SalesPersonId, SqlDbType.VarChar);
+            dp.AddParam("@CustomerId", model.CustomerId, SqlDbType.VarChar);
+            dp.AddParam("@WarehouseId", model.WarehouseId, SqlDbType.VarChar);
+            dp.AddParam("@TglRencanaKirim", model.TglRencanaKirim, SqlDbType.DateTime);
+            dp.AddParam("@TermOfPayment", model.TermOfPayment, SqlDbType.VarChar);
 
-    public void Delete(IFakturKey key)
-    {
-        const string sql = @"
+            dp.AddParam("@Total", model.Total, SqlDbType.Decimal);
+            dp.AddParam("@DiscountLain", model.DiscountLain, SqlDbType.Decimal);
+            dp.AddParam("@BiayaLain", model.BiayaLain, SqlDbType.Decimal);
+            dp.AddParam("@GrandTotal", model.GrandTotal, SqlDbType.Decimal);
+            dp.AddParam("@UangMuka", model.UangMuka, SqlDbType.Decimal);
+            dp.AddParam("@KurangBayar", model.KurangBayar, SqlDbType.Decimal);
+
+            dp.AddParam("@CreateTime", model.CreateTime, SqlDbType.DateTime);
+            dp.AddParam("@LastUpdate", model.LastUpdate, SqlDbType.DateTime);
+            dp.AddParam("@UserId", model.UserId, SqlDbType.VarChar);
+
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
+
+        public void Delete(IFakturKey key)
+        {
+            const string sql = @"
             DELETE FROM 
                 BTR_Faktur
             WHERE
                 FakturId = @FakturId ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@FakturId", key.FakturId, SqlDbType.VarChar); 
+            var dp = new DynamicParameters();
+            dp.AddParam("@FakturId", key.FakturId, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        conn.Execute(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                conn.Execute(sql, dp);
+            }
+        }
 
-    public FakturModel GetData(IFakturKey key)
-    {
-        const string sql = @"
+        public FakturModel GetData(IFakturKey key)
+        {
+            const string sql = @"
             SELECT
                 aa.FakturId, aa.FakturDate, aa.SalesPersonId, aa.CustomerId,
                 aa.WarehouseId, aa.TglRencanaKirim, aa.TermOfPayment, aa.Total,
@@ -145,16 +151,18 @@ public class FakturDal : IFakturDal
             WHERE
                 aa.FakturId = @FakturId ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@FakturId", key.FakturId, SqlDbType.VarChar);
+            var dp = new DynamicParameters();
+            dp.AddParam("@FakturId", key.FakturId, SqlDbType.VarChar);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        return conn.ReadSingle<FakturModel>(sql, dp);
-    }
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                return conn.ReadSingle<FakturModel>(sql, dp);
+            }
+        }
 
-    public IEnumerable<FakturModel> ListData(Periode filter)
-    {
-        const string sql = @"
+        public IEnumerable<FakturModel> ListData(Periode filter)
+        {
+            const string sql = @"
             SELECT
                 aa.FakturId, aa.FakturDate, aa.SalesPersonId, aa.CustomerId,
                 aa.WarehouseId, aa.TglRencanaKirim, aa.TermOfPayment, aa.Total,
@@ -173,11 +181,14 @@ public class FakturDal : IFakturDal
             WHERE
                 aa.FakturDate BETWEEN @Tgl1 AND @Tgl2 ";
 
-        var dp = new DynamicParameters();
-        dp.AddParam("@Tgl1", filter.Tgl1, SqlDbType.DateTime);
-        dp.AddParam("@Tgl2", filter.Tgl2, SqlDbType.DateTime);
+            var dp = new DynamicParameters();
+            dp.AddParam("@Tgl1", filter.Tgl1, SqlDbType.DateTime);
+            dp.AddParam("@Tgl2", filter.Tgl2, SqlDbType.DateTime);
 
-        using var conn = new SqlConnection(ConnStringHelper.Get(_opt));
-        return conn.Read<FakturModel>(sql, dp);
+            using (var conn = new SqlConnection(ConnStringHelper.Get(_opt)))
+            {
+                return conn.Read<FakturModel>(sql, dp);
+            }
+        }
     }
 }

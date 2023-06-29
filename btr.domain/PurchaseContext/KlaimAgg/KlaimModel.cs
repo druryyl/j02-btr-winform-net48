@@ -1,15 +1,12 @@
-﻿using btr.domain.PurchaseContext.PrinsipalAgg;
+﻿using System;
+using btr.domain.PurchaseContext.PrinsipalAgg;
 
-namespace btr.domain.PurchaseContext.KlaimAgg;
-
-public class KlaimModel : IKlaimKey, IPrinsipalKey
-{ 
-    public string KlaimId { get; set; }
-    public DateTime KlaimDate { get; set; }
-    public string PrinsipalId { get; set; }
-}
-
-public interface IKlaimKey
+namespace btr.domain.PurchaseContext.KlaimAgg
 {
-    string KlaimId { get; }
+    public class KlaimModel : IKlaimKey, IPrinsipalKey
+    {
+        public string KlaimId { get; set; }
+        public DateTime KlaimDate { get; set; }
+        public string PrinsipalId { get; set; }
+    }
 }

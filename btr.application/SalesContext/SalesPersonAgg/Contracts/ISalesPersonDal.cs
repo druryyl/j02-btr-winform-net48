@@ -1,13 +1,14 @@
 ﻿using btr.domain.SalesContext.SalesPersonAgg;
-using Nuna.Lib.DataAccessHelper;
+using btr.nuna.Infrastructure;
 
-namespace btr.application.SalesContext.SalesPersonAgg.Contracts;
-
-public interface ISalesPersonDal :
-    IInsert<SalesPersonModel>,
-    IUpdate<SalesPersonModel>,
-    IDelete<ISalesPersonKey>,
-    IGetData<SalesPersonModel, ISalesPersonKey>,
-    IListData<SalesPersonModel>
+namespace btr.application.SalesContext.SalesPersonAgg.Contracts
 {
+    public interface ISalesPersonDal :
+        IInsert<SalesPersonModel>,
+        IUpdate<SalesPersonModel>,
+        IDelete<ISalesPersonKey>,
+        IGetData<SalesPersonModel, ISalesPersonKey>,
+        IListData<SalesPersonModel>
+    {
+    }
 }

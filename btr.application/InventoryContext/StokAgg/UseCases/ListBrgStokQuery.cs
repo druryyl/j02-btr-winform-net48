@@ -1,4 +1,8 @@
-﻿using btr.application.InventoryContext.BrgAgg.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using btr.application.InventoryContext.BrgAgg.Contracts;
 using btr.application.InventoryContext.StokAgg.Contracts;
 using btr.domain.InventoryContext.BrgAgg;
 using btr.domain.InventoryContext.StokAgg;
@@ -6,9 +10,18 @@ using btr.domain.InventoryContext.WarehouseAgg;
 using Dawn;
 using MediatR;
 
-namespace btr.application.InventoryContext.StokAgg.UseCases;
-
-public record ListBrgStokQuery(string BrgName, string WarehouseId) : IRequest<IEnumerable<ListBrgStokResponse>>;
+namespace btr.application.InventoryContext.StokAgg.UseCases
+{
+    public class ListBrgStokQuery : IRequest<IEnumerable<ListBrgStokResponse>>, IWarehouseKey
+    {
+        public ListBrgStokQuery(string brgName, string warehouseId)
+        {
+            BrgName = brgName;
+            WarehouseId = warehouseId;
+        }
+        public string BrgName { get; }
+        public string WarehouseId { get; }
+    }
 
 public class ListBrgStokResponse
 {
@@ -78,4 +91,5 @@ public class ListBrgStokHandler : IRequestHandler<ListBrgStokQuery, IEnumerable<
         return result;
     }
 
+}
 }

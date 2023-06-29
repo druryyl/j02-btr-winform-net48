@@ -1,9 +1,9 @@
-﻿using btr.winform48.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using btr.winform48.SharedForm;
 
 namespace btr.winform48
 {

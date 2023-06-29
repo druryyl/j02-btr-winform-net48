@@ -3,7 +3,6 @@ using btr.winform48.InventoryContext.WarehouseAgg.Services;
 using btr.winform48.SaleContext.CustomerAgg.Services;
 using btr.winform48.SaleContext.FakturAgg.Services;
 using btr.winform48.SaleContext.SalesPersonAgg.Services;
-using btr.winform48.SaleContext.StokAgg;
 using btr.winform48.SharedForm;
 using Microsoft.SqlServer.Server;
 using Syncfusion.Windows.Forms.Tools;
@@ -16,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using btr.winform48.InventoryContext.StokAgg.Services;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {

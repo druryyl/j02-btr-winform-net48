@@ -1,12 +1,10 @@
-﻿namespace btr.domain.InventoryContext.GoodReceiptAgg;
+﻿using System;
 
-public class GoodReceiptModel : IGoodReceiptKey
+namespace btr.domain.InventoryContext.GoodReceiptAgg
 {
-    public string GoodReceiptId { get; set; }
-    public DateTime GoodReceiptDate { get; set; }
-}
-
-public interface IGoodReceiptKey
-{
-    string GoodReceiptId { get; }
+    public class GoodReceiptModel : IGoodReceiptKey
+    {
+        public string GoodReceiptId { get; set; }
+        public DateTime GoodReceiptDate { get; set; }
+    }
 }

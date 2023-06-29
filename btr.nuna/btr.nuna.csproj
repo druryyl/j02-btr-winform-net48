@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{B110355B-480D-4017-82DC-C3E74FA198E6}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>btr.nuna</RootNamespace>
+        <AssemblyName>btr.nuna</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\Dapper.2.0.143\lib\net461\Dapper.dll</HintPath>
+        </Reference>
+        <Reference Include="Dawn.Guard, Version=1.12.0.0, Culture=neutral, PublicKeyToken=234740ae15f786ce, processorArchitecture=MSIL">
+          <HintPath>..\packages\Dawn.Guard.1.12.0\lib\netstandard2.0\Dawn.Guard.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Transactions" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Application\GuardExtension.cs" />
+        <Compile Include="Application\INunaCounterDal.cs" />
+        <Compile Include="Application\NunaCounterBL.cs" />
+        <Compile Include="Application\NunaWorker.cs" />
+        <Compile Include="Application\TransHelper.cs" />
+        <Compile Include="Domain\DateTimeConversion.cs" />
+        <Compile Include="Domain\DateTimeProvider.cs" />
+        <Compile Include="Domain\NunaModelHelper.cs" />
+        <Compile Include="Domain\Periode.cs" />
+        <Compile Include="Infrastructure\DapperHelper.cs" />
+        <Compile Include="Infrastructure\DataAccessInterface.cs" />
+        <Compile Include="Infrastructure\SqlBulkCopyHelper.cs" />
+        <Compile Include="Infrastructure\TypeConverter.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

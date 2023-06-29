@@ -1,5 +1,6 @@
 ﻿using btr.winform48.Helper;
 using System.Collections.Generic;
+using btr.nuna.Domain;
 
 namespace btr.winform48.SharedForm
 {

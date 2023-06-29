@@ -1,6 +1,7 @@
-﻿namespace btr.domain.FinanceContext.HutangAgg;
-
-public interface IHutangKey
+﻿namespace btr.domain.FinanceContext.HutangAgg
 {
-    string HUtangId { get; }
+    public interface IHutangKey
+    {
+        string HUtangId { get; }
+    }
 }

@@ -1,11 +1,12 @@
 ﻿using btr.domain.SalesContext.FakturAgg;
-using Nuna.Lib.DataAccessHelper;
+using btr.nuna.Infrastructure;
 
-namespace btr.application.SalesContext.FakturAgg.Contracts;
-
-public interface  IFakturDiscountDal :
-    IInsertBulk<FakturDiscountModel>,
-    IDelete<IFakturKey>,
-    IListData<FakturDiscountModel, IFakturKey>
+namespace btr.application.SalesContext.FakturAgg.Contracts
 {
+    public interface IFakturDiscountDal :
+        IInsertBulk<FakturDiscountModel>,
+        IDelete<IFakturKey>,
+        IListData<FakturDiscountModel, IFakturKey>
+    {
+    }
 }

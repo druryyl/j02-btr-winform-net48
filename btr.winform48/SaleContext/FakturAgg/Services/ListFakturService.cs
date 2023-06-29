@@ -1,14 +1,13 @@
-﻿using btr.winform48.Helper;
-using btr.winform48.SharedForm;
-using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using btr.nuna.Domain;
+using btr.winform48.Helper;
+using btr.winform48.SharedForm;
+using RestSharp;
 
-namespace btr.winform48.SaleContext.FakturAgg
+namespace btr.winform48.SaleContext.FakturAgg.Services
 {
     public interface IListFakturService : IDateBrowser<ListFakturResponse>
     {
@@ -61,5 +60,6 @@ namespace btr.winform48.SaleContext.FakturAgg
                 periode.Tgl2.ToString("yyyy-MM-dd"));
             return result;
         }
+
     }
 }

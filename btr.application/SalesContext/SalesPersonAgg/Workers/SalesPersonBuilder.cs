@@ -1,53 +1,56 @@
-﻿using btr.application.SalesContext.SalesPersonAgg.Contracts;
+﻿using System.Collections.Generic;
+using btr.application.SalesContext.SalesPersonAgg.Contracts;
 using btr.domain.SalesContext.SalesPersonAgg;
-using Nuna.Lib.CleanArchHelper;
-using Nuna.Lib.ValidationHelper;
+using btr.nuna.Application;
+using btr.nuna.Domain;
 
-namespace btr.application.SalesContext.SalesPersonAgg.Workers;
-
-public interface ISalesPersonBuilder : INunaBuilder<SalesPersonModel>
+namespace btr.application.SalesContext.SalesPersonAgg.Workers
 {
-    ISalesPersonBuilder CreateNew();
-    ISalesPersonBuilder Load(ISalesPersonKey salesPersonKey);
-    ISalesPersonBuilder Name(string name);
-}
-public class SalesPersonBuilder : ISalesPersonBuilder
-{
-    private SalesPersonModel _aggRoot = new();
-    private readonly ISalesPersonDal _salesPersonDal;
-
-    public SalesPersonBuilder(ISalesPersonDal salesPersonDal)
+    public interface ISalesPersonBuilder : INunaBuilder<SalesPersonModel>
     {
-        _salesPersonDal = salesPersonDal;
+        ISalesPersonBuilder CreateNew();
+        ISalesPersonBuilder Load(ISalesPersonKey salesPersonKey);
+        ISalesPersonBuilder Name(string name);
     }
 
-    public SalesPersonModel Build()
+    public class SalesPersonBuilder : ISalesPersonBuilder
     {
-        _aggRoot.RemoveNull();
-        return _aggRoot;
-    }
+        private SalesPersonModel _aggRoot = new SalesPersonModel();
+        private readonly ISalesPersonDal _salesPersonDal;
 
-    public ISalesPersonBuilder CreateNew()
-    {
-        _aggRoot = new SalesPersonModel
+        public SalesPersonBuilder(ISalesPersonDal salesPersonDal)
         {
-            SalesPersonName = string.Empty,
-            SalesPersonId = string.Empty
-        };
-        return this;
-    }
+            _salesPersonDal = salesPersonDal;
+        }
 
-    
-    public ISalesPersonBuilder Load(ISalesPersonKey salesPersonKey)
-    {
-        _aggRoot = _salesPersonDal.GetData(salesPersonKey)
-                   ?? throw new KeyNotFoundException($"SalesPersonId not found ({salesPersonKey.SalesPersonId})");
-        return this;
-    }
+        public SalesPersonModel Build()
+        {
+            _aggRoot.RemoveNull();
+            return _aggRoot;
+        }
 
-    public ISalesPersonBuilder Name(string name)
-    {
-        _aggRoot.SalesPersonName = name;
-        return this;
+        public ISalesPersonBuilder CreateNew()
+        {
+            _aggRoot = new SalesPersonModel
+            {
+                SalesPersonName = string.Empty,
+                SalesPersonId = string.Empty
+            };
+            return this;
+        }
+
+
+        public ISalesPersonBuilder Load(ISalesPersonKey salesPersonKey)
+        {
+            _aggRoot = _salesPersonDal.GetData(salesPersonKey)
+                       ?? throw new KeyNotFoundException($"SalesPersonId not found ({salesPersonKey.SalesPersonId})");
+            return this;
+        }
+
+        public ISalesPersonBuilder Name(string name)
+        {
+            _aggRoot.SalesPersonName = name;
+            return this;
+        }
     }
 }

@@ -1,6 +1,7 @@
-﻿namespace btr.domain.SalesContext.FakturAgg;
-
-public interface IFakturStokHargaKey
+﻿namespace btr.domain.SalesContext.FakturAgg
 {
-    string FakturQtyHargaId { get; }
+    public interface IFakturStokHargaKey
+    {
+        string FakturQtyHargaId { get; }
+    }
 }

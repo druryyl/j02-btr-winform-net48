@@ -1,16 +1,10 @@
-﻿using btr.winform48.SaleContext.FakturAgg;
-using btr.winform48.SharedForm;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using btr.winform48.SaleContext.FakturAgg;
 
-namespace btr.winform48.Forms
+namespace btr.winform48.SharedForm
 {
     public partial class MainForm : Form
     {

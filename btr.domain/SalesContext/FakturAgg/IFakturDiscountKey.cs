@@ -1,6 +1,7 @@
-﻿namespace btr.domain.SalesContext.FakturAgg;
-
-public interface IFakturDiscountKey
+﻿namespace btr.domain.SalesContext.FakturAgg
 {
-    string FakturDiscountId { get; }
+    public interface IFakturDiscountKey
+    {
+        string FakturDiscountId { get; }
+    }
 }

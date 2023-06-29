@@ -1,13 +1,12 @@
-﻿using btr.application.SalesContext.FakturAgg.Contracts;
+﻿using System.Linq;
+using btr.application.SalesContext.FakturAgg.Contracts;
 using btr.domain.SalesContext.FakturAgg;
+using btr.nuna.Application;
 using FluentValidation;
-using Nuna.Lib.AutoNumberHelper;
-using Nuna.Lib.CleanArchHelper;
-using Nuna.Lib.DataTypeExtension;
-using Nuna.Lib.TransactionHelper;
+using btr.nuna.Domain;
 
-namespace btr.application.SalesContext.FakturAgg.Workers;
-
+namespace btr.application.SalesContext.FakturAgg.Workers
+{
 public interface IFakturWriter : INunaWriter<FakturModel>
 {
 }
@@ -64,22 +63,26 @@ public class FakturWriter : IFakturWriter
         var allDiscount = model.ListItem.SelectMany(x => x.ListDiscount, (hdr, dtl) => dtl);
         
         //  WRITE
-        using var trans = TransHelper.NewScope();
+        using(var trans = TransHelper.NewScope())
+        {
+            var db = _fakturDal.GetData(model);
+            if (db is null)
+                _fakturDal.Insert(model);
+            else
+                _fakturDal.Update(model);
 
-        var db = _fakturDal.GetData(model);
-        if (db is null)
-            _fakturDal.Insert(model);
-        else
-            _fakturDal.Update(model);
+            _fakturItemDal.Delete(model);
+            _fakturQtyHargaDal.Delete(model);
+            _fakturDiscountDal.Delete(model);
 
-        _fakturItemDal.Delete(model);
-        _fakturQtyHargaDal.Delete(model);
-        _fakturDiscountDal.Delete(model);
-
-        _fakturItemDal.Insert(model.ListItem);
-        _fakturQtyHargaDal.Insert(allStokHarga);
-        _fakturDiscountDal.Insert(allDiscount);
+            _fakturItemDal.Insert(model.ListItem);
+            _fakturQtyHargaDal.Insert(allStokHarga);
+            _fakturDiscountDal.Insert(allDiscount);
         
-        trans.Complete();
+            trans.Complete();
+            
+        }
+
     }
+}
 }

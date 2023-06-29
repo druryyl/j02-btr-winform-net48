@@ -1,6 +1,7 @@
-﻿namespace btr.domain.PurchaseContext.PrinsipalAgg;
-
-public interface IPrinsipalKey
+﻿namespace btr.domain.PurchaseContext.PrinsipalAgg
 {
-    string PrinsipalId { get; }
+    public interface IPrinsipalKey
+    {
+        string PrinsipalId { get; }
+    }
 }
