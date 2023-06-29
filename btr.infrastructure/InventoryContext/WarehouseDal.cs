@@ -6,6 +6,7 @@ using btr.domain.InventoryContext.WarehouseAgg;
 using btr.infrastructure.Helpers;
 using btr.nuna.Infrastructure;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace btr.infrastructure.InventoryContext
 {
@@ -13,9 +14,9 @@ namespace btr.infrastructure.InventoryContext
     {
         private readonly DatabaseOptions _opt;
 
-        public WarehouseDal(DatabaseOptions opt)
+        public WarehouseDal(IOptions<DatabaseOptions> opt)
         {
-            _opt = opt;
+            _opt = opt.Value;
         }
 
         public void Insert(WarehouseModel model)

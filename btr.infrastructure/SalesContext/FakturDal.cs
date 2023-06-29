@@ -7,6 +7,7 @@ using btr.infrastructure.Helpers;
 using btr.nuna.Domain;
 using btr.nuna.Infrastructure;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace btr.infrastructure.SalesContext
 {
@@ -14,9 +15,9 @@ namespace btr.infrastructure.SalesContext
     {
         private readonly DatabaseOptions _opt;
 
-        public FakturDal(DatabaseOptions opt)
+        public FakturDal(IOptions<DatabaseOptions> opt)
         {
-            _opt = opt;
+            _opt = opt.Value;
         }
 
         public void Insert(FakturModel model)

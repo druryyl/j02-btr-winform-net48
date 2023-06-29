@@ -7,6 +7,7 @@ using btr.domain.InventoryContext.StokAgg;
 using btr.infrastructure.Helpers;
 using btr.nuna.Infrastructure;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace btr.infrastructure.InventoryContext
 {
@@ -14,9 +15,9 @@ namespace btr.infrastructure.InventoryContext
     {
         private readonly DatabaseOptions _opt;
 
-        public StokMutasiDal(DatabaseOptions opt)
+        public StokMutasiDal(IOptions<DatabaseOptions> opt)
         {
-            _opt = opt;
+            _opt = opt.Value;
         }
 
         public void Insert(IEnumerable<StokMutasiModel> listModel)

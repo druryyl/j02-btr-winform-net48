@@ -7,6 +7,7 @@ using btr.domain.SalesContext.FakturAgg;
 using btr.infrastructure.Helpers;
 using btr.nuna.Infrastructure;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace btr.infrastructure.SalesContext
 {
@@ -14,9 +15,9 @@ namespace btr.infrastructure.SalesContext
     {
         private readonly DatabaseOptions _opt;
 
-        public FakturQtyHargaDal(DatabaseOptions opt)
+        public FakturQtyHargaDal(IOptions<DatabaseOptions> opt)
         {
-            _opt = opt;
+            _opt = opt.Value;
         }
 
         public void Insert(IEnumerable<FakturQtyHargaModel> listModel)

@@ -16,33 +16,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using btr.winform48.InventoryContext.StokAgg.Services;
+using MediatR;
+using btr.application.InventoryContext.WarehouseAgg.UseCases;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
     public partial class FakturForm : Form
     {
         private List<FakturItemDto> _listItem = new List<FakturItemDto>();
+
+        private readonly IMediator _mediator;
         private readonly IListFakturService _listFakturService;
         private readonly IGetFakturService _getFakturService;
         private readonly IListSalesPersonService _listSalesPersonService;
         private readonly IGetSalesPersonService _getSalesPersonService;
         private readonly IListCustomerService _listCustomerService;
         private readonly IGetCustomerService _getCustomerService;
-        private readonly IListWarehouseService _listWarehouseService;
-        private readonly IGetWarehouseService _getWarehouseService;
+        //private readonly IListWarehouseService _listWarehouseService;
+        //private readonly IGetWarehouseService _getWarehouseService;
 
-        public FakturForm()
+        public FakturForm(IMediator mediator)
         {
             InitializeComponent();
             InitGrid();
-            _listFakturService = new ListFakturService();
-            _getFakturService = new GetFakturService();
-            _listSalesPersonService = new ListSalesPersonService();
-            _getSalesPersonService = new GetSalesPersonService();
-            _listCustomerService = new ListCustomerService();
-            _getCustomerService = new GetCustomerService();
-            _listWarehouseService = new ListWarehouseService();
-            _getWarehouseService = new GetWarehouseService();
+            _mediator = mediator;
+            //_listFakturService = new ListFakturService();
+            //_getFakturService = new GetFakturService();
+            //_listSalesPersonService = new ListSalesPersonService();
+            //_getSalesPersonService = new GetSalesPersonService();
+            //_listCustomerService = new ListCustomerService();
+            //_getCustomerService = new GetCustomerService();
+            //_listWarehouseService = new ListWarehouseService();
+            //_getWarehouseService = new GetWarehouseService();
         }
 
         private void InitGrid()
@@ -261,7 +266,10 @@ namespace btr.winform48.SaleContext.FakturAgg
         }
         private void WarehouseIdButton_Click(object sender, EventArgs e)
         {
-            var list = _listWarehouseService.Execute();
+            var query = new ListWarehouseQuery();
+            var list = Task.Run(() => _mediator.Send(query)).GetAwaiter().GetResult();
+
+            //var list = _listWarehouseService.Execute();
             var form = new BrowserForm<ListWarehouseResponse, string>(list, WarehouseIdTextBox.Text, x => x.WarehouseName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
@@ -278,21 +286,24 @@ namespace btr.winform48.SaleContext.FakturAgg
                 return;
             }
 
-            GetWarehouseResponse model = null;
+            GetWarehouseResponse result = null;
             try
             {
-                model = _getWarehouseService.Execute(textbox.Text);
+                var query = new GetWarehouseQuery(textbox.Text);
+                result = Task.Run(() => _mediator.Send(query)).GetAwaiter().GetResult();
+
+                //model = _getWarehouseService.Execute(textbox.Text);
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (model is null)
+            if (result is null)
             {
                 e.Cancel = true;
                 return;
             }
-            WarehouseNameTextBox.Text = model.WarehouseName;
+            WarehouseNameTextBox.Text = result.WarehouseName;
         }
     }
 

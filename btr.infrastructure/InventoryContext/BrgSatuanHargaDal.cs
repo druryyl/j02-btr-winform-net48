@@ -7,6 +7,7 @@ using btr.domain.InventoryContext.BrgAgg;
 using btr.infrastructure.Helpers;
 using btr.nuna.Infrastructure;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace btr.infrastructure.InventoryContext
 {
@@ -14,9 +15,9 @@ namespace btr.infrastructure.InventoryContext
     {
         private readonly DatabaseOptions _opt;
 
-        public BrgSatuanHargaDal(DatabaseOptions opt)
+        public BrgSatuanHargaDal(IOptions<DatabaseOptions> opt)
         {
-            _opt = opt;
+            _opt = opt.Value;
         }
 
         public void Insert(IEnumerable<BrgSatuanHargaModel> listModel)
