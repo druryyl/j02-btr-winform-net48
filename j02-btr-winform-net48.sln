@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.infrastructure", "btr.i
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.nuna", "btr.nuna\btr.nuna.csproj", "{B110355B-480D-4017-82DC-C3E74FA198E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btr.winform48a", "btr.winform48a\btr.winform48a.csproj", "{1BB40032-3BA8-4885-AB31-5E721B533462}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B110355B-480D-4017-82DC-C3E74FA198E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B110355B-480D-4017-82DC-C3E74FA198E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B110355B-480D-4017-82DC-C3E74FA198E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB40032-3BA8-4885-AB31-5E721B533462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB40032-3BA8-4885-AB31-5E721B533462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB40032-3BA8-4885-AB31-5E721B533462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB40032-3BA8-4885-AB31-5E721B533462}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
