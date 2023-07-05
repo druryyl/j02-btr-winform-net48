@@ -186,7 +186,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\IServiceBase.cs" />
     <Compile Include="Helper\Periode.cs" />
     <Compile Include="InventoryContext\StokAgg\Services\GetBrgService.cs" />
@@ -196,7 +195,7 @@
     <Compile Include="SaleContext\CustomerAgg\Services\GetCustomerService.cs" />
     <Compile Include="SaleContext\CustomerAgg\Services\ListCustomerService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
-    <Compile Include="SaleContext\FakturAgg\Services\ListFakturService.cs" />
+    <Compile Include="SaleContext\FakturAgg\Services\FakturBrowser.cs" />
     <Compile Include="SaleContext\SalesPersonAgg\Services\GetSalesPersonService.cs" />
     <Compile Include="SaleContext\SalesPersonAgg\Services\ListSalesPersonService.cs" />
     <Compile Include="SharedForm\BrowserForm.cs">

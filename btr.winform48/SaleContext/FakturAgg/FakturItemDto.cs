@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using btr.winform48.InventoryContext.StokAgg.Services;
+using btr.application.InventoryContext.BrgAgg.UseCases;
+using MediatR;
+using Polly;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
@@ -23,26 +25,43 @@ namespace btr.winform48.SaleContext.FakturAgg
         private double _ppnRp = 0;
         private double _total = 0;
 
-        private readonly IGetBrgHargaService _getBrgHargaService;
+        private readonly IMediator _mediator;
 
-        public FakturItemDto()
+        public FakturItemDto(IMediator mediator)
         {
             ListStokHargaSatuan = new List<FakturItemStokHargaSatuan>();
+            _mediator = mediator;
         }
 
         public string BrgId 
         { 
             get => _brgId;
-            set
+            set => BrgIdSetterAsync(value).Wait();
+        }
+
+        private async Task BrgIdSetterAsync(string value)
+        {
+            _brgId = value;
+
+            var defBrgHarga = new GetBrgHargaResponse
             {
-                _brgId = value;
-                var service = new GetBrgHargaService();
-                var response = service.Execute(_brgId);
-                _brgName = response.BrgName;
-                ListStokHargaSatuan = response.ListSatuanHarga
-                    .Select(x => new FakturItemStokHargaSatuan(x.Stok, x.HargaJual, x.Satuan))
-                    .ToList();
-            } 
+                BrgId = value,
+                BrgName = string.Empty,
+                ListSatuanHarga = new List<GetBrgHargaResponseSatuanHrg>()
+            };
+            var policy = Policy<GetBrgHargaResponse>
+                .Handle<KeyNotFoundException>()
+                .FallbackAsync(defBrgHarga);
+            var query = new GetBrgHargaQuery(value);
+            Task<GetBrgHargaResponse> queryTask() => _mediator.Send(query);
+            var result = await policy.ExecuteAsync(queryTask);
+
+            //var service = new GetBrgHargaService();
+            //var response = service.Execute(_brgId);
+            _brgName = result.BrgName;
+            ListStokHargaSatuan = result.ListSatuanHarga
+                .Select(x => new FakturItemStokHargaSatuan(x.Stok, x.HargaJual, x.Satuan))
+                .ToList();
         }
         public string BrgName { get => _brgName; }
 

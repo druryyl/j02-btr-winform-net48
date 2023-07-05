@@ -1,24 +1,20 @@
-﻿using btr.winform48.Helper;
-using btr.winform48.SaleContext.FakturAgg.Services;
+﻿using btr.winform48.SaleContext.FakturAgg.Services;
 using btr.winform48.SharedForm;
 using Syncfusion.Windows.Forms.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using btr.winform48.InventoryContext.StokAgg.Services;
 using MediatR;
 using btr.application.InventoryContext.WarehouseAgg.UseCases;
 using btr.application.SalesContext.CustomerAgg.UseCases;
 using btr.application.SalesContext.SalesPersonAgg.UseCases;
 using System.Threading.Tasks;
-using System.Security.Authentication.ExtendedProtection;
 using Polly;
 using btr.nuna.Domain;
 using btr.application.SalesContext.FakturAgg.UseCases;
+using System.Linq;
 
 namespace btr.winform48.SaleContext.FakturAgg
 {
@@ -27,12 +23,15 @@ namespace btr.winform48.SaleContext.FakturAgg
         private List<FakturItemDto> _listItem = new List<FakturItemDto>();
 
         private readonly IMediator _mediator;
+        private readonly IFakturBrowser _fakturBrowser;
 
-        public FakturForm(IMediator mediator)
+        public FakturForm(IMediator mediator, 
+            IFakturBrowser fakturBrowser)
         {
             InitializeComponent();
             InitGrid();
             _mediator = mediator;
+            _fakturBrowser = fakturBrowser;
         }
 
         private void InitGrid()
@@ -94,70 +93,53 @@ namespace btr.winform48.SaleContext.FakturAgg
             FakturItemGrid.DataSource = binding;
         }
 
-        private async void FakturIdButton_Click(object sender, EventArgs e)
+        private void FakturIdButton_Click(object sender, EventArgs e)
         {
-            //var form = new BrowserForm<ListFakturResponse, string>(_listFakturService, FakturIdTextBox.Text, x => x.CustomerName);
-            //var resultDialog = form.ShowDialog();
-            //if (resultDialog == DialogResult.OK)
-            //    FakturIdTextBox.Text = form.ReturnedValue;
-            //FakturDateTextBox.Focus();
-
             var now = DateTime.Now.ToString("yyyy-MM-dd");
             var query = new ListFakturQuery(now, now);
-            var list = await _mediator.Send(query);
-            var form = new BrowserForm<ListDataSalesPersonResponse, string>(list, SalesPersonIdTextBox.Text, x => x.SalesPersonName);
+            var form = new BrowserForm<ListFakturResponse, string>(_fakturBrowser, SalesPersonIdTextBox.Text, x => x.CustomerName);
             var resultDialog = form.ShowDialog();
             if (resultDialog == DialogResult.OK)
-                SalesPersonIdTextBox.Text = form.ReturnedValue;
-            CustomerIdTextBox.Focus();
+                FakturIdTextBox.Text = form.ReturnedValue;
+            SalesPersonIdTextBox.Focus();
         }
 
-        private void FakturIdTextBox_Validating(object sender, CancelEventArgs e)
+        private async void FakturIdTextBox_Validating(object sender, CancelEventArgs e)
         {
             var textbox = (ButtonEdit)sender;
-            if (textbox.Text.Length == 0)
-            {
-                e.Cancel = false;
-                return;
-            }
+            var policy = Policy<GetFakturResponse>
+                .Handle<KeyNotFoundException>()
+                .FallbackAsync(new GetFakturResponse());
+            var query = new GetFakturQuery(textbox.Text);
+            Task<GetFakturResponse> queryTask() => _mediator.Send(query);
+            var result = await policy.ExecuteAsync(queryTask);
 
-            GetFakturResponse faktur = null;
-            try
-            {
-                faktur = _getFakturService.Execute(textbox.Text);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (faktur is null)
-            {
-                e.Cancel = true;
-                return;
-            }
+            result.RemoveNull();
+            CustomerNameTextBox.Text = result.CustomerName;
 
-            //FakturDateTextBox.Value = faktur.FakturDate.ToDate();
-            SalesPersonIdTextBox.Text = faktur.SalesPersonId;
-            SalesPersonNameTextBox.Text = faktur.SalesPersonName;
-            CustomerIdTextBox.Text = faktur.CustomerId;
-            CustomerNameTextBox.Text = faktur.CustomerName;
-            PlafondTextBox.Value = (decimal)faktur.Plafond;
-            CreditBalanceTextBox.Value = (decimal)faktur.CreditBalance;
-            WarehouseIdTextBox.Text = faktur.WarehouseId;
-            WarehouseNameTextBox.Text = faktur.WarehouseName;
-            //TglRencanaKirimTextBox.Value = faktur.TglRencanaKirim.ToDate();
-            TotalTextBox.Value = (decimal)faktur.Total;
-            GrandTotalTextBox.Value = (decimal)faktur.GrandTotal;
+            FakturDateTextBox.Value = result.FakturDate.ToDate();
+            SalesPersonIdTextBox.Text = result.SalesPersonId;
+            SalesPersonNameTextBox.Text = result.SalesPersonName;
+            CustomerIdTextBox.Text = result.CustomerId;
+            CustomerNameTextBox.Text = result.CustomerName;
+            PlafondTextBox.Value = (decimal)result.Plafond;
+            CreditBalanceTextBox.Value = (decimal)result.CreditBalance;
+            WarehouseIdTextBox.Text = result.WarehouseId;
+            WarehouseNameTextBox.Text = result.WarehouseName;
+            TglRencanaKirimTextBox.Value = result.TglRencanaKirim.ToDate();
+            TotalTextBox.Value = (decimal)result.Total;
+            GrandTotalTextBox.Value = (decimal)result.GrandTotal;
 
             _listItem.Clear();
-            foreach(var item in faktur.ListItem)
+
+            foreach (var item in result.ListItem)
             {
                 var qtyString = string.Join(";", item.ListQtyHarga.Select(x => x.Qty.ToString()));
                 var discString = string.Join(";", item.ListDiscount.Select(x => x.DiscountProsen.ToString()));
                 var listQtyHarga = item.ListQtyHarga
                     .Where(x => x.HargaJual != 0)
                     .Select(x => new FakturItemStokHargaSatuan(x.Qty, x.HargaJual, x.Satuan));
-                var newItem = new FakturItemDto
+                var newItem = new FakturItemDto(_mediator)
                 {
                     BrgId = item.BrgId,
                     Qty = qtyString,
@@ -173,18 +155,18 @@ namespace btr.winform48.SaleContext.FakturAgg
 
         private void FakturItemGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var grid = (DataGridView)sender;
-            if (e.ColumnIndex == grid.Columns["Find"].Index && e.RowIndex >= 0)
-            {
-                if (WarehouseIdTextBox.Text.Length == 0)
-                    return;
+            //var grid = (DataGridView)sender;
+            //if (e.ColumnIndex == grid.Columns["Find"].Index && e.RowIndex >= 0)
+            //{
+            //    if (WarehouseIdTextBox.Text.Length == 0)
+            //        return;
 
-                var service = new ListBrgStokService();
-                var form = new BrowserForm<ListBrgStokResponse, string>(service, FakturIdTextBox.Text, WarehouseIdTextBox.Text, x => x.BrgName);
-                var resultDialog = form.ShowDialog();
-                if (resultDialog == DialogResult.OK)
-                    grid.CurrentRow.Cells["BrgId"].Value = form.ReturnedValue;
-            }
+            //    var service = new ListBrgStokService();
+            //    var form = new BrowserForm<ListBrgStokResponse, string>(service, FakturIdTextBox.Text, WarehouseIdTextBox.Text, x => x.BrgName);
+            //    var resultDialog = form.ShowDialog();
+            //    if (resultDialog == DialogResult.OK)
+            //        grid.CurrentRow.Cells["BrgId"].Value = form.ReturnedValue;
+            //}
         }
 
         private async void SalesPersonIdButton_Click(object sender, EventArgs e)
@@ -230,9 +212,9 @@ namespace btr.winform48.SaleContext.FakturAgg
                 .Handle<KeyNotFoundException>()
                 .FallbackAsync(new GetCustomerResponse());
             var query = new GetCustomerQuery(textbox.Text);
-            Task<GetCustomerResponse> queryFunc() => _mediator.Send(query);
+            Task<GetCustomerResponse> queryTask() => _mediator.Send(query);
 
-            var result = await policy.ExecuteAsync(queryFunc);
+            var result = await policy.ExecuteAsync(queryTask);
             result.RemoveNull();
             CustomerNameTextBox.Text = result.CustomerName;
         }

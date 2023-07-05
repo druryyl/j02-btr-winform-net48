@@ -111,10 +111,20 @@ namespace btr.winform48
             services
                 .Scan(selector => selector
                     .FromAssemblyOf<WinformAssemblyAnchor>()
-                    .AddClasses(c => c.AssignableTo(typeof(Form)))
-                    .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-                    .AsSelf()
-                    .WithScopedLifetime());
+                        .AddClasses(c => c.AssignableTo(typeof(Form)))
+                        .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                        .AsSelf()
+                        .WithScopedLifetime()
+                    .FromAssemblyOf<WinformAssemblyAnchor>()
+                        .AddClasses(c => c.AssignableTo(typeof(IDateBrowser<>)))
+                        .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                        .AsSelfWithInterfaces()
+                        .WithScopedLifetime()
+                    .FromAssemblyOf<WinformAssemblyAnchor>()
+                        .AddClasses(c => c.AssignableTo(typeof(IStringBrowser<>)))
+                        .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                        .AsSelfWithInterfaces()
+                        .WithScopedLifetime());
         }
     }
 }

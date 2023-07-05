@@ -42,12 +42,8 @@ namespace btr.winform48.SharedForm
         {
             InitializeComponent();
 
-            //FilterDate1TextBox.Visible = true;
-            //FilterDate2TextBox.Visible = true;
-            //SearchButton.Visible = true;
-
             _dateBrowser = browseDate;
-            ListData = _dateBrowser.Browse(new Periode(DateTime.Now));
+            ListData = Task.Run(() => _dateBrowser.Browse(new Periode(DateTime.Now))).GetAwaiter().GetResult();
             _propertySelector = propertySelector;
             RefreshGrid();
             ReturnedValue = returnedValue;
@@ -66,11 +62,11 @@ namespace btr.winform48.SharedForm
             ReturnedValue = returnedValue;
         }
 
-        private void RePopulateListData()
+        private async Task RePopulateListData()
         {
             if (_dateBrowser != null)
             {
-                ListData = _dateBrowser.Browse(new Periode(FilterDate1TextBox.Value, FilterDate2TextBox.Value));
+                ListData = await _dateBrowser.Browse(new Periode(FilterDate1TextBox.Value, FilterDate2TextBox.Value));
                 return;
             }
             if (_stringBrowser != null)
@@ -78,7 +74,7 @@ namespace btr.winform48.SharedForm
                 if (FilterTextBox.Text.Length == 0)
                     ListData = new List<T>();
                 else
-                    ListData = _stringBrowser.Browse(FilterTextBox.Text, _filter2nd);
+                    ListData = await _stringBrowser.Browse(FilterTextBox.Text, _filter2nd);
                 return;
             }
         }
