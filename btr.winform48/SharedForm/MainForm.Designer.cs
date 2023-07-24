@@ -205,6 +205,7 @@
             this.FakturButton.Name = "FakturButton";
             this.FakturButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("FakturButton.SmallImage")));
             this.FakturButton.Text = "Faktur";
+            this.FakturButton.Click += new System.EventHandler(this.FakturButton_Click);
             // 
             // ribbonButton6
             // 
@@ -454,7 +455,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::btr.winform48.Properties.Resources.app_wallpaper_3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(846, 495);
             this.Controls.Add(this.ribbon1);

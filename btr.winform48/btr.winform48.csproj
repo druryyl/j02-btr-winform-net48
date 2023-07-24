@@ -194,6 +194,12 @@
     <Compile Include="InventoryContext\WarehouseAgg\Services\ListWarehouseService.cs" />
     <Compile Include="SaleContext\CustomerAgg\Services\GetCustomerService.cs" />
     <Compile Include="SaleContext\CustomerAgg\Services\ListCustomerService.cs" />
+    <Compile Include="SaleContext\FakturAgg\Faktur2Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaleContext\FakturAgg\Faktur2Form.Designer.cs">
+      <DependentUpon>Faktur2Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="SaleContext\FakturAgg\Services\GetFakturService.cs" />
     <Compile Include="SaleContext\FakturAgg\Services\FakturBrowser.cs" />
     <Compile Include="SaleContext\SalesPersonAgg\Services\GetSalesPersonService.cs" />
@@ -231,6 +237,9 @@
     <Compile Include="WinformAssemblyAnchor.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaleContext\FakturAgg\Faktur2Form.resx">
+      <DependentUpon>Faktur2Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SharedForm\BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>

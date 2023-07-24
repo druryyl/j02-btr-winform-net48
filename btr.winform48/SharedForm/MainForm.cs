@@ -11,15 +11,18 @@ namespace btr.winform48.SharedForm
     {
         private readonly SalesPersonForm _salesPersonForm;
         private readonly FakturForm _fakturForm;
+        private readonly Faktur2Form _faktur2Form;
 
-        public MainForm(SalesPersonForm salesPersonForm, 
-            FakturForm fakturForm)
+        public MainForm(SalesPersonForm salesPersonForm,
+            FakturForm fakturForm,
+            Faktur2Form faktur2Form)
         {
             InitializeComponent();
             Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.White;
 
             _fakturForm = fakturForm;
             _salesPersonForm = salesPersonForm;
+            _faktur2Form = faktur2Form;
         }
 
         private void PoButton_Click(object sender, EventArgs e)
@@ -34,6 +37,13 @@ namespace btr.winform48.SharedForm
 
             _salesPersonForm.StartPosition = FormStartPosition.CenterScreen;
             _salesPersonForm.Show();
+        }
+
+        private void FakturButton_Click(object sender, EventArgs e)
+        {
+            _faktur2Form.StartPosition = FormStartPosition.CenterScreen;
+            _faktur2Form.MdiParent = this;
+            _faktur2Form.Show();
         }
     }
 }
